@@ -34,7 +34,7 @@ mvn clean install
 
 ### 4. Run the Application
 ```bash
-mvn exec:java -Dexec.mainClass="com.intelliChef.Main"
+mvn exec:java -Dexec.mainClass = "com.intelliChef.Main"
 ```
 
 ## Project Structure
