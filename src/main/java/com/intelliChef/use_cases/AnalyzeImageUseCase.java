@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.intelliChef.adapters.GeminiAIClient;
+import com.intelliChef.data_access.GeminiAIClient;
 import com.intelliChef.entities.Ingredient;
 
 public class AnalyzeImageUseCase {

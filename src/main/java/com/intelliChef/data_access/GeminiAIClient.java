@@ -1,4 +1,4 @@
-package com.intelliChef.adapters;
+package com.intelliChef.data_access;
 
 import com.google.cloud.vertexai.VertexAI;
 import com.google.cloud.vertexai.api.GenerateContentResponse;
