@@ -19,6 +19,11 @@ public class AnalyzeImageUseCase {
         return parseIngredients(response);
     }
 
+    /**
+     * Takes an input String and converts it into a list of ingredients.
+     * @param response has the format ingredient:quantity separated by commas
+     * @return a list of type Ingredient in the response
+     */
     private List<Ingredient> parseIngredients(String response) {
         List<Ingredient> ingredients = new ArrayList<>();
         String[] pairs = response.split(", ");
