@@ -39,13 +39,20 @@ public class GeminiAIClient {
                                     " in the following format separated by commas: ingredient(String):quantity(integer)"
                     ));
             return ResponseHandler.getText(response);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
+        return null;
     }
 
+    /**
+     * Turns the image into array of bytes.
+     * @param imagePath is the absolute path of the image
+     * @return an array of the bytes of the image
+     * @throws IOException if path is not of an image
+     */
     private static byte[] getImageBytes(String imagePath) throws IOException {
-        // Get path of the image
         Path path = Paths.get(imagePath);
-        // Turn image file to byte array
-        return Files.readAllBytes(path);
+        return Files.readAllBytes(path);  // Turn image file to byte array
     }
 }
