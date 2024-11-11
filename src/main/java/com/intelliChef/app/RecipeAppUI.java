@@ -15,11 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RecipeAppUI extends JFrame {
-    private final UploadImageController uploadImageController;
     private final JFrame frame;
 
     public RecipeAppUI(UploadImageController uploadImageController) {
-        this.uploadImageController = uploadImageController;
         frame = new JFrame("Image Uploader");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 400);
@@ -55,7 +53,10 @@ public class RecipeAppUI extends JFrame {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            GeminiAIClient vertexAIClient = new GeminiAIClient("project-id", "us-central1", "gemini-1.5-flash-001");
+            GeminiAIClient vertexAIClient = new GeminiAIClient(
+                    "API-KEY", // TODO: Change this to a valid API key
+                    "us-central1",
+                    "gemini-1.5-flash-001");
             AnalyzeImageUseCase analyzeImageUseCase = new AnalyzeImageUseCase(vertexAIClient);
             UploadImageController uploadImageController = new UploadImageController(analyzeImageUseCase);
 
