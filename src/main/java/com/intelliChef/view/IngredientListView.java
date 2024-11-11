@@ -20,21 +20,19 @@ public class IngredientListView extends JFrame {
         titleLabel.setFont(new Font("Arial", Font.BOLD, 18));
         add(titleLabel, BorderLayout.NORTH);
 
-        // Create a list model to hold ingredient items
-        DefaultListModel<String> listModel = new DefaultListModel<>();
+        // Create a panel to hold ingredient checkboxes in a scrollable pane
+        JPanel ingredientPanel = new JPanel();
+        ingredientPanel.setLayout(new BoxLayout(ingredientPanel, BoxLayout.Y_AXIS));
 
-        // Add ingredients from the list to the list model
+        // Add a checkbox for each ingredient
         for (Ingredient ingredient : ingredients) {
-            String ingredientEntry = ingredient.getName() + " - " + ingredient.getQuantity();
-            listModel.addElement(ingredientEntry);
+            JCheckBox checkBox = new JCheckBox(ingredient.getName() + " - " + ingredient.getQuantity(), true);
+            checkBox.setFont(new Font("Arial", Font.PLAIN, 14));
+            ingredientPanel.add(checkBox);
         }
 
-        // Create the JList with the list model
-        JList<String> ingredientList = new JList<>(listModel);
-        ingredientList.setFont(new Font("Arial", Font.PLAIN, 14));
-
-        // Make the list scrollable
-        JScrollPane scrollPane = new JScrollPane(ingredientList);
+        // Make the panel scrollable
+        JScrollPane scrollPane = new JScrollPane(ingredientPanel);
         add(scrollPane, BorderLayout.CENTER);
 
         // Display the frame
@@ -53,4 +51,5 @@ public class IngredientListView extends JFrame {
         new IngredientListView(ingredients);
     }
 }
+
 
