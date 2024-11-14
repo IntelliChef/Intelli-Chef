@@ -1,4 +1,4 @@
-package com.intelliChef.use_cases;
+package com.intelliChef.use_case.analyzeImage;
 
 import java.io.IOException;
 import java.util.ArrayList;

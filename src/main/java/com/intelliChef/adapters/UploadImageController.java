@@ -1,7 +1,7 @@
 package com.intelliChef.adapters;
 
 import com.intelliChef.entities.Ingredient;
-import com.intelliChef.use_cases.AnalyzeImageUseCase;
+import com.intelliChef.use_case.analyzeImage.AnalyzeImageUseCase;
 
 import java.io.IOException;
 import java.util.List;

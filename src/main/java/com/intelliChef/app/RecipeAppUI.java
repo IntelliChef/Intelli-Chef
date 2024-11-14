@@ -3,7 +3,7 @@ package com.intelliChef.app;
 import com.intelliChef.adapters.UploadImageController;
 import com.intelliChef.data_access.GeminiAIClient;
 import com.intelliChef.entities.Ingredient;
-import com.intelliChef.use_cases.AnalyzeImageUseCase;
+import com.intelliChef.use_case.analyzeImage.AnalyzeImageUseCase;
 
 import javax.swing.*;
 import java.awt.*;
