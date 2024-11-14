@@ -1,0 +1,49 @@
+{
+  "hits": [
+    {
+      "recipe": {
+        "label": "Spaghetti Carbonara",
+        "image": "https://example.com/images/spaghetti-carbonara.jpg",
+        "calories": 700.5,
+        "totalTime": 30,
+        "url": "https://example.com/recipes/spaghetti-carbonara"
+      }
+    },
+    {
+      "recipe": {
+        "label": "Chicken Caesar Salad",
+        "image": "https://example.com/images/chicken-caesar-salad.jpg",
+        "calories": 350.0,
+        "totalTime": 20,
+        "url": "https://example.com/recipes/chicken-caesar-salad"
+      }
+    },
+    {
+      "recipe": {
+        "label": "Vegetable Stir Fry",
+        "image": "https://example.com/images/vegetable-stir-fry.jpg",
+        "calories": 250.5,
+        "totalTime": 15,
+        "url": "https://example.com/recipes/vegetable-stir-fry"
+      }
+    },
+    {
+      "recipe": {
+        "label": "Beef Tacos",
+        "image": "https://example.com/images/beef-tacos.jpg",
+        "calories": 500.8,
+        "totalTime": 25,
+        "url": "https://example.com/recipes/beef-tacos"
+      }
+    },
+    {
+      "recipe": {
+        "label": "Pancakes",
+        "image": "https://example.com/images/pancakes.jpg",
+        "calories": 320.2,
+        "totalTime": 10,
+        "url": "https://example.com/recipes/pancakes"
+      }
+    }
+  ]
+}
