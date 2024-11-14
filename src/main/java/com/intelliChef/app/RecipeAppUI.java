@@ -41,7 +41,12 @@ public class RecipeAppUI extends JFrame {
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
-                    System.out.println(ingredientList.toString()); // just for testing
+
+                    if (!ingredientList.isEmpty()) {
+                        System.out.println(ingredientList.toString()); // just for testing
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No ingredients found. Please enter a valid image.");
+                    }
                 }
             }
         });
@@ -53,7 +58,7 @@ public class RecipeAppUI extends JFrame {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             GeminiAIClient vertexAIClient = new GeminiAIClient(
-                    "API-KEY", // TODO: Change this to a valid API key
+                    "", // TODO: Change this to a valid API key
                     "us-central1",
                     "gemini-1.5-flash-001");
             AnalyzeImageInteractor analyzeImageInteractor = new AnalyzeImageInteractor(vertexAIClient);

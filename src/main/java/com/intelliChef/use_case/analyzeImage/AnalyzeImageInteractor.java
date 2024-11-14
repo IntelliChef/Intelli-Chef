@@ -16,6 +16,9 @@ public class AnalyzeImageInteractor {
 
     public List<Ingredient> execute(byte[] imageBytes) throws IOException {
         String response = geminiAIClient.analyzeImage(imageBytes);
+        if (response.equals("[]")) {
+            return new ArrayList<>();
+        }
         return parseIngredients(response);
     }
 

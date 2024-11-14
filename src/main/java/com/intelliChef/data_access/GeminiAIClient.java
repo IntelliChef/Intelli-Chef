@@ -34,8 +34,10 @@ public class GeminiAIClient {
             GenerateContentResponse response = model.generateContent(
                     ContentMaker.fromMultiModalData(
                             PartMaker.fromMimeTypeAndData("image/png", imageBytes),
-                            "Make sure not to write anything else in your response. Give me ingredients in this fridge" +
-                                    " in the following format separated by commas: ingredient(String):quantity(integer)"
+                            "Make sure not to write anything else in your response. Give me ingredients in this" +
+                                    " picture of fridge in the following format separated by commas:" +
+                                    " ingredient(String):quantity(integer)" +
+                                    " If there are no ingredients in this picture, return an empty list only: []"
                     ));
             return ResponseHandler.getText(response);
         } catch (IOException e) {
