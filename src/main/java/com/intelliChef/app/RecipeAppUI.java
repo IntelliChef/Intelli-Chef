@@ -4,6 +4,7 @@ import com.intelliChef.adapters.UploadImageController;
 import com.intelliChef.data_access.GeminiAIClient;
 import com.intelliChef.entities.Ingredient;
 import com.intelliChef.use_case.analyzeImage.AnalyzeImageInteractor;
+import com.intelliChef.view.IngredientListView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,6 +17,7 @@ import java.util.List;
 
 public class RecipeAppUI extends JFrame {
     private final JFrame frame;
+    private final List<Ingredient> ingredientList = new ArrayList<>();
 
     public RecipeAppUI(UploadImageController uploadImageController) {
         frame = new JFrame("Image Uploader");
@@ -35,17 +37,23 @@ public class RecipeAppUI extends JFrame {
                     File selectedFile = fileChooser.getSelectedFile();
                     String imagePath = selectedFile.getAbsolutePath();
 
-                    List<Ingredient> ingredientList = new ArrayList<>();
+                    List<Ingredient> returnedList;
                     try {
-                        ingredientList = uploadImageController.execute(imagePath);
+                        returnedList = uploadImageController.execute(imagePath);
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
 
-                    if (!ingredientList.isEmpty()) {
-                        System.out.println(ingredientList.toString()); // just for testing
-                    } else {
+                    if (returnedList.isEmpty()) {
                         JOptionPane.showMessageDialog(null, "No ingredients found. Please enter a valid image.");
+                    } else {
+                        ingredientList.addAll(returnedList);
+
+                        // Go to the second page of app
+                        IngredientListView ingredientListView = new IngredientListView(ingredientList);
+                        ingredientListView.setVisible(true);
+
+                        frame.dispose();
                     }
                 }
             }
