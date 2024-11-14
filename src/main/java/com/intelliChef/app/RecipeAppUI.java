@@ -20,6 +20,7 @@ public class RecipeAppUI extends JFrame {
     public RecipeAppUI(UploadImageController uploadImageController) {
         frame = new JFrame("Image Uploader");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(500, 400);
 
         JButton uploadButton = new JButton("Upload Image");
 
@@ -34,14 +35,13 @@ public class RecipeAppUI extends JFrame {
                     File selectedFile = fileChooser.getSelectedFile();
                     String imagePath = selectedFile.getAbsolutePath();
 
-                    System.out.println(imagePath);
-
                     List<Ingredient> ingredientList = new ArrayList<>();
                     try {
                         ingredientList = uploadImageController.execute(imagePath);
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
+                    System.out.println(ingredientList.toString()); // just for testing
                 }
             }
         });
