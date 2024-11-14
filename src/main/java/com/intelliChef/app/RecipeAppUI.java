@@ -20,7 +20,6 @@ public class RecipeAppUI extends JFrame {
     public RecipeAppUI(UploadImageController uploadImageController) {
         frame = new JFrame("Image Uploader");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 400);
 
         JButton uploadButton = new JButton("Upload Image");
 
