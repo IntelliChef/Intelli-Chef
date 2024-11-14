@@ -27,8 +27,7 @@ public class GeminiAIClient {
         this.modelName = modelName;
     }
 
-    public String analyzeImage(String imagePath) throws IOException {
-        byte[] imageBytes = getImageBytes(imagePath);
+    public String analyzeImage(byte[] imageBytes) throws IOException {
 
         try (VertexAI vertexAI = new VertexAI(projectId, location)) {
             GenerativeModel model = new GenerativeModel(modelName, vertexAI);
@@ -43,16 +42,5 @@ public class GeminiAIClient {
             System.out.println(e.getMessage());
         }
         return null;
-    }
-
-    /**
-     * Turns the image into array of bytes.
-     * @param imagePath is the absolute path of the image
-     * @return an array of the bytes of the image
-     * @throws IOException if path is not of an image
-     */
-    private static byte[] getImageBytes(String imagePath) throws IOException {
-        Path path = Paths.get(imagePath);
-        return Files.readAllBytes(path);  // Turn image file to byte array
     }
 }

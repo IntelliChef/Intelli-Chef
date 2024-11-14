@@ -3,7 +3,7 @@ package com.intelliChef.app;
 import com.intelliChef.adapters.UploadImageController;
 import com.intelliChef.data_access.GeminiAIClient;
 import com.intelliChef.entities.Ingredient;
-import com.intelliChef.use_case.analyzeImage.AnalyzeImageUseCase;
+import com.intelliChef.use_case.analyzeImage.AnalyzeImageInteractor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -56,8 +56,8 @@ public class RecipeAppUI extends JFrame {
                     "API-KEY", // TODO: Change this to a valid API key
                     "us-central1",
                     "gemini-1.5-flash-001");
-            AnalyzeImageUseCase analyzeImageUseCase = new AnalyzeImageUseCase(vertexAIClient);
-            UploadImageController uploadImageController = new UploadImageController(analyzeImageUseCase);
+            AnalyzeImageInteractor analyzeImageInteractor = new AnalyzeImageInteractor(vertexAIClient);
+            UploadImageController uploadImageController = new UploadImageController(analyzeImageInteractor);
 
             RecipeAppUI recipeAppUI = new RecipeAppUI(uploadImageController);
             recipeAppUI.setVisible(true);

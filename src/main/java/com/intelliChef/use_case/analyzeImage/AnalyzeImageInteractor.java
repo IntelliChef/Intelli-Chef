@@ -7,15 +7,15 @@ import java.util.List;
 import com.intelliChef.data_access.GeminiAIClient;
 import com.intelliChef.entities.Ingredient;
 
-public class AnalyzeImageUseCase {
+public class AnalyzeImageInteractor {
     private final GeminiAIClient geminiAIClient;
 
-    public AnalyzeImageUseCase(GeminiAIClient geminiAIClient) {
+    public AnalyzeImageInteractor(GeminiAIClient geminiAIClient) {
         this.geminiAIClient = geminiAIClient;
     }
 
-    public List<Ingredient> execute(String imagePath) throws IOException {
-        String response = geminiAIClient.analyzeImage(imagePath);
+    public List<Ingredient> execute(byte[] imageBytes) throws IOException {
+        String response = geminiAIClient.analyzeImage(imageBytes);
         return parseIngredients(response);
     }
 
