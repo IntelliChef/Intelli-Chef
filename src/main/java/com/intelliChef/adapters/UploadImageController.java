@@ -1,6 +1,7 @@
 package com.intelliChef.adapters;
 
 import com.intelliChef.entities.Ingredient;
+import com.intelliChef.use_case.analyzeImage.AnalyzeImageInputData;
 import com.intelliChef.use_case.analyzeImage.AnalyzeImageInteractor;
 
 import java.io.IOException;
@@ -9,6 +10,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+/**
+ * Controller that takes path of image and turns the image into bytes so it can be passed into the interactor.
+ */
 public class UploadImageController {
 
     private final AnalyzeImageInteractor analyzeImageInteractor;
@@ -19,7 +23,7 @@ public class UploadImageController {
 
     public List<Ingredient> execute(String imagePath) throws IOException {
         byte[] imgBytes = getImageBytes(imagePath);
-        return analyzeImageInteractor.execute(imgBytes);
+        return analyzeImageInteractor.execute(new AnalyzeImageInputData(imgBytes)).getIngredientList();
     }
 
     /**

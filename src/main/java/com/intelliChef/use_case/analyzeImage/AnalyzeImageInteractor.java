@@ -7,6 +7,9 @@ import java.util.List;
 import com.intelliChef.data_access.GeminiAIClient;
 import com.intelliChef.entities.Ingredient;
 
+/**
+ * Interactor that calls the API and converts the resulting string output into list of ingredients.
+ */
 public class AnalyzeImageInteractor {
     private final GeminiAIClient geminiAIClient;
 
@@ -14,12 +17,12 @@ public class AnalyzeImageInteractor {
         this.geminiAIClient = geminiAIClient;
     }
 
-    public List<Ingredient> execute(byte[] imageBytes) throws IOException {
-        String response = geminiAIClient.analyzeImage(imageBytes);
+    public AnalyzeImageOutputData execute(AnalyzeImageInputData analyzeImageInputData) throws IOException {
+        String response = geminiAIClient.analyzeImage(analyzeImageInputData.getImageBytes());
         if (response.equals("[]")) {
-            return new ArrayList<>();
+            return new AnalyzeImageOutputData(new ArrayList<>());
         }
-        return parseIngredients(response);
+        return new AnalyzeImageOutputData(parseIngredients(response));
     }
 
     /**
