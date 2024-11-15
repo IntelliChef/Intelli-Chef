@@ -7,13 +7,8 @@ import org.json.JSONTokener;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.HyperlinkEvent;
-import javax.swing.event.HyperlinkListener;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
@@ -25,19 +20,25 @@ public class RecipeListGUI extends JFrame {
 
     public RecipeListGUI() {
         setTitle("Recipe List");
-        setSize(800, 600);
+        setSize(900, 700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null); // Center window on screen
 
+        // Main content panel
         contentPanel = new JPanel();
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
-        contentPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+        contentPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
+        contentPanel.setBackground(new Color(245, 245, 245));
 
         JScrollPane scrollPane = new JScrollPane(contentPanel);
+        scrollPane.setBorder(BorderFactory.createEmptyBorder());
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16); // Smooth scrolling
         add(scrollPane, BorderLayout.CENTER);
 
-        List<Recipe> recipes = loadRecipes(); // Load recipes from JSON file
+        List<Recipe> recipes = loadRecipes();
         for (Recipe recipe : recipes) {
             contentPanel.add(createRecipePanel(recipe));
+            contentPanel.add(Box.createRigidArea(new Dimension(0, 10))); // Spacing
         }
 
         setVisible(true);
@@ -45,71 +46,66 @@ public class RecipeListGUI extends JFrame {
 
     private JPanel createRecipePanel(Recipe recipe) {
         JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setLayout(new BorderLayout());
         panel.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(Color.GRAY, 1),
+                BorderFactory.createLineBorder(new Color(200, 200, 200), 2, true),
                 new EmptyBorder(10, 10, 10, 10)
         ));
+        panel.setBackground(Color.WHITE);
 
-        JLabel nameLabel = new JLabel(recipe.getName());
-        nameLabel.setFont(new Font("Arial", Font.BOLD, 16));
-        panel.add(nameLabel);
-
+        // Recipe image
         try {
             BufferedImage image = ImageIO.read(new URL(recipe.getImageUrl()));
-            JLabel imageLabel = new JLabel(new ImageIcon(image));
-            panel.add(imageLabel);
+            Image scaledImage = image.getScaledInstance(120, 120, Image.SCALE_SMOOTH);
+            JLabel imageLabel = new JLabel(new ImageIcon(scaledImage));
+            panel.add(imageLabel, BorderLayout.WEST);
         } catch (Exception e) {
-            panel.add(new JLabel("Image not available"));
+            JLabel placeholder = new JLabel("No Image", SwingConstants.CENTER);
+            placeholder.setPreferredSize(new Dimension(120, 120));
+            placeholder.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+            panel.add(placeholder, BorderLayout.WEST);
         }
 
+        // Recipe details
+        JPanel detailsPanel = new JPanel();
+        detailsPanel.setLayout(new BoxLayout(detailsPanel, BoxLayout.Y_AXIS));
+        detailsPanel.setBackground(Color.WHITE);
+
+        JLabel nameLabel = new JLabel(recipe.getName());
+        nameLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        nameLabel.setForeground(new Color(50, 50, 50));
+        detailsPanel.add(nameLabel);
+
         JLabel calorieLabel = new JLabel("Calories: " + recipe.getCalories());
-        panel.add(calorieLabel);
+        calorieLabel.setFont(new Font("Arial", Font.PLAIN, 14));
+        calorieLabel.setForeground(new Color(80, 80, 80));
+        detailsPanel.add(calorieLabel);
 
         if (recipe.getCookingTime() > 0) {
             JLabel timeLabel = new JLabel("Cooking Time: " + recipe.getCookingTime() + " mins");
-            panel.add(timeLabel);
+            timeLabel.setFont(new Font("Arial", Font.PLAIN, 14));
+            timeLabel.setForeground(new Color(80, 80, 80));
+            detailsPanel.add(timeLabel);
         }
 
-        JEditorPane urlPane = new JEditorPane();
-        urlPane.setContentType("text/html");
-        urlPane.setText("<a href='" + recipe.getUrl() + "'>Recipe Link</a>");
-        urlPane.setEditable(false);
-        urlPane.setOpaque(false);
-        urlPane.addHyperlinkListener(new HyperlinkListener() {
-            public void hyperlinkUpdate(HyperlinkEvent e) {
-                if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
-                    try {
-                        Desktop.getDesktop().browse(new URL(recipe.getUrl()).toURI());
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
-                }
-            }
-        });
-        panel.add(urlPane);
+        JButton detailsButton = new JButton("View Details");
+        detailsButton.setFocusPainted(false);
+        detailsButton.setFont(new Font("Arial", Font.BOLD, 12));
+        detailsButton.setBackground(new Color(0, 123, 255));
+        detailsButton.setForeground(Color.WHITE);
+        detailsButton.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+        detailsButton.addActionListener(e -> new RecipeDetailGUI(recipe, this));
+        detailsPanel.add(detailsButton);
 
-        panel.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                openRecipeDetail(recipe);
-            }
-        });
-
+        panel.add(detailsPanel, BorderLayout.CENTER);
         return panel;
-    }
-
-    private void openRecipeDetail(Recipe recipe) {
-        RecipeDetailGUI recipeDetailGUI = new RecipeDetailGUI(recipe, this);
-        recipeDetailGUI.setVisible(true);
-        this.setVisible(false);
     }
 
     private List<Recipe> loadRecipes() {
         List<Recipe> recipes = new ArrayList<>();
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("recipes.json")) {
             if (is == null) {
-                throw new FileNotFoundException("File not found: recipes.json");
+                throw new RuntimeException("File not found: recipes.json");
             }
             JSONObject jsonObject = new JSONObject(new JSONTokener(is));
             JSONArray hitsArray = jsonObject.getJSONArray("hits");
@@ -132,13 +128,12 @@ public class RecipeListGUI extends JFrame {
         SwingUtilities.invokeLater(RecipeListGUI::new);
     }
 
-    // Recipe class to hold data
-    class Recipe {
-        private String name;
-        private String imageUrl;
-        private double calories;
-        private int cookingTime;
-        private String url;
+    static class Recipe {
+        private final String name;
+        private final String imageUrl;
+        private final double calories;
+        private final int cookingTime;
+        private final String url;
 
         public Recipe(String name, String imageUrl, double calories, int cookingTime, String url) {
             this.name = name;
