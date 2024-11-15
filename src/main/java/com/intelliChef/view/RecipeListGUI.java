@@ -10,6 +10,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -87,7 +89,20 @@ public class RecipeListGUI extends JFrame {
         });
         panel.add(urlPane);
 
+        panel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                openRecipeDetail(recipe);
+            }
+        });
+
         return panel;
+    }
+
+    private void openRecipeDetail(Recipe recipe) {
+        RecipeDetailGUI recipeDetailGUI = new RecipeDetailGUI(recipe, this);
+        recipeDetailGUI.setVisible(true);
+        this.setVisible(false);
     }
 
     private List<Recipe> loadRecipes() {
