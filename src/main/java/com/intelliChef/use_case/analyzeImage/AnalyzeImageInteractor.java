@@ -7,16 +7,22 @@ import java.util.List;
 import com.intelliChef.data_access.GeminiAIClient;
 import com.intelliChef.entities.Ingredient;
 
-public class AnalyzeImageUseCase {
+/**
+ * Interactor that calls the API and converts the resulting string output into list of ingredients.
+ */
+public class AnalyzeImageInteractor {
     private final GeminiAIClient geminiAIClient;
 
-    public AnalyzeImageUseCase(GeminiAIClient geminiAIClient) {
+    public AnalyzeImageInteractor(GeminiAIClient geminiAIClient) {
         this.geminiAIClient = geminiAIClient;
     }
 
-    public List<Ingredient> execute(String imagePath) throws IOException {
-        String response = geminiAIClient.analyzeImage(imagePath);
-        return parseIngredients(response);
+    public AnalyzeImageOutputData execute(AnalyzeImageInputData analyzeImageInputData) throws IOException {
+        String response = geminiAIClient.analyzeImage(analyzeImageInputData.getImageBytes());
+        if (response.equals("[]")) {
+            return new AnalyzeImageOutputData(new ArrayList<>());
+        }
+        return new AnalyzeImageOutputData(parseIngredients(response));
     }
 
     /**
