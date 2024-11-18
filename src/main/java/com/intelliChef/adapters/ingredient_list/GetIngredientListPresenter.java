@@ -1,5 +1,6 @@
 package com.intelliChef.adapters.ingredient_list;
 
+import com.intelliChef.adapters.ingredient_list.IngredientListViewModel;
 import com.intelliChef.use_case.get_ingredient_list.GetIngredientListOutputBoundary;
 import com.intelliChef.use_case.get_ingredient_list.GetIngredientListOutputData;
 
