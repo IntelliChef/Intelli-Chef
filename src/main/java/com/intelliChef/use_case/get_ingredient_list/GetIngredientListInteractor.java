@@ -5,7 +5,7 @@ import com.intelliChef.use_case.IngredientRepository;
 
 import java.util.List;
 
-public class GetIngredientListInteractor implements GetIngredientListInputBoundary {
+public class GetIngredientListInteractor {
     private final IngredientRepository ingredientRepository; // Data Access Interface
     private final GetIngredientListOutputBoundary outputBoundary; // Presenter Interface
 
@@ -15,8 +15,7 @@ public class GetIngredientListInteractor implements GetIngredientListInputBounda
         this.outputBoundary = outputBoundary;
     }
 
-    @Override
-    public void execute(GetIngredientListInputData inputData) {
+    public void execute() {
         // Fetch data from the repository
         List<Ingredient> ingredients = ingredientRepository.getAllIngredients();
 
