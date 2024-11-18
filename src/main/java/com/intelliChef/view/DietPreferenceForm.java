@@ -116,6 +116,11 @@ public class DietPreferenceForm {
             }
         });
 
+        confirmButton.addActionListener(e -> {
+            if (confirmButton.isSelected()) {
+
+            }
+        });
 
         frame.setVisible(true);
     }
