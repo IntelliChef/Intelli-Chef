@@ -5,13 +5,13 @@ import com.intelliChef.entities.Ingredient;
 import java.util.List;
 
 public class GetIngredientListOutputData {
-    private final List<Ingredient> ingredientList;
+    private final List<Ingredient> ingredients;
 
     public GetIngredientListOutputData(List<Ingredient> ingredients) {
-        this.ingredientList = ingredients;
+        this.ingredients = ingredients;
     }
 
-    public List<Ingredient> getIngredientList() {
-        return ingredientList;
+    public List<Ingredient> getIngredients() {
+        return ingredients;
     }
 }

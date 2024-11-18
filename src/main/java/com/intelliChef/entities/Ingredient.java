@@ -1,3 +1,5 @@
+package com.intelliChef.entities;
+
 public class Ingredient {
     private String name;
     private double quantity;
