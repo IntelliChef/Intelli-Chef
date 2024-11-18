@@ -1,10 +1,9 @@
-package com.intelliChef.app;
+package com.intelliChef.view;
 
 import com.intelliChef.adapters.UploadImageController;
 import com.intelliChef.data_access.GeminiAIClient;
 import com.intelliChef.entities.Ingredient;
 import com.intelliChef.use_case.analyzeImage.AnalyzeImageInteractor;
-import com.intelliChef.view.IngredientListView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,11 +14,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecipeAppUI extends JFrame {
+public class RecipeUploadView extends JFrame {
     private final JFrame frame;
     private final List<Ingredient> ingredientList = new ArrayList<>();
 
-    public RecipeAppUI(UploadImageController uploadImageController) {
+    public RecipeUploadView(UploadImageController uploadImageController) {
         frame = new JFrame("Image Uploader");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 400);
@@ -72,8 +71,8 @@ public class RecipeAppUI extends JFrame {
             AnalyzeImageInteractor analyzeImageInteractor = new AnalyzeImageInteractor(vertexAIClient);
             UploadImageController uploadImageController = new UploadImageController(analyzeImageInteractor);
 
-            RecipeAppUI recipeAppUI = new RecipeAppUI(uploadImageController);
-            recipeAppUI.setVisible(true);
+            RecipeUploadView recipeUploadView = new RecipeUploadView(uploadImageController);
+            recipeUploadView.setVisible(true);
         });
     }
 }
