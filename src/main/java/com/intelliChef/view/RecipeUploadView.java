@@ -13,23 +13,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RecipeUploadView extends JFrame {
-    private final JFrame frame;
     private final List<Ingredient> ingredientList = new ArrayList<>();
 
     public RecipeUploadView(UploadImageController uploadImageController) {
-        frame = new JFrame("Image Uploader");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 400);
+        super("Image Uploader");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(500, 400);
+        setLayout(new BorderLayout());
 
         JButton uploadButton = new JButton("Upload Image");
-
         uploadButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fileChooser = new JFileChooser();
                 fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
-                int result = fileChooser.showOpenDialog(frame);
+                int result = fileChooser.showOpenDialog(RecipeUploadView.this);
                 if (result == JFileChooser.APPROVE_OPTION) {
                     File selectedFile = fileChooser.getSelectedFile();
                     String imagePath = selectedFile.getAbsolutePath();
@@ -38,26 +37,24 @@ public class RecipeUploadView extends JFrame {
                     try {
                         returnedList = uploadImageController.execute(imagePath);
                     } catch (IOException ex) {
-                        throw new RuntimeException(ex);
+                        JOptionPane.showMessageDialog(RecipeUploadView.this, "Error processing the image.");
+                        System.out.println("Ingredient problem");
+                        return;
                     }
 
                     if (returnedList.isEmpty()) {
-                        JOptionPane.showMessageDialog(null, "No ingredients found. Please enter a valid image.");
+                        JOptionPane.showMessageDialog(RecipeUploadView.this, "No ingredients found. Please enter a valid image.");
                     } else {
                         ingredientList.addAll(returnedList);
-
-                        // Go to the second page of app
                         IngredientListView ingredientListView = new IngredientListView(ingredientList);
                         ingredientListView.setVisible(true);
-
-                        frame.dispose();
+                        dispose();
                     }
                 }
             }
         });
-
-        frame.getContentPane().add(uploadButton, BorderLayout.CENTER);
-        frame.setVisible(true);
+        getContentPane().add(uploadButton, BorderLayout.CENTER);
+        setVisible(true);
     }
 }
 
