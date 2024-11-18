@@ -21,6 +21,8 @@ public class RecipeUploadView extends JFrame {
         setSize(500, 400);
         setLayout(new BorderLayout());
 
+        JButton ingredientsButton = new JButton("Enter Ingredients");
+
         JButton uploadButton = new JButton("Upload Image");
         uploadButton.addActionListener(new ActionListener() {
             @Override
@@ -37,13 +39,16 @@ public class RecipeUploadView extends JFrame {
                     try {
                         returnedList = uploadImageController.execute(imagePath);
                     } catch (IOException ex) {
-                        JOptionPane.showMessageDialog(RecipeUploadView.this, "Error processing the image.");
-                        System.out.println("Ingredient problem");
+                        JOptionPane.showMessageDialog(
+                                RecipeUploadView.this,
+                                "Error processing the image.");
                         return;
                     }
 
                     if (returnedList.isEmpty()) {
-                        JOptionPane.showMessageDialog(RecipeUploadView.this, "No ingredients found. Please enter a valid image.");
+                        JOptionPane.showMessageDialog(
+                                RecipeUploadView.this,
+                                "No ingredients found. Please enter a valid image.");
                     } else {
                         ingredientList.addAll(returnedList);
                         IngredientListView ingredientListView = new IngredientListView(ingredientList);
@@ -53,7 +58,11 @@ public class RecipeUploadView extends JFrame {
                 }
             }
         });
-        getContentPane().add(uploadButton, BorderLayout.CENTER);
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(uploadButton);
+        buttonPanel.add(ingredientsButton);
+
+        add(buttonPanel, BorderLayout.CENTER);
         setVisible(true);
     }
 }
