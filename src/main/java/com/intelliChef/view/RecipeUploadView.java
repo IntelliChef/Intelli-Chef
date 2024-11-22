@@ -6,8 +6,6 @@ import com.intelliChef.Main;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -37,9 +35,7 @@ public class RecipeUploadView extends JFrame {
 
         JButton uploadButton = new JButton("Upload Image");
         styleButton(uploadButton);
-        uploadButton.addActionListener(e -> {
-                handleUploadImageButton(uploadImageController);
-        });
+        uploadButton.addActionListener(e -> {handleUploadImageButton(uploadImageController);});
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
@@ -66,7 +62,9 @@ public class RecipeUploadView extends JFrame {
             } catch (RuntimeException | IOException ex) {
                 JOptionPane.showMessageDialog(
                         RecipeUploadView.this,
-                        "Error processing the image.");
+                        "There was an error processing the image. Please try again.",
+                        "Undefined Error",
+                        JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
@@ -90,5 +88,6 @@ public class RecipeUploadView extends JFrame {
         button.setBackground(new Color(40, 118, 167));
         button.setForeground(Color.WHITE);
         button.setPreferredSize(new Dimension(180, 40));
+        button.setFocusPainted(false);
     }
 }
