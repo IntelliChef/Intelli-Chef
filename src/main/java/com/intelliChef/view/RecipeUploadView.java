@@ -22,6 +22,14 @@ public class RecipeUploadView extends JFrame {
         setLayout(new BorderLayout());
 
         JButton ingredientsButton = new JButton("Enter Ingredients");
+        ingredientsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                IngredientListView ingredientListView = new IngredientListView(ingredientList);
+                ingredientListView.setVisible(true);
+                dispose();
+            }
+        });
 
         JButton uploadButton = new JButton("Upload Image");
         uploadButton.addActionListener(new ActionListener() {
