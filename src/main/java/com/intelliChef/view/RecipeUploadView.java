@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import com.intelliChef.Main;
 
 public class RecipeUploadView extends JFrame {
     private final List<Ingredient> ingredientList = new ArrayList<>();
@@ -25,8 +26,7 @@ public class RecipeUploadView extends JFrame {
         ingredientsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                IngredientListView ingredientListView = new IngredientListView(ingredientList);
-                ingredientListView.setVisible(true);
+                Main.showIngredientListView(ingredientList);
                 dispose();
             }
         });
@@ -59,8 +59,7 @@ public class RecipeUploadView extends JFrame {
                                 "No ingredients found. Please enter a valid image.");
                     } else {
                         ingredientList.addAll(returnedList);
-                        IngredientListView ingredientListView = new IngredientListView(ingredientList);
-                        ingredientListView.setVisible(true);
+                        Main.showIngredientListView(ingredientList);
                         dispose();
                     }
                 }
