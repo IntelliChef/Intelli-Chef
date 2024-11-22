@@ -25,7 +25,7 @@ public class RecipeUploadView extends JFrame {
 
         JLabel titleLabel = new JLabel("IntelliChef", SwingConstants.CENTER);
         titleLabel.setFont(new Font("SansSerif", Font.BOLD, 30));
-        titleLabel.setBorder(BorderFactory.createEmptyBorder(20, 0, 10, 0)); // Add padding
+        titleLabel.setBorder(BorderFactory.createEmptyBorder(20, 0, 10, 0));
         add(titleLabel, BorderLayout.NORTH);
 
         JButton ingredientsButton = new JButton("Enter Ingredients");
@@ -85,7 +85,7 @@ public class RecipeUploadView extends JFrame {
                 );
             } else {
                 ingredientList.addAll(returnedList);
-                Main.showIngredientListView(ingredientList);
+                Main.showIngredientsDetectedView(ingredientList);
                 dispose();
             }
         }
@@ -95,6 +95,6 @@ public class RecipeUploadView extends JFrame {
         button.setFont(new Font("SansSerif", Font.PLAIN, 16));
         button.setBackground(new Color(40, 118, 167));
         button.setForeground(Color.WHITE);
-        button.setPreferredSize(new Dimension(180, 40)); // Set specific width and height
+        button.setPreferredSize(new Dimension(180, 40));
     }
 }
