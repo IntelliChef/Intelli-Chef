@@ -24,7 +24,7 @@ public class GeminiAIClient {
         this.modelName = modelName;
     }
 
-    public String analyzeImage(byte[] imageBytes) throws IOException {
+    public String analyzeImage(byte[] imageBytes) throws RuntimeException {
 
         try (VertexAI vertexAI = new VertexAI(projectId, location)) {
             GenerativeModel model = new GenerativeModel(modelName, vertexAI);

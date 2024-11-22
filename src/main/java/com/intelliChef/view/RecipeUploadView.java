@@ -19,7 +19,7 @@ public class RecipeUploadView extends JFrame {
     public RecipeUploadView(UploadImageController uploadImageController) {
         super("IntelliChef");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(500, 400);
+        setSize(500, 300);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
@@ -69,7 +69,7 @@ public class RecipeUploadView extends JFrame {
             List<Ingredient> returnedList;
             try {
                 returnedList = uploadImageController.execute(imagePath);
-            } catch (IOException ex) {
+            } catch (RuntimeException | IOException ex) {
                 JOptionPane.showMessageDialog(
                         RecipeUploadView.this,
                         "Error processing the image.");

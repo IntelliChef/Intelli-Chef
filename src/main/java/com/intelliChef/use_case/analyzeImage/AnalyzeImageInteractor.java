@@ -17,7 +17,7 @@ public class AnalyzeImageInteractor {
         this.geminiAIClient = geminiAIClient;
     }
 
-    public AnalyzeImageOutputData execute(AnalyzeImageInputData analyzeImageInputData) throws IOException {
+    public AnalyzeImageOutputData execute(AnalyzeImageInputData analyzeImageInputData) throws RuntimeException {
         String response = geminiAIClient.analyzeImage(analyzeImageInputData.getImageBytes());
         if (response.equals("[]")) {
             return new AnalyzeImageOutputData(new ArrayList<>());

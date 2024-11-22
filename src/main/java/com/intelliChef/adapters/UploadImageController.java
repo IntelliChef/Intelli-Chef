@@ -21,7 +21,7 @@ public class UploadImageController {
         this.analyzeImageInteractor = analyzeImageInteractor;
     }
 
-    public List<Ingredient> execute(String imagePath) throws IOException {
+    public List<Ingredient> execute(String imagePath) throws RuntimeException, IOException {
         byte[] imgBytes = getImageBytes(imagePath);
         return analyzeImageInteractor.execute(new AnalyzeImageInputData(imgBytes)).getIngredientList();
     }
@@ -30,9 +30,9 @@ public class UploadImageController {
      * Turns the image into array of bytes.
      * @param imagePath is the absolute path of the image
      * @return an array of the bytes of the image
-     * @throws IOException if path is not of an image
+     * @throws RuntimeException if path is not of an image
      */
-    private static byte[] getImageBytes(String imagePath) throws IOException {
+    private static byte[] getImageBytes(String imagePath) throws RuntimeException, IOException {
         Path path = Paths.get(imagePath);
         return Files.readAllBytes(path);  // Turn image file to byte array
     }
