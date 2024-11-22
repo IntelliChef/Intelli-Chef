@@ -13,6 +13,8 @@ import java.util.List;
 
 public class RecipeUploadView extends JFrame {
     private final List<Ingredient> ingredientList = new ArrayList<>();
+    private JLabel scanningLabel;
+
 
     public RecipeUploadView(UploadImageController uploadImageController) {
         super("IntelliChef");
@@ -25,6 +27,12 @@ public class RecipeUploadView extends JFrame {
         titleLabel.setFont(new Font("SansSerif", Font.BOLD, 30));
         titleLabel.setBorder(BorderFactory.createEmptyBorder(20, 0, 10, 0));
         add(titleLabel, BorderLayout.NORTH);
+
+        scanningLabel = new JLabel("Image is being scanned. Please wait...", SwingConstants.CENTER);
+        scanningLabel.setFont(new Font("SansSerif", Font.ITALIC, 16));
+        scanningLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 20, 10));
+        scanningLabel.setVisible(false);
+        add(scanningLabel, BorderLayout.SOUTH);
 
         JButton ingredientsButton = new JButton("Enter Ingredients");
         styleButton(ingredientsButton);
@@ -56,30 +64,40 @@ public class RecipeUploadView extends JFrame {
             File selectedFile = fileChooser.getSelectedFile();
             String imagePath = selectedFile.getAbsolutePath();
 
-            List<Ingredient> returnedList;
-            try {
-                returnedList = uploadImageController.execute(imagePath);
-            } catch (RuntimeException | IOException ex) {
-                JOptionPane.showMessageDialog(
-                        RecipeUploadView.this,
-                        "There was an error processing the image. Please try again.",
-                        "Undefined Error",
-                        JOptionPane.ERROR_MESSAGE);
-                return;
-            }
+            scanningLabel.setVisible(true);
+            new SwingWorker<List<Ingredient>, Void>() {
+                @Override
+                protected List<Ingredient> doInBackground() throws Exception {
+                    return uploadImageController.execute(imagePath);
+                }
 
-            if (returnedList.isEmpty()) {
-                JOptionPane.showMessageDialog(
-                        RecipeUploadView.this,
-                        "No ingredients found. Please upload a valid image.",
-                        "Ingredient Error",
-                        JOptionPane.WARNING_MESSAGE
-                );
-            } else {
-                ingredientList.addAll(returnedList);
-                Main.showIngredientsDetectedView(ingredientList);
-                dispose();
-            }
+                @Override
+                protected void done() {
+                    scanningLabel.setVisible(false);
+                    try {
+                        List<Ingredient> returnedList = get();
+                        if (returnedList.isEmpty()) {
+                            JOptionPane.showMessageDialog(
+                                    RecipeUploadView.this,
+                                    "No ingredients found. Please upload a valid image.",
+                                    "Ingredient Error",
+                                    JOptionPane.WARNING_MESSAGE
+                            );
+                        } else {
+                            ingredientList.addAll(returnedList);
+                            Main.showIngredientsDetectedView(ingredientList);
+                            dispose();
+                        }
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(
+                                RecipeUploadView.this,
+                                "There was an error processing the image. Please try again.",
+                                "Undefined Error",
+                                JOptionPane.ERROR_MESSAGE
+                        );
+                    }
+                }
+            }.execute();
         }
     }
 
