@@ -30,21 +30,15 @@ public class RecipeUploadView extends JFrame {
 
         JButton ingredientsButton = new JButton("Enter Ingredients");
         styleButton(ingredientsButton);
-        ingredientsButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        ingredientsButton.addActionListener(e -> {
                 Main.showIngredientListView(ingredientList);
                 dispose();
-            }
         });
 
         JButton uploadButton = new JButton("Upload Image");
         styleButton(uploadButton);
-        uploadButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        uploadButton.addActionListener(e -> {
                 handleUploadImageButton(uploadImageController);
-            }
         });
 
         JPanel buttonPanel = new JPanel();
@@ -92,7 +86,7 @@ public class RecipeUploadView extends JFrame {
     }
 
     private void styleButton(JButton button) {
-        button.setFont(new Font("SansSerif", Font.PLAIN, 16));
+        button.setFont(new Font("SansSerif", Font.BOLD, 16));
         button.setBackground(new Color(40, 118, 167));
         button.setForeground(Color.WHITE);
         button.setPreferredSize(new Dimension(180, 40));

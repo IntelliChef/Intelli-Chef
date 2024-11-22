@@ -21,12 +21,14 @@ public class IngredientsDetectedView extends JFrame {
          add(ingredientCount, BorderLayout.CENTER);
 
          JButton continueButton = new JButton("Continue");
+         styleButton(continueButton);
          continueButton.addActionListener(e -> {
              Main.showIngredientListView(ingredientList);
              dispose();
          });
 
          JButton cancelButton = new JButton("Cancel");
+         styleButton(cancelButton);
          cancelButton.addActionListener(e -> {
              Main.showRecipeUploadView();
              dispose();
@@ -37,9 +39,11 @@ public class IngredientsDetectedView extends JFrame {
          buttonPanel.add(continueButton);
          buttonPanel.add(cancelButton);
          add(buttonPanel, BorderLayout.SOUTH);
-
          setVisible(true);
      }
 
-
+    private void styleButton(JButton button) {
+        button.setFont(new Font("SansSerif", Font.BOLD, 16));
+        button.setPreferredSize(new Dimension(120, 40));
+    }
 }
