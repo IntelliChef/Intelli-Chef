@@ -38,34 +38,7 @@ public class RecipeUploadView extends JFrame {
         uploadButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-
-                int result = fileChooser.showOpenDialog(RecipeUploadView.this);
-                if (result == JFileChooser.APPROVE_OPTION) {
-                    File selectedFile = fileChooser.getSelectedFile();
-                    String imagePath = selectedFile.getAbsolutePath();
-
-                    List<Ingredient> returnedList;
-                    try {
-                        returnedList = uploadImageController.execute(imagePath);
-                    } catch (IOException ex) {
-                        JOptionPane.showMessageDialog(
-                                RecipeUploadView.this,
-                                "Error processing the image.");
-                        return;
-                    }
-
-                    if (returnedList.isEmpty()) {
-                        JOptionPane.showMessageDialog(
-                                RecipeUploadView.this,
-                                "No ingredients found. Please enter a valid image.");
-                    } else {
-                        ingredientList.addAll(returnedList);
-                        Main.showIngredientListView(ingredientList);
-                        dispose();
-                    }
-                }
+                handleUploadImageButton(uploadImageController);
             }
         });
         JPanel buttonPanel = new JPanel();
@@ -74,6 +47,37 @@ public class RecipeUploadView extends JFrame {
 
         add(buttonPanel, BorderLayout.CENTER);
         setVisible(true);
+    }
+
+    private void handleUploadImageButton(UploadImageController uploadImageController) {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+        int result = fileChooser.showOpenDialog(RecipeUploadView.this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            String imagePath = selectedFile.getAbsolutePath();
+
+            List<Ingredient> returnedList;
+            try {
+                returnedList = uploadImageController.execute(imagePath);
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(
+                        RecipeUploadView.this,
+                        "Error processing the image.");
+                return;
+            }
+
+            if (returnedList.isEmpty()) {
+                JOptionPane.showMessageDialog(
+                        RecipeUploadView.this,
+                        "No ingredients found. Please enter a valid image.");
+            } else {
+                ingredientList.addAll(returnedList);
+                Main.showIngredientListView(ingredientList);
+                dispose();
+            }
+        }
     }
 
     private void styleButton(JButton button) {
