@@ -2,6 +2,7 @@ package com.intelliChef.view;
 
 import com.intelliChef.adapters.UploadImageController;
 import com.intelliChef.entities.Ingredient;
+import com.intelliChef.Main;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,17 +12,21 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import com.intelliChef.Main;
 
 public class RecipeUploadView extends JFrame {
     private final List<Ingredient> ingredientList = new ArrayList<>();
 
     public RecipeUploadView(UploadImageController uploadImageController) {
-        super("Image Uploader");
+        super("IntelliChef");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(500, 400);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
+
+        JLabel titleLabel = new JLabel("IntelliChef", SwingConstants.CENTER);
+        titleLabel.setFont(new Font("SansSerif", Font.BOLD, 30));
+        titleLabel.setBorder(BorderFactory.createEmptyBorder(20, 0, 10, 0)); // Add padding
+        add(titleLabel, BorderLayout.NORTH);
 
         JButton ingredientsButton = new JButton("Enter Ingredients");
         styleButton(ingredientsButton);
@@ -41,7 +46,10 @@ public class RecipeUploadView extends JFrame {
                 handleUploadImageButton(uploadImageController);
             }
         });
+
         JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        buttonPanel.setBorder(BorderFactory.createEmptyBorder(20, 30, 20, 30));
         buttonPanel.add(uploadButton);
         buttonPanel.add(ingredientsButton);
 
@@ -71,7 +79,10 @@ public class RecipeUploadView extends JFrame {
             if (returnedList.isEmpty()) {
                 JOptionPane.showMessageDialog(
                         RecipeUploadView.this,
-                        "No ingredients found. Please enter a valid image.");
+                        "No ingredients found. Please upload a valid image.",
+                        "Ingredient Error",
+                        JOptionPane.WARNING_MESSAGE
+                );
             } else {
                 ingredientList.addAll(returnedList);
                 Main.showIngredientListView(ingredientList);
@@ -82,8 +93,8 @@ public class RecipeUploadView extends JFrame {
 
     private void styleButton(JButton button) {
         button.setFont(new Font("SansSerif", Font.PLAIN, 16));
-        button.setForeground(Color.white);
-        button.setBackground(Color.gray);
+        button.setBackground(new Color(40, 118, 167));
+        button.setForeground(Color.WHITE);
+        button.setPreferredSize(new Dimension(180, 40)); // Set specific width and height
     }
 }
-
