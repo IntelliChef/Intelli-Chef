@@ -1,5 +1,6 @@
 package com.intelliChef.view;
 
+import com.intelliChef.adapters.ingredient_list.AddIngredientController;
 import com.intelliChef.adapters.ingredient_list.GetIngredientListPresenter;
 import com.intelliChef.adapters.ingredient_list.IngredientListViewModel;
 
@@ -29,35 +30,13 @@ public class IngredientListView extends JFrame implements ActionListener {
         add(titleLabel, BorderLayout.NORTH);
 
         // Display the ingredients
-        // displayIngredients();
         displayIngredientsAsTable();
+
+        // Add "Manually add ingredient" button
+        addIngredientFieldsAndButton();
 
         // Add "Confirm" button at the bottom
         addConfirmButton();
-    }
-
-    private void displayIngredients() {
-        // Get the View Model from the Presenter
-        IngredientListViewModel viewModel = presenter.getViewModel();
-
-        // Create a panel to hold ingredient checkboxes in a scrollable pane
-        JPanel ingredientPanel = new JPanel();
-        ingredientPanel.setLayout(new BoxLayout(ingredientPanel, BoxLayout.Y_AXIS));
-
-        // Add a checkbox for each ingredient
-        List<String> ingredients = viewModel.getIngredientsDisplayList();
-        for (String ingredient : ingredients) {
-            JCheckBox checkBox = new JCheckBox(ingredient, true);
-            checkBox.setFont(new Font("Arial", Font.PLAIN, 14));
-            ingredientPanel.add(checkBox);
-        }
-
-        // Make the panel scrollable
-        JScrollPane scrollPane = new JScrollPane(ingredientPanel);
-        add(scrollPane, BorderLayout.CENTER);
-
-        // Display the frame
-        setVisible(true);
     }
 
     private void displayIngredientsAsTable() {
@@ -121,6 +100,55 @@ public class IngredientListView extends JFrame implements ActionListener {
 
         // Add the panel to the bottom of the frame
         add(buttonPanel, BorderLayout.SOUTH);
+    }
+
+    private void addIngredientFieldsAndButton() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(3, 2)); // Create a grid for the fields
+
+        // Name field
+        JLabel nameLabel = new JLabel("Ingredient Name:");
+        JTextField nameField = new JTextField();
+        panel.add(nameLabel);
+        panel.add(nameField);
+
+        // Quantity field
+        JLabel quantityLabel = new JLabel("Quantity:");
+        JTextField quantityField = new JTextField();
+        panel.add(quantityLabel);
+        panel.add(quantityField);
+
+        // Add Button
+        JButton addButton = new JButton("Add Ingredient");
+
+        panel.add(addButton);
+
+        // Add the panel with the fields and button to the bottom
+        add(panel, BorderLayout.SOUTH);
+
+        addButton.addActionListener(e -> {
+            String ingredientName = nameField.getText();
+            String ingredientQuantity = quantityField.getText();
+            if (!ingredientName.isEmpty() && !ingredientQuantity.isEmpty()
+                    && ingredientQuantity.matches("\\d+")) {
+                // Add the new ingredient
+                addNewIngredient(ingredientName, ingredientQuantity);
+
+                // Clear the fields
+                nameField.setText("");
+                quantityField.setText("");
+            } else {JOptionPane.showMessageDialog(this,
+                    "Please enter a valid name and numeric quantity!");}
+        });
+
+        revalidate();
+        repaint();
+    }
+
+    private void addNewIngredient(String name, String quantity) {
+        AddIngredientController controller = new AddIngredientController();
+        controller.execute(name, quantity); // Update the ingredient list
+        // trigger presenter or interactor to handle this action and update the data.
     }
 
     /**
