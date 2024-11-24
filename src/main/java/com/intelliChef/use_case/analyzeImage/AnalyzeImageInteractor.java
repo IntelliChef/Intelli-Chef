@@ -17,7 +17,7 @@ public class AnalyzeImageInteractor {
         this.geminiAIClient = geminiAIClient;
     }
 
-    public AnalyzeImageOutputData execute(AnalyzeImageInputData analyzeImageInputData) throws IOException {
+    public AnalyzeImageOutputData execute(AnalyzeImageInputData analyzeImageInputData) throws RuntimeException {
         String response = geminiAIClient.analyzeImage(analyzeImageInputData.getImageBytes());
         if (response.equals("[]")) {
             return new AnalyzeImageOutputData(new ArrayList<>());
@@ -25,11 +25,6 @@ public class AnalyzeImageInteractor {
         return new AnalyzeImageOutputData(parseIngredients(response));
     }
 
-    /**
-     * Takes an input String and converts it into a list of ingredients.
-     * @param response has the format ingredient:quantity separated by commas
-     * @return a list of type Ingredient in the response
-     */
     private List<Ingredient> parseIngredients(String response) {
         List<Ingredient> ingredients = new ArrayList<>();
         String[] pairs = response.split(", ");
