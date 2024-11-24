@@ -1,6 +1,7 @@
 package com.intelliChef.view;
 
 import com.intelliChef.adapters.UploadImageController;
+import com.intelliChef.adapters.UploadImagePresenter;
 import com.intelliChef.entities.Ingredient;
 import com.intelliChef.Main;
 
@@ -13,11 +14,14 @@ import java.util.List;
 
 public class RecipeUploadView extends JFrame {
     private final List<Ingredient> ingredientList = new ArrayList<>();
-    private JLabel scanningLabel;
+    private final JLabel scanningLabel;
+    private final UploadImageController uploadImageController;
+    private final UploadImagePresenter uploadImagePresenter = new UploadImagePresenter(this);
 
 
     public RecipeUploadView(UploadImageController uploadImageController) {
         super("IntelliChef");
+        this.uploadImageController = uploadImageController;
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(500, 300);
         setLocationRelativeTo(null);
@@ -37,13 +41,13 @@ public class RecipeUploadView extends JFrame {
         JButton ingredientsButton = new JButton("Enter Ingredients");
         styleButton(ingredientsButton);
         ingredientsButton.addActionListener(e -> {
-                Main.showIngredientListView(ingredientList);
-                dispose();
+            uploadImageController.ingredientButtonClick();
+            uploadImagePresenter.ingredientButtonClick();
         });
 
         JButton uploadButton = new JButton("Upload Image");
         styleButton(uploadButton);
-        uploadButton.addActionListener(e -> {handleUploadImageButton(uploadImageController);});
+        uploadButton.addActionListener(e -> {handleUploadImageButton();});
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
@@ -55,7 +59,7 @@ public class RecipeUploadView extends JFrame {
         setVisible(true);
     }
 
-    private void handleUploadImageButton(UploadImageController uploadImageController) {
+    private void handleUploadImageButton() {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
@@ -64,40 +68,7 @@ public class RecipeUploadView extends JFrame {
             File selectedFile = fileChooser.getSelectedFile();
             String imagePath = selectedFile.getAbsolutePath();
 
-            scanningLabel.setVisible(true);
-            new SwingWorker<List<Ingredient>, Void>() {
-                @Override
-                protected List<Ingredient> doInBackground() throws Exception {
-                    return uploadImageController.execute(imagePath);
-                }
-
-                @Override
-                protected void done() {
-                    scanningLabel.setVisible(false);
-                    try {
-                        List<Ingredient> returnedList = get();
-                        if (returnedList.isEmpty()) {
-                            JOptionPane.showMessageDialog(
-                                    RecipeUploadView.this,
-                                    "No ingredients found. Please upload a valid image.",
-                                    "Ingredient Error",
-                                    JOptionPane.WARNING_MESSAGE
-                            );
-                        } else {
-                            ingredientList.addAll(returnedList);
-                            Main.showIngredientsDetectedView(ingredientList);
-                            dispose();
-                        }
-                    } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(
-                                RecipeUploadView.this,
-                                "There was an error processing the image. Please try again.",
-                                "Undefined Error",
-                                JOptionPane.ERROR_MESSAGE
-                        );
-                    }
-                }
-            }.execute();
+            uploadImageController.uploadImageClick(imagePath, uploadImagePresenter, this);
         }
     }
 
@@ -107,5 +78,9 @@ public class RecipeUploadView extends JFrame {
         button.setForeground(Color.WHITE);
         button.setPreferredSize(new Dimension(180, 40));
         button.setFocusPainted(false);
+    }
+
+    public void updateScanningLabel(boolean isVisible) {
+        scanningLabel.setVisible(isVisible);
     }
 }
