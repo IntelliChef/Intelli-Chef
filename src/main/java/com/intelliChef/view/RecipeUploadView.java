@@ -1,7 +1,7 @@
 package com.intelliChef.view;
 
-import com.intelliChef.adapters.UploadImageController;
-import com.intelliChef.adapters.UploadImagePresenter;
+import com.intelliChef.adapters.RecipeUploadController;
+import com.intelliChef.adapters.RecipeUploadPresenter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,13 +9,13 @@ import java.io.File;
 
 public class RecipeUploadView extends JFrame {
     private final JLabel scanningLabel;
-    private final UploadImageController uploadImageController;
-    private final UploadImagePresenter uploadImagePresenter = new UploadImagePresenter(this);
+    private final RecipeUploadController recipeUploadController;
+    private final RecipeUploadPresenter recipeUploadPresenter = new RecipeUploadPresenter(this);
 
 
-    public RecipeUploadView(UploadImageController uploadImageController) {
+    public RecipeUploadView(RecipeUploadController recipeUploadController) {
         super("IntelliChef");
-        this.uploadImageController = uploadImageController;
+        this.recipeUploadController = recipeUploadController;
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(500, 300);
         setLocationRelativeTo(null);
@@ -35,7 +35,7 @@ public class RecipeUploadView extends JFrame {
         JButton ingredientsButton = new JButton("Enter Ingredients");
         styleButton(ingredientsButton);
         ingredientsButton.addActionListener(e -> {
-            uploadImageController.ingredientButtonClick(uploadImagePresenter);
+            recipeUploadController.ingredientButtonClick(recipeUploadPresenter);
         });
 
         JButton uploadButton = new JButton("Upload Image");
@@ -61,7 +61,7 @@ public class RecipeUploadView extends JFrame {
             File selectedFile = fileChooser.getSelectedFile();
             String imagePath = selectedFile.getAbsolutePath();
 
-            uploadImageController.uploadImageClick(imagePath, uploadImagePresenter);
+            recipeUploadController.uploadImageClick(imagePath, recipeUploadPresenter);
         }
     }
 

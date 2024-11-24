@@ -15,37 +15,37 @@ import java.util.List;
 /**
  * Controller that takes path of image and turns the image into bytes so it can be passed into the interactor.
  */
-public class UploadImageController {
+public class RecipeUploadController {
     private List<Ingredient> ingredientList;
     private final AnalyzeImageInteractor analyzeImageInteractor;
 
-    public UploadImageController(AnalyzeImageInteractor analyzeImageInteractor) {
+    public RecipeUploadController(AnalyzeImageInteractor analyzeImageInteractor) {
         this.analyzeImageInteractor = analyzeImageInteractor;
     }
 
-    public void ingredientButtonClick(UploadImagePresenter uploadImagePresenter) {
-        uploadImagePresenter.ingredientButtonClick();
+    public void ingredientButtonClick(RecipeUploadPresenter recipeUploadPresenter) {
+        recipeUploadPresenter.ingredientButtonClick();
         Main.showIngredientListView(new ArrayList<>());
     }
 
     public void uploadImageClick(String imagePath,
-                                 UploadImagePresenter uploadImagePresenter) {
+                                 RecipeUploadPresenter recipeUploadPresenter) {
         try {
-            uploadImagePresenter.updateScanningLabel(true);
+            recipeUploadPresenter.updateScanningLabel(true);
             byte[] imgBytes = getImageBytes(imagePath);
             ingredientList = analyzeImageInteractor.execute(new AnalyzeImageInputData(imgBytes)).getIngredientList();
         } catch (IOException | RuntimeException e) {
-            uploadImagePresenter.updateScanningLabel(false);
-            uploadImagePresenter.uploadImageClickError();
+            recipeUploadPresenter.updateScanningLabel(false);
+            recipeUploadPresenter.uploadImageClickError();
         }
 
-        uploadImagePresenter.updateScanningLabel(false);
+        recipeUploadPresenter.updateScanningLabel(false);
 
         if (ingredientList.isEmpty()) {
-            uploadImagePresenter.uploadImageClickFail();
+            recipeUploadPresenter.uploadImageClickFail();
         } else {
             Main.showIngredientsDetectedView(ingredientList);
-            uploadImagePresenter.uploadImageClickSuccess();
+            recipeUploadPresenter.uploadImageClickSuccess();
         }
     }
 

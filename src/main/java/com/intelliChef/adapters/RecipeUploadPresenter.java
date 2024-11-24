@@ -4,10 +4,10 @@ import com.intelliChef.view.RecipeUploadView;
 
 import javax.swing.*;
 
-public class UploadImagePresenter {
+public class RecipeUploadPresenter {
     private final RecipeUploadView recipeUploadView;
 
-    public UploadImagePresenter(RecipeUploadView recipeUploadView) {
+    public RecipeUploadPresenter(RecipeUploadView recipeUploadView) {
         this.recipeUploadView = recipeUploadView;
     }
 
@@ -16,7 +16,7 @@ public class UploadImagePresenter {
         if (isVisible) {
             JOptionPane.showMessageDialog(
                     recipeUploadView,
-                    "Scanning Image. Please wait...",
+                    "Please wait while image is being scanned. Click 'OK' to continue.",
                     "Scan in Progress",
                     JOptionPane.INFORMATION_MESSAGE
             );

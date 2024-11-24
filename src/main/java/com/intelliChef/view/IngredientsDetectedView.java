@@ -1,7 +1,8 @@
 package com.intelliChef.view;
 
+import com.intelliChef.adapters.IngredientsDetectedController;
+import com.intelliChef.adapters.IngredientsDetectedPresenter;
 import com.intelliChef.entities.Ingredient;
-import com.intelliChef.Main;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,13 +10,15 @@ import java.util.List;
 
 public class IngredientsDetectedView extends JFrame {
      public IngredientsDetectedView(List<Ingredient> ingredientList) {
-         super("Ingredients Detected");
+         super("Ingredient(s) Detected");
+         IngredientsDetectedController ingredientsDetectedController = new IngredientsDetectedController();
+         IngredientsDetectedPresenter ingredientsDetectedPresenter = new IngredientsDetectedPresenter(this);
          setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
          setSize(400, 200);
          setLocationRelativeTo(null);
          setLayout(new BorderLayout());
 
-         JLabel ingredientCount = new JLabel("Number of ingredients detected: "
+         JLabel ingredientCount = new JLabel("Type(s) of ingredient(s) detected: "
                  + ingredientList.size(), SwingConstants.CENTER);
          ingredientCount.setFont(new Font("SansSerif", Font.PLAIN, 16));
          add(ingredientCount, BorderLayout.CENTER);
@@ -23,15 +26,13 @@ public class IngredientsDetectedView extends JFrame {
          JButton continueButton = new JButton("Continue");
          styleButton(continueButton);
          continueButton.addActionListener(e -> {
-             Main.showIngredientListView(ingredientList);
-             dispose();
+             ingredientsDetectedController.continueButtonClick(ingredientList, ingredientsDetectedPresenter);
          });
 
          JButton cancelButton = new JButton("Cancel");
          styleButton(cancelButton);
          cancelButton.addActionListener(e -> {
-             Main.showRecipeUploadView();
-             dispose();
+             ingredientsDetectedController.cancelButtonClick(ingredientsDetectedPresenter);
          });
 
          JPanel buttonPanel = new JPanel();
