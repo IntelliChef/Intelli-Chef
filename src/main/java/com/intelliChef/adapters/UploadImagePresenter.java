@@ -13,6 +13,14 @@ public class UploadImagePresenter {
 
     public void updateScanningLabel(boolean isVisible) {
         recipeUploadView.updateScanningLabel(isVisible);
+        if (isVisible) {
+            JOptionPane.showMessageDialog(
+                    recipeUploadView,
+                    "Scanning Image. Please wait...",
+                    "Scan in Progress",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+        }
     }
 
     public void ingredientButtonClick() {

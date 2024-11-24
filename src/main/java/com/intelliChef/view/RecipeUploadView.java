@@ -2,18 +2,12 @@ package com.intelliChef.view;
 
 import com.intelliChef.adapters.UploadImageController;
 import com.intelliChef.adapters.UploadImagePresenter;
-import com.intelliChef.entities.Ingredient;
-import com.intelliChef.Main;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class RecipeUploadView extends JFrame {
-    private final List<Ingredient> ingredientList = new ArrayList<>();
     private final JLabel scanningLabel;
     private final UploadImageController uploadImageController;
     private final UploadImagePresenter uploadImagePresenter = new UploadImagePresenter(this);
@@ -41,8 +35,7 @@ public class RecipeUploadView extends JFrame {
         JButton ingredientsButton = new JButton("Enter Ingredients");
         styleButton(ingredientsButton);
         ingredientsButton.addActionListener(e -> {
-            uploadImageController.ingredientButtonClick();
-            uploadImagePresenter.ingredientButtonClick();
+            uploadImageController.ingredientButtonClick(uploadImagePresenter);
         });
 
         JButton uploadButton = new JButton("Upload Image");
@@ -68,7 +61,7 @@ public class RecipeUploadView extends JFrame {
             File selectedFile = fileChooser.getSelectedFile();
             String imagePath = selectedFile.getAbsolutePath();
 
-            uploadImageController.uploadImageClick(imagePath, uploadImagePresenter, this);
+            uploadImageController.uploadImageClick(imagePath, uploadImagePresenter);
         }
     }
 

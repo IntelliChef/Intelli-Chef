@@ -4,9 +4,7 @@ import com.intelliChef.Main;
 import com.intelliChef.entities.Ingredient;
 import com.intelliChef.use_case.analyzeImage.AnalyzeImageInputData;
 import com.intelliChef.use_case.analyzeImage.AnalyzeImageInteractor;
-import com.intelliChef.view.RecipeUploadView;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -25,13 +23,13 @@ public class UploadImageController {
         this.analyzeImageInteractor = analyzeImageInteractor;
     }
 
-    public void ingredientButtonClick() {
+    public void ingredientButtonClick(UploadImagePresenter uploadImagePresenter) {
+        uploadImagePresenter.ingredientButtonClick();
         Main.showIngredientListView(new ArrayList<>());
     }
 
     public void uploadImageClick(String imagePath,
-                                 UploadImagePresenter uploadImagePresenter,
-                                 RecipeUploadView recipeUploadView) {
+                                 UploadImagePresenter uploadImagePresenter) {
         try {
             uploadImagePresenter.updateScanningLabel(true);
             byte[] imgBytes = getImageBytes(imagePath);
