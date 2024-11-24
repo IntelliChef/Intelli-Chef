@@ -1,4 +1,4 @@
-package com.intelliChef.adapters;
+package com.intelliChef.adapters.recipeUpload;
 
 import com.intelliChef.Main;
 import com.intelliChef.entities.Ingredient;

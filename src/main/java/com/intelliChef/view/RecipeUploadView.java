@@ -1,7 +1,8 @@
 package com.intelliChef.view;
 
-import com.intelliChef.adapters.RecipeUploadController;
-import com.intelliChef.adapters.RecipeUploadPresenter;
+import com.intelliChef.adapters.recipeUpload.RecipeUploadController;
+import com.intelliChef.adapters.recipeUpload.RecipeUploadFactory;
+import com.intelliChef.adapters.recipeUpload.RecipeUploadPresenter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,7 +17,7 @@ public class RecipeUploadView extends JFrame {
     public RecipeUploadView(RecipeUploadController recipeUploadController) {
         super("IntelliChef");
         this.recipeUploadController = recipeUploadController;
-        this.recipeUploadPresenter = new RecipeUploadPresenter(this);
+        this.recipeUploadPresenter = new RecipeUploadFactory().getPresenter(this);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(500, 300);
