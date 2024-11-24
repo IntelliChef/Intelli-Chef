@@ -4,6 +4,7 @@ import com.intelliChef.Main;
 import com.intelliChef.entities.Ingredient;
 import com.intelliChef.use_case.analyzeImage.AnalyzeImageInputData;
 import com.intelliChef.use_case.analyzeImage.AnalyzeImageInteractor;
+import com.intelliChef.use_case.analyzeImage.AnalyzeImageOutputData;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -28,24 +29,14 @@ public class RecipeUploadController {
         Main.showIngredientListView(new ArrayList<>());
     }
 
-    public void uploadImageClick(String imagePath,
-                                 RecipeUploadPresenter recipeUploadPresenter) {
+    public void uploadImageClick(String imagePath, RecipeUploadPresenter recipeUploadPresenter) {
+        recipeUploadPresenter.updateScanningLabel(true);
         try {
-            recipeUploadPresenter.updateScanningLabel(true);
             byte[] imgBytes = getImageBytes(imagePath);
-            ingredientList = analyzeImageInteractor.execute(new AnalyzeImageInputData(imgBytes)).getIngredientList();
+            AnalyzeImageOutputData result = analyzeImageInteractor.execute(new AnalyzeImageInputData(imgBytes));
+            recipeUploadPresenter.uploadButtonResult(result.getIngredientList());
         } catch (IOException | RuntimeException e) {
-            recipeUploadPresenter.updateScanningLabel(false);
-            recipeUploadPresenter.uploadImageClickError();
-        }
-
-        recipeUploadPresenter.updateScanningLabel(false);
-
-        if (ingredientList.isEmpty()) {
-            recipeUploadPresenter.uploadImageClickFail();
-        } else {
-            Main.showIngredientsDetectedView(ingredientList);
-            recipeUploadPresenter.uploadImageClickSuccess();
+            recipeUploadPresenter.uploadImageClickError("There was an error processing the image. Please try again.");
         }
     }
 

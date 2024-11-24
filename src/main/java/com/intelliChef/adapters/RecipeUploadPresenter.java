@@ -1,8 +1,11 @@
 package com.intelliChef.adapters;
 
+import com.intelliChef.Main;
+import com.intelliChef.entities.Ingredient;
 import com.intelliChef.view.RecipeUploadView;
 
 import javax.swing.*;
+import java.util.List;
 
 public class RecipeUploadPresenter {
     private final RecipeUploadView recipeUploadView;
@@ -27,25 +30,18 @@ public class RecipeUploadPresenter {
         recipeUploadView.dispose();
     }
 
-    public void uploadImageClickSuccess() {
-        recipeUploadView.dispose();
+    public void uploadButtonResult(List<Ingredient> ingredientList) {
+        recipeUploadView.updateScanningLabel(false);
+        if (ingredientList.isEmpty()) {
+            recipeUploadView.showWarningMessage("No ingredients found. Please upload a valid image.");
+        } else {
+            recipeUploadView.dispose();
+            Main.showIngredientsDetectedView(ingredientList);
+        }
     }
 
-    public void uploadImageClickFail() {
-        JOptionPane.showMessageDialog(
-                recipeUploadView,
-                "No ingredients found. Please upload a valid image.",
-                "Ingredient Error",
-                JOptionPane.WARNING_MESSAGE
-        );
-    }
-
-    public void uploadImageClickError() {
-        JOptionPane.showMessageDialog(
-                recipeUploadView,
-                "There was an error processing the image. Please try again.",
-                "Undefined Error",
-                JOptionPane.ERROR_MESSAGE
-        );
+    public void uploadImageClickError(String error) {
+        recipeUploadView.updateScanningLabel(false);
+        recipeUploadView.showErrorMessage(error);
     }
 }
