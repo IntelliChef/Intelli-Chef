@@ -4,13 +4,11 @@ import com.intelliChef.adapters.ingredient_list.AddIngredientController;
 import com.intelliChef.adapters.ingredient_list.ConfirmIngredientListController;
 import com.intelliChef.adapters.ingredient_list.GetIngredientListPresenter;
 import com.intelliChef.adapters.ingredient_list.IngredientListViewModel;
-import com.intelliChef.data_access.IngredientListRepository;
 import com.intelliChef.use_case.IngredientRepository;
 import com.intelliChef.use_case.add_ingredient.AddIngredientInteractor;
 import com.intelliChef.use_case.get_ingredient_list.GetIngredientListInputBoundary;
 import com.intelliChef.use_case.get_ingredient_list.GetIngredientListInteractor;
 import com.intelliChef.use_case.get_ingredient_list.GetIngredientListOutputBoundary;
-import com.intelliChef.use_case.get_ingredient_list.GetIngredientListOutputData;
 import com.intelliChef.use_case.confirm_ingredient_list.ConfirmIngredientListInteractor;
 import com.intelliChef.view.IngredientListView;
 

@@ -18,4 +18,6 @@ public interface NavigationCall {
      * @param ingredientList list which contains the new ingredients detected after scanning image
      */
     void navigateToIngredientsDetectedView(List<Ingredient> ingredientList);
+
+    void navigateToIngredientListView();
 }
