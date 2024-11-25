@@ -1,6 +1,7 @@
 package com.intelliChef.app;
 
 import com.intelliChef.adapters.ingredient_list.AddIngredientController;
+import com.intelliChef.adapters.ingredient_list.ConfirmIngredientListController;
 import com.intelliChef.adapters.ingredient_list.GetIngredientListPresenter;
 import com.intelliChef.adapters.ingredient_list.IngredientListViewModel;
 import com.intelliChef.data_access.IngredientListRepository;
@@ -16,14 +17,25 @@ public final class IngredientListFactory {
     /**
      * Prevent instantiation.
      */
-    private IngredientListFactory() {
-    }
+    private IngredientListFactory() {}
 
     /**
      * Factory function for creating the IngredientListView.
      */
     public static IngredientListView create(IngredientRepository ingredientRepository) {
-        // implement later
+        AddIngredientController addIngredientController = createAddIngredientUseCase();
+        ConfirmIngredientListController confirmIngredientListController = createConfirmIngredientListUseCase();
+
+        return new IngredientListView(ingredientListViewModel, addIngredientController,
+                confirmIngredientListController);
+    }
+
+    public static AddIngredientController createAddIngredientUseCase() {
+
+    }
+
+    public static ConfirmIngredientListController createConfirmIngredientListUseCase() {
+
     }
 }
 
