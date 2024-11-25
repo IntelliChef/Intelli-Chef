@@ -1,58 +1,171 @@
 package com.intelliChef.view;
 
+import com.intelliChef.adapters.ingredient_list.AddIngredientController;
+import com.intelliChef.adapters.ingredient_list.ConfirmIngredientListController;
+import com.intelliChef.adapters.ingredient_list.GetIngredientListPresenter;
+import com.intelliChef.adapters.ingredient_list.IngredientListViewModel;
+
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.util.List;
-import java.util.ArrayList;
-import com.intelliChef.entities.Ingredient;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class IngredientListView extends JFrame {
+public class IngredientListView extends JFrame implements ActionListener {
+    private IngredientListViewModel viewModel;
+    private AddIngredientController addIngredientController;
+    private ConfirmIngredientListController confirmController;
 
-    public IngredientListView(List<Ingredient> ingredients) {
+    private JTable ingredientTable;
+
+    public IngredientListView(IngredientListViewModel viewModel,
+                              AddIngredientController addIngredientController,
+                              ConfirmIngredientListController confirmController) {
+        this.viewModel = viewModel;
+        this.addIngredientController = addIngredientController;
+        this.confirmController = confirmController;
+
         // Set up the frame
-        setTitle("Ingredients List");
+        setTitle("Ingredient List");
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-
-        // Set layout for the frame
         setLayout(new BorderLayout());
 
-        // Title label at the top
-        JLabel titleLabel = new JLabel("Ingredients List", SwingConstants.CENTER);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 18));
-        add(titleLabel, BorderLayout.NORTH);
-
-        // Create a panel to hold ingredient checkboxes in a scrollable pane
-        JPanel ingredientPanel = new JPanel();
-        ingredientPanel.setLayout(new BoxLayout(ingredientPanel, BoxLayout.Y_AXIS));
-
-        // Add a checkbox for each ingredient
-        for (Ingredient ingredient : ingredients) {
-            JCheckBox checkBox = new JCheckBox(ingredient.getName() + " - " + ingredient.getQuantity(), true);
-            checkBox.setFont(new Font("Arial", Font.PLAIN, 14));
-            ingredientPanel.add(checkBox);
-        }
-
-        // Make the panel scrollable
-        JScrollPane scrollPane = new JScrollPane(ingredientPanel);
+        // add a table to the view
+        ingredientTable = displayIngredientsAsTable();
+        JScrollPane scrollPane = new JScrollPane(ingredientTable);
         add(scrollPane, BorderLayout.CENTER);
 
-        // Display the frame
-        setVisible(true);
+        // Add "Add ingredient" button and name, quantity field to the view
+        addAddIngredientButtonAndField();
+
+        // Add "Confirm" button to the view
+        addConfirmButton();
     }
 
-    public static void main(String[] args) {
-        // Example list of ingredients
-        List<Ingredient> ingredients = new ArrayList<>();
-        ingredients.add(new Ingredient("Tomato", 5.0));
-        ingredients.add(new Ingredient("Onion", 2.0));
-        ingredients.add(new Ingredient("Garlic", 3.0));
-        ingredients.add(new Ingredient("Olive Oil", 0.5));
+    public JTable displayIngredientsAsTable() {
+        // Table column headers
+        String[] columnNames = {"Select", "Name", "Quantity"};
 
-        // Create and show the Ingredient List view
-        new IngredientListView(ingredients);
+        // Extract ingredient data and include a checkbox for each row
+        Object[][] tableData = viewModel.getIngredientsDisplayList().stream()
+                .map(ingredient -> ingredient.split(", "))
+                .map(data -> new Object[]{
+                        Boolean.TRUE, // Default selection is true (checked)
+                        data[0].replace("Name: ", ""),
+                        data[1].replace("Quantity: ", "")
+                })
+                .toArray(Object[][]::new);
+
+        // Create a table model
+        DefaultTableModel tableModel = new DefaultTableModel(tableData, columnNames) {
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                // First column (Select) is Boolean, others are String
+                return columnIndex == 0 ? Boolean.class : String.class;
+            }
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                // Only allow editing the checkbox column
+                return column == 0;
+            }
+        };
+
+        // Create a JTable
+        JTable ingredientTable = new JTable(tableModel);
+
+        // Set column widths for better spacing
+        ingredientTable.getColumnModel().getColumn(0).setPreferredWidth(50); // Checkbox column
+        ingredientTable.getColumnModel().getColumn(1).setPreferredWidth(150); // Name column
+        ingredientTable.getColumnModel().getColumn(2).setPreferredWidth(100); // Quantity column
+
+        return ingredientTable;
+    }
+
+    private void addConfirmButton() {
+        // Create a panel with a FlowLayout aligned to the right
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        JButton confirmButton = new JButton("Confirm");
+        confirmButton.setFont(new Font("Arial", Font.BOLD, 14));
+
+        confirmButton.addActionListener(e -> {
+            // Confirms the ingredient list
+            int column = 0;
+            int rowCount = ingredientTable.getRowCount();
+            boolean[] selected = new boolean[rowCount];
+
+            for (int i = 0; i < rowCount; i++) {
+                Object value = ingredientTable.getValueAt(i, column);
+                selected[i] = (value != null && value instanceof Boolean) ? (Boolean) value : false;
+            }
+            confirmController.execute(selected);
+            // Transition to the next view
+
+        });    // Attach ActionListener
+        // Add the button to the panel
+        buttonPanel.add(confirmButton);
+
+        // Add the panel to the bottom of the frame
+        add(buttonPanel, BorderLayout.SOUTH);
+    }
+
+    private void addAddIngredientButtonAndField() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(3, 2)); // Create a grid for the fields
+
+        // Name field
+        JLabel nameLabel = new JLabel("Enter Ingredient Name:");
+        JTextField nameField = new JTextField();
+        panel.add(nameLabel);
+        panel.add(nameField);
+
+        // Quantity field
+        JLabel quantityLabel = new JLabel("Enter quantity:");
+        JTextField quantityField = new JTextField();
+        panel.add(quantityLabel);
+        panel.add(quantityField);
+
+        // Add Button
+        JButton addButton = new JButton("Add Ingredient");
+
+        addButton.addActionListener(e -> {
+            String ingredientName = nameField.getText();
+            String ingredientQuantity = quantityField.getText();
+            if (!ingredientName.isEmpty() && !ingredientQuantity.isEmpty()
+                    && ingredientQuantity.matches("\\d+")) {
+                // Call addIngredientController
+                addIngredientController.execute(ingredientName, ingredientQuantity);
+
+                // Clear the fields
+                nameField.setText("");
+                quantityField.setText("");
+
+                // Refresh the ingredient table to show the new ingredient
+                ingredientTable.updateUI();
+
+            } else {JOptionPane.showMessageDialog(this,
+                    "Please enter a valid name and numeric quantity!");}
+        });   // Attach ActionListener
+
+        panel.add(addButton);
+
+        // Add the panel with the fields and button to the bottom
+        add(panel, BorderLayout.SOUTH);
+    }
+
+    /**
+     * Invoked when an action occurs.
+     *
+     * @param e the event to be processed
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        System.out.println("Click " + e.getActionCommand());
     }
 }
+
+
 
 
