@@ -5,7 +5,7 @@ import com.intelliChef.use_case.analyzeImage.AnalyzeImageInteractor;
 
 import java.util.List;
 
-public class ViewManager {
+public class ViewManager implements NavigationCall {
     private final ViewFactory viewFactory;
     private final AnalyzeImageInteractor analyzeImageInteractor;
 
@@ -22,5 +22,15 @@ public class ViewManager {
     public void showIngredientsDetectedView(List<Ingredient> ingredientList) {
         IngredientsDetectedView ingredientsDetectedView = viewFactory.createIngredientsDetectedView(ingredientList);
         ingredientsDetectedView.setVisible(true);
+    }
+
+    @Override
+    public void navigateToRecipeUploadView() {
+        showRecipeUploadView();
+    }
+
+    @Override
+    public void navigateToIngredientsDetectedView(List<Ingredient> ingredientList) {
+        showIngredientsDetectedView(ingredientList);
     }
 }

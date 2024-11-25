@@ -12,16 +12,16 @@ public class IngredientsDetectedView extends JFrame {
     private IngredientsDetectedController ingredientsDetectedController;
     private IngredientsDetectedPresenter ingredientsDetectedPresenter;
 
-    public IngredientsDetectedView(List<Ingredient> ingredientList) {
+    public IngredientsDetectedView(int ingredientCount, List<Ingredient> ingredientList) {
      super("Ingredient(s) Detected");
      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
      setSize(400, 200);
      setLocationRelativeTo(null);
      setLayout(new BorderLayout());
 
-     JLabel ingredientCount = new JLabel("Type(s) of ingredient(s) detected: " + ingredientList.size(), SwingConstants.CENTER);
-     ingredientCount.setFont(new Font("SansSerif", Font.PLAIN, 16));
-     add(ingredientCount, BorderLayout.CENTER);
+     JLabel ingredientLabel = new JLabel("Type(s) of ingredient(s) detected: " + ingredientCount, SwingConstants.CENTER);
+     ingredientLabel.setFont(new Font("SansSerif", Font.PLAIN, 16));
+     add(ingredientLabel, BorderLayout.CENTER);
 
      JButton continueButton = new JButton("Continue");
      styleButton(continueButton);
