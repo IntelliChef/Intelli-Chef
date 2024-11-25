@@ -29,7 +29,7 @@ public class ViewFactory {
     }
 
     public IngredientsDetectedView createIngredientsDetectedView(List<Ingredient> ingredientList) {
-        IngredientsDetectedView ingredientsDetectedView = new IngredientsDetectedView();
+        IngredientsDetectedView ingredientsDetectedView = new IngredientsDetectedView(ingredientList);
 
         IngredientsDetectedController ingredientsDetectedController = new ControllerFactory()
                 .getIngredientsDetectedController();
@@ -38,7 +38,6 @@ public class ViewFactory {
 
         ingredientsDetectedView.setIngredientsDetectedController(ingredientsDetectedController);
         ingredientsDetectedView.setIngredientsDetectedPresenter(ingredientsDetectedPresenter);
-        ingredientsDetectedView.setIngredientList(ingredientList);
         return ingredientsDetectedView;
     }
 }

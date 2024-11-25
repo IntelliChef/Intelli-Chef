@@ -11,17 +11,15 @@ import java.util.List;
 public class IngredientsDetectedView extends JFrame {
     private IngredientsDetectedController ingredientsDetectedController;
     private IngredientsDetectedPresenter ingredientsDetectedPresenter;
-    private List<Ingredient> ingredientList;
 
-    public IngredientsDetectedView() {
+    public IngredientsDetectedView(List<Ingredient> ingredientList) {
      super("Ingredient(s) Detected");
      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
      setSize(400, 200);
      setLocationRelativeTo(null);
      setLayout(new BorderLayout());
 
-     JLabel ingredientCount = new JLabel(
-             "Type(s) of ingredient(s) detected: " + ingredientList.size(), SwingConstants.CENTER);
+     JLabel ingredientCount = new JLabel("Type(s) of ingredient(s) detected: " + ingredientList.size(), SwingConstants.CENTER);
      ingredientCount.setFont(new Font("SansSerif", Font.PLAIN, 16));
      add(ingredientCount, BorderLayout.CENTER);
 
@@ -56,9 +54,5 @@ public class IngredientsDetectedView extends JFrame {
 
     public void setIngredientsDetectedPresenter(IngredientsDetectedPresenter ingredientsDetectedPresenter) {
         this.ingredientsDetectedPresenter = ingredientsDetectedPresenter;
-    }
-
-    public void setIngredientList(List<Ingredient> ingredientList) {
-        this.ingredientList = ingredientList;
     }
 }
