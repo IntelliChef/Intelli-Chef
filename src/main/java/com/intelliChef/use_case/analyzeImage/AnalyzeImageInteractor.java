@@ -21,18 +21,24 @@ public class AnalyzeImageInteractor {
         if (response.equals("[]")) {
             return new AnalyzeImageOutputData(new ArrayList<>());
         }
-        return new AnalyzeImageOutputData(parseIngredients(response));
+        return new AnalyzeImageOutputData(parseIngredientsToList(response));
     }
 
-    private List<Ingredient> parseIngredients(String response) {
+    private List<Ingredient> parseIngredientsToList(String response) {
         List<Ingredient> ingredients = new ArrayList<>();
         String[] pairs = response.split(", ");
+        int i = 0;
 
         for (String pair : pairs) {
             String[] parts = pair.split(":");
+
             String name = parts[0].trim();
             int quantity = Integer.parseInt(parts[1].trim());
-            ingredients.add(new Ingredient(name, quantity));
+
+            Ingredient ing = new Ingredient(name, quantity);
+            ing.setId(i);
+            ingredients.add(ing);
+            i++;
         }
         return ingredients;
     }

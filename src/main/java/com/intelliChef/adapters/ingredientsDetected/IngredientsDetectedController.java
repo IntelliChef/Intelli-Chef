@@ -13,7 +13,7 @@ public class IngredientsDetectedController {
     public void continueButtonClick(IngredientListRepository ingredientRepo,
                                     IngredientsDetectedPresenter ingredientsDetectedPresenter) {
         ingredientsDetectedPresenter.continueButtonClick();
-        // TODO: add call to ingredient list view with ingredient list using navigationCall
+        // TODO: add call to ingredient list view using ingredientRepo using navigationCall
     }
 
     public void cancelButtonClick(IngredientsDetectedPresenter ingredientsDetectedPresenter) {

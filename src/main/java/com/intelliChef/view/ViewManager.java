@@ -18,8 +18,8 @@ public class ViewManager implements NavigationCall {
         recipeUploadView.setVisible(true);
     }
 
-    public void showIngredientsDetectedView(IngredientListRepository ingredientList) {
-        IngredientsDetectedView ingredientsDetectedView = viewFactory.createIngredientsDetectedView(ingredientList);
+    public void showIngredientsDetectedView(IngredientListRepository ingredientRepo) {
+        IngredientsDetectedView ingredientsDetectedView = viewFactory.createIngredientsDetectedView(ingredientRepo);
         ingredientsDetectedView.setVisible(true);
     }
 

@@ -31,9 +31,8 @@ public class RecipeUploadController {
         try {
             byte[] imgBytes = convertImageToBytes.execute(imagePath);
             AnalyzeImageOutputData result = analyzeImageInteractor.execute(new AnalyzeImageInputData(imgBytes));
-            recipeUploadPresenter.uploadButtonResult(result.getIngredientList());
-            navigationCall.navigateToIngredientsDetectedView(
-                    new IngredientListRepository().makeRepository(result.getIngredientList()));
+            recipeUploadPresenter.uploadButtonResult(result);
+            navigationCall.navigateToIngredientsDetectedView(new IngredientListRepository().makeRepository(result.getIngredientList()));
         } catch (IOException | RuntimeException e) {
             recipeUploadPresenter.uploadImageClickError("There was an error processing the image. Please try again.");
         }

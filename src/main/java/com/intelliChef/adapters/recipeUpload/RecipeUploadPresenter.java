@@ -1,10 +1,9 @@
 package com.intelliChef.adapters.recipeUpload;
 
-import com.intelliChef.entities.Ingredient;
+import com.intelliChef.use_case.analyzeImage.AnalyzeImageOutputData;
 import com.intelliChef.view.RecipeUploadView;
 
 import javax.swing.*;
-import java.util.List;
 
 public class RecipeUploadPresenter {
     private final RecipeUploadView recipeUploadView;
@@ -29,9 +28,9 @@ public class RecipeUploadPresenter {
         recipeUploadView.dispose();
     }
 
-    public void uploadButtonResult(List<Ingredient> ingredientList) {
+    public void uploadButtonResult(AnalyzeImageOutputData result) {
         recipeUploadView.updateScanningLabel(false);
-        if (ingredientList.isEmpty()) {
+        if (result.isEmpty()) {
             recipeUploadView.showWarningMessage("No ingredients found. Please upload a valid image.");
         } else {
             recipeUploadView.dispose();

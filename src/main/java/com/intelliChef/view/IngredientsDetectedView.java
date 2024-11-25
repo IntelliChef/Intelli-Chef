@@ -3,11 +3,9 @@ package com.intelliChef.view;
 import com.intelliChef.adapters.ingredientsDetected.IngredientsDetectedController;
 import com.intelliChef.adapters.ingredientsDetected.IngredientsDetectedPresenter;
 import com.intelliChef.data_access.IngredientListRepository;
-import com.intelliChef.entities.Ingredient;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
 
 public class IngredientsDetectedView extends JFrame {
     private IngredientsDetectedController ingredientsDetectedController;
