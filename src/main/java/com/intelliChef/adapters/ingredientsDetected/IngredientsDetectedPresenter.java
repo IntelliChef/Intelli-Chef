@@ -1,4 +1,4 @@
-package com.intelliChef.adapters;
+package com.intelliChef.adapters.ingredientsDetected;
 
 import com.intelliChef.view.IngredientsDetectedView;
 
