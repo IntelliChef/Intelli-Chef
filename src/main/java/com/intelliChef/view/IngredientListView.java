@@ -1,6 +1,7 @@
 package com.intelliChef.view;
 
 import com.intelliChef.adapters.ingredient_list.AddIngredientController;
+import com.intelliChef.adapters.ingredient_list.ConfirmIngredientListController;
 import com.intelliChef.adapters.ingredient_list.GetIngredientListPresenter;
 import com.intelliChef.adapters.ingredient_list.IngredientListViewModel;
 
@@ -9,13 +10,20 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 public class IngredientListView extends JFrame implements ActionListener {
-    private final GetIngredientListPresenter presenter;
+    private IngredientListViewModel viewModel;
+    private AddIngredientController addIngredientController;
+    private ConfirmIngredientListController confirmController;
 
-    public IngredientListView(GetIngredientListPresenter presenter) {
-        this.presenter = presenter;
+    private JTable ingredientTable;
+
+    public IngredientListView(IngredientListViewModel viewModel,
+                              AddIngredientController addIngredientController,
+                              ConfirmIngredientListController confirmController) {
+        this.viewModel = viewModel;
+        this.addIngredientController = addIngredientController;
+        this.confirmController = confirmController;
 
         // Set up the frame
         setTitle("Ingredient List");
@@ -24,25 +32,19 @@ public class IngredientListView extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
-        // Title label at the top
-        JLabel titleLabel = new JLabel("Ingredients List", SwingConstants.CENTER);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 18));
-        add(titleLabel, BorderLayout.NORTH);
+        // add a table to the view
+        ingredientTable = displayIngredientsAsTable();
+        JScrollPane scrollPane = new JScrollPane(ingredientTable);
+        add(scrollPane, BorderLayout.CENTER);
 
-        // Display the ingredients
-        displayIngredientsAsTable();
+        // Add "Add ingredient" button and name, quantity field to the view
+        addAddIngredientButtonAndField();
 
-        // Add "Manually add ingredient" button
-        addIngredientFieldsAndButton();
-
-        // Add "Confirm" button at the bottom
+        // Add "Confirm" button to the view
         addConfirmButton();
     }
 
-    private void displayIngredientsAsTable() {
-        // Get the View Model from the Presenter
-        IngredientListViewModel viewModel = presenter.getViewModel();
-
+    public JTable displayIngredientsAsTable() {
         // Table column headers
         String[] columnNames = {"Select", "Name", "Quantity"};
 
@@ -79,13 +81,8 @@ public class IngredientListView extends JFrame implements ActionListener {
         ingredientTable.getColumnModel().getColumn(1).setPreferredWidth(150); // Name column
         ingredientTable.getColumnModel().getColumn(2).setPreferredWidth(100); // Quantity column
 
-        // Wrap the table in a JScrollPane
-        JScrollPane scrollPane = new JScrollPane(ingredientTable);
-
-        // Add the table to the center of the frame
-        add(scrollPane, BorderLayout.CENTER);
+        return ingredientTable;
     }
-
 
     private void addConfirmButton() {
         // Create a panel with a FlowLayout aligned to the right
@@ -93,8 +90,20 @@ public class IngredientListView extends JFrame implements ActionListener {
         JButton confirmButton = new JButton("Confirm");
         confirmButton.setFont(new Font("Arial", Font.BOLD, 14));
 
-        confirmButton.setActionCommand("Confirm"); // Assign ActionCommand for identification
-        confirmButton.addActionListener(this);    // Attach ActionListener
+        confirmButton.addActionListener(e -> {
+            // Confirms the ingredient list
+            int column = 0;
+            int rowCount = ingredientTable.getRowCount();
+            boolean[] selected = new boolean[rowCount];
+
+            for (int i = 0; i < rowCount; i++) {
+                Object value = ingredientTable.getValueAt(i, column);
+                selected[i] = (value != null && value instanceof Boolean) ? (Boolean) value : false;
+            }
+            confirmController.execute(selected);
+            // Transition to the next view
+
+        });    // Attach ActionListener
         // Add the button to the panel
         buttonPanel.add(confirmButton);
 
@@ -102,18 +111,18 @@ public class IngredientListView extends JFrame implements ActionListener {
         add(buttonPanel, BorderLayout.SOUTH);
     }
 
-    private void addIngredientFieldsAndButton() {
+    private void addAddIngredientButtonAndField() {
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(3, 2)); // Create a grid for the fields
 
         // Name field
-        JLabel nameLabel = new JLabel("Ingredient Name:");
+        JLabel nameLabel = new JLabel("Enter Ingredient Name:");
         JTextField nameField = new JTextField();
         panel.add(nameLabel);
         panel.add(nameField);
 
         // Quantity field
-        JLabel quantityLabel = new JLabel("Quantity:");
+        JLabel quantityLabel = new JLabel("Enter quantity:");
         JTextField quantityField = new JTextField();
         panel.add(quantityLabel);
         panel.add(quantityField);
@@ -121,49 +130,42 @@ public class IngredientListView extends JFrame implements ActionListener {
         // Add Button
         JButton addButton = new JButton("Add Ingredient");
 
-        panel.add(addButton);
-
-        // Add the panel with the fields and button to the bottom
-        add(panel, BorderLayout.SOUTH);
-
         addButton.addActionListener(e -> {
             String ingredientName = nameField.getText();
             String ingredientQuantity = quantityField.getText();
             if (!ingredientName.isEmpty() && !ingredientQuantity.isEmpty()
                     && ingredientQuantity.matches("\\d+")) {
-                // Add the new ingredient
-                addNewIngredient(ingredientName, ingredientQuantity);
+                // Call addIngredientController
+                addIngredientController.execute(ingredientName, ingredientQuantity);
 
                 // Clear the fields
                 nameField.setText("");
                 quantityField.setText("");
+
+                // Refresh the ingredient table to show the new ingredient
+                ingredientTable.updateUI();
+
             } else {JOptionPane.showMessageDialog(this,
                     "Please enter a valid name and numeric quantity!");}
-        });
+        });   // Attach ActionListener
 
-        revalidate();
-        repaint();
-    }
+        panel.add(addButton);
 
-    private void addNewIngredient(String name, String quantity) {
-        AddIngredientController controller = new AddIngredientController();
-        controller.execute(name, quantity); // Update the ingredient list
-        // trigger presenter or interactor to handle this action and update the data.
+        // Add the panel with the fields and button to the bottom
+        add(panel, BorderLayout.SOUTH);
     }
 
     /**
      * Invoked when an action occurs.
      *
-     * @param evt the event to be processed
+     * @param e the event to be processed
      */
     @Override
-    public void actionPerformed(ActionEvent evt) {
-        String command = evt.getActionCommand();
-        if ("Confirm".equals(command)) {
-            // invokes the next page, possibly call ConfirmIngredientListController
-        }
+    public void actionPerformed(ActionEvent e) {
+        System.out.println("Click " + e.getActionCommand());
     }
 }
+
 
 
 
