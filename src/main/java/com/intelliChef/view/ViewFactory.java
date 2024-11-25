@@ -15,11 +15,21 @@ import java.util.List;
  * Factory to create views.
  */
 public class ViewFactory {
+    private NavigationCall navigationCall;
+
+    public ViewFactory(NavigationCall navigationCall) {
+        this.navigationCall = navigationCall;
+    }
+
+    public void setNavigator(ViewManager viewManager) {
+        navigationCall = viewManager;
+    }
+
     public RecipeUploadView createRecipeUploadView(AnalyzeImageInteractor analyzeImageInteractor) {
         RecipeUploadView recipeUploadView = new RecipeUploadView();
 
         RecipeUploadController recipeUploadController = new ControllerFactory()
-                .getRecipeUploadController(analyzeImageInteractor);
+                .getRecipeUploadController(analyzeImageInteractor, navigationCall);
         RecipeUploadPresenter recipeUploadPresenter = new PresenterFactory().
                 getRecipeUploadPresenter(recipeUploadView);
 
@@ -29,16 +39,15 @@ public class ViewFactory {
     }
 
     public IngredientsDetectedView createIngredientsDetectedView(List<Ingredient> ingredientList) {
-        IngredientsDetectedView ingredientsDetectedView = new IngredientsDetectedView();
+        IngredientsDetectedView ingredientsDetectedView = new IngredientsDetectedView(ingredientList.size(), ingredientList);
 
         IngredientsDetectedController ingredientsDetectedController = new ControllerFactory()
-                .getIngredientsDetectedController();
+                .getIngredientsDetectedController(navigationCall);
         IngredientsDetectedPresenter ingredientsDetectedPresenter = new PresenterFactory()
                 .getIngredientsDetectedPresenter(ingredientsDetectedView);
 
         ingredientsDetectedView.setIngredientsDetectedController(ingredientsDetectedController);
         ingredientsDetectedView.setIngredientsDetectedPresenter(ingredientsDetectedPresenter);
-        ingredientsDetectedView.setIngredientList(ingredientList);
         return ingredientsDetectedView;
     }
 }
