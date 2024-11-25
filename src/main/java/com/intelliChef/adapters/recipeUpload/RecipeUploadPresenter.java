@@ -36,7 +36,6 @@ public class RecipeUploadPresenter {
             recipeUploadView.showWarningMessage("No ingredients found. Please upload a valid image.");
         } else {
             recipeUploadView.dispose();
-            Main.showIngredientsDetectedView(ingredientList);
         }
     }
 
