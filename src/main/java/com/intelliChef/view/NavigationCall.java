@@ -20,5 +20,14 @@ public interface NavigationCall {
      */
     void navigateToIngredientsDetectedView(List<Ingredient> ingredientList);
 
+    /**
+     * Loads the ingredient list view.
+     * @param ingredientRepository which contains the Ingredient repository.
+     */
     void navigateToIngredientListView(IngredientRepository ingredientRepository);
+
+    /**
+     * Loads the diet preference view.
+     */
+    void navigateToDietPreferenceView();
 }

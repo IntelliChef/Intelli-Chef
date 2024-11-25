@@ -10,6 +10,7 @@ import java.util.List;
 public class ViewManager implements NavigationCall {
     private final ViewFactory viewFactory;
     private final AnalyzeImageInteractor analyzeImageInteractor;
+    private IngredientRepository ingredientRepository;
 
 
     public ViewManager(ViewFactory viewFactory, AnalyzeImageInteractor analyzeImageInteractor) {
@@ -28,7 +29,7 @@ public class ViewManager implements NavigationCall {
     }
 
     public void showIngredientListView(IngredientRepository ingredientRepository) {
-        IngredientListView ingredientListView = IngredientListFactory.create(ingredientRepository);
+        IngredientListView ingredientListView = IngredientListFactory.create(ingredientRepository, this);
         ingredientListView.setVisible(true);
     }
 
@@ -44,8 +45,13 @@ public class ViewManager implements NavigationCall {
 
     @Override
     public void navigateToIngredientListView(IngredientRepository ingredientRepository) {
+        this.ingredientRepository = ingredientRepository;
         showIngredientListView(ingredientRepository);
     }
 
+    @Override
+    public void navigateToDietPreferenceView() {
+        // To be implemented by Harpuneet by using ingredientRepository
+    }
 
 }

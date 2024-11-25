@@ -11,12 +11,12 @@ import com.intelliChef.use_case.get_ingredient_list.GetIngredientListInteractor;
 import com.intelliChef.use_case.get_ingredient_list.GetIngredientListOutputBoundary;
 import com.intelliChef.use_case.confirm_ingredient_list.ConfirmIngredientListInteractor;
 import com.intelliChef.view.IngredientListView;
+import com.intelliChef.view.NavigationCall;
 
 /**
  * This class contains the static factory function for creating the IngredientListView.
  */
 public final class IngredientListFactory {
-
     /**
      * Prevent instantiation.
      */
@@ -25,11 +25,11 @@ public final class IngredientListFactory {
     /**
      * Factory function for creating the IngredientListView.
      */
-    public static IngredientListView create(IngredientRepository ingredientRepository) {
+    public static IngredientListView create(IngredientRepository ingredientRepository, NavigationCall navigationCall) {
         IngredientListViewModel ingredientListViewModel = createIngredientListViewModel(ingredientRepository);
         AddIngredientController addIngredientController = createAddIngredientUseCase(ingredientRepository);
         ConfirmIngredientListController confirmIngredientListController = createConfirmIngredientListUseCase(
-                ingredientRepository);
+                ingredientRepository, navigationCall);
 
         return new IngredientListView(ingredientListViewModel, addIngredientController,
                 confirmIngredientListController);
@@ -57,10 +57,11 @@ public final class IngredientListFactory {
     }
 
     public static ConfirmIngredientListController createConfirmIngredientListUseCase(IngredientRepository
-                                                                                             ingredientRepository) {
+                                                                                             ingredientRepository,
+                                                                                     NavigationCall navigationCall) {
         ConfirmIngredientListInteractor confirmIngredientListInteractor = new ConfirmIngredientListInteractor(
                 ingredientRepository);
-        return new ConfirmIngredientListController(confirmIngredientListInteractor);
+        return new ConfirmIngredientListController(confirmIngredientListInteractor, navigationCall);
     }
 }
 
