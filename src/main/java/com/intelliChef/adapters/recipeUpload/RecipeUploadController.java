@@ -1,5 +1,6 @@
 package com.intelliChef.adapters.recipeUpload;
 
+import com.intelliChef.data_access.IngredientListRepository;
 import com.intelliChef.use_case.analyzeImage.AnalyzeImageInputData;
 import com.intelliChef.use_case.analyzeImage.AnalyzeImageInteractor;
 import com.intelliChef.use_case.analyzeImage.AnalyzeImageOutputData;
@@ -31,7 +32,8 @@ public class RecipeUploadController {
             byte[] imgBytes = convertImageToBytes.execute(imagePath);
             AnalyzeImageOutputData result = analyzeImageInteractor.execute(new AnalyzeImageInputData(imgBytes));
             recipeUploadPresenter.uploadButtonResult(result.getIngredientList());
-            navigationCall.navigateToIngredientsDetectedView(result.getIngredientList());
+            navigationCall.navigateToIngredientsDetectedView(
+                    new IngredientListRepository().makeRepository(result.getIngredientList()));
         } catch (IOException | RuntimeException e) {
             recipeUploadPresenter.uploadImageClickError("There was an error processing the image. Please try again.");
         }

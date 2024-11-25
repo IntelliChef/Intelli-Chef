@@ -1,9 +1,8 @@
 package com.intelliChef.view;
 
-import com.intelliChef.entities.Ingredient;
+import com.intelliChef.data_access.IngredientListRepository;
 import com.intelliChef.use_case.analyzeImage.AnalyzeImageInteractor;
 
-import java.util.List;
 
 public class ViewManager implements NavigationCall {
     private final ViewFactory viewFactory;
@@ -19,7 +18,7 @@ public class ViewManager implements NavigationCall {
         recipeUploadView.setVisible(true);
     }
 
-    public void showIngredientsDetectedView(List<Ingredient> ingredientList) {
+    public void showIngredientsDetectedView(IngredientListRepository ingredientList) {
         IngredientsDetectedView ingredientsDetectedView = viewFactory.createIngredientsDetectedView(ingredientList);
         ingredientsDetectedView.setVisible(true);
     }
@@ -30,7 +29,7 @@ public class ViewManager implements NavigationCall {
     }
 
     @Override
-    public void navigateToIngredientsDetectedView(List<Ingredient> ingredientList) {
-        showIngredientsDetectedView(ingredientList);
+    public void navigateToIngredientsDetectedView(IngredientListRepository ingredientRepo) {
+        showIngredientsDetectedView(ingredientRepo);
     }
 }

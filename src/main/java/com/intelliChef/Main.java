@@ -10,7 +10,7 @@ import javax.swing.*;
 public class Main {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-             ViewFactory viewFactory = new ViewFactory(null);
+            ViewFactory viewFactory = new ViewFactory(null);
             AnalyzeImageInteractor analyzeImageInteractor = new InteractorFactory().createAnalyzeImageInteractor(
                     new GeminiAIClient(
                         "",

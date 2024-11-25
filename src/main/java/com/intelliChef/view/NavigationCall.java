@@ -1,8 +1,6 @@
 package com.intelliChef.view;
 
-import com.intelliChef.entities.Ingredient;
-
-import java.util.List;
+import com.intelliChef.data_access.IngredientListRepository;
 
 /**
  * Interface for navigation callbacks to be used by controllers, presenters and/or view models.
@@ -15,7 +13,7 @@ public interface NavigationCall {
 
     /**
      * Loads the ingredients detection view.
-     * @param ingredientList list which contains the new ingredients detected after scanning image
+     * @param ingredientRepository repository interface which contains the new ingredients detected after scanning image
      */
-    void navigateToIngredientsDetectedView(List<Ingredient> ingredientList);
+    void navigateToIngredientsDetectedView(IngredientListRepository ingredientRepository);
 }

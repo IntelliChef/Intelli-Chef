@@ -1,6 +1,5 @@
 package com.intelliChef.adapters.recipeUpload;
 
-import com.intelliChef.Main;
 import com.intelliChef.entities.Ingredient;
 import com.intelliChef.view.RecipeUploadView;
 

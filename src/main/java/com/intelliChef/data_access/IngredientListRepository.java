@@ -34,4 +34,15 @@ public class IngredientListRepository implements IngredientRepository {
     public int getNextId() {
         return myIngredients.size() + 1; // Might have to change this
     }
+
+    public IngredientListRepository makeRepository(List<Ingredient> ingredientList) {
+        for (Ingredient ingredient : ingredientList) {
+            addIngredient(ingredient);
+        }
+        return this;
+    }
+
+    public int numberOfIngredients() {
+        return myIngredients.size();
+    }
 }

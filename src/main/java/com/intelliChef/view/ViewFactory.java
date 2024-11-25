@@ -6,10 +6,8 @@ import com.intelliChef.adapters.ingredientsDetected.IngredientsDetectedControlle
 import com.intelliChef.adapters.ingredientsDetected.IngredientsDetectedPresenter;
 import com.intelliChef.adapters.recipeUpload.RecipeUploadController;
 import com.intelliChef.adapters.recipeUpload.RecipeUploadPresenter;
-import com.intelliChef.entities.Ingredient;
+import com.intelliChef.data_access.IngredientListRepository;
 import com.intelliChef.use_case.analyzeImage.AnalyzeImageInteractor;
-
-import java.util.List;
 
 /**
  * Factory to create views.
@@ -38,8 +36,8 @@ public class ViewFactory {
         return recipeUploadView;
     }
 
-    public IngredientsDetectedView createIngredientsDetectedView(List<Ingredient> ingredientList) {
-        IngredientsDetectedView ingredientsDetectedView = new IngredientsDetectedView(ingredientList.size(), ingredientList);
+    public IngredientsDetectedView createIngredientsDetectedView(IngredientListRepository ingredientRepo) {
+        IngredientsDetectedView ingredientsDetectedView = new IngredientsDetectedView(ingredientRepo);
 
         IngredientsDetectedController ingredientsDetectedController = new ControllerFactory()
                 .getIngredientsDetectedController(navigationCall);

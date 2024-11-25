@@ -24,6 +24,7 @@ public final class IngredientListFactory {
      */
     public static IngredientListView create(IngredientRepository ingredientRepository) {
         // implement later
+        return null;
     }
 }
 
