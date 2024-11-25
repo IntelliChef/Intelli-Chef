@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IngredientListRepository implements IngredientRepository {
-    private final List<Ingredient> myIngredients = new ArrayList<Ingredient>();
+    private static final List<Ingredient> myIngredients = new ArrayList<Ingredient>();
 
     @Override
     public List<Ingredient> getAllIngredients() {
