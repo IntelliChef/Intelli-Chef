@@ -17,5 +17,26 @@ public class IngredientListRepository implements IngredientRepository {
     public void addIngredient(Ingredient ingredient) {
 
     }
+
+    /**
+     * Delete ingredient with the id
+     *
+     * @param id the id of the ingredient to be deleted.
+     */
+    @Override
+    public void deleteIngredient(int id) {
+
+    }
+
+    /**
+     * Return the next possible id
+     *
+     * @return
+     */
+    @Override
+    public int getNextId() {
+
+    }
+
     // to be implemented later.
 }
