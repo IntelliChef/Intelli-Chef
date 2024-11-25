@@ -11,6 +11,7 @@ public class ViewManager implements NavigationCall {
     private final ViewFactory viewFactory;
     private final AnalyzeImageInteractor analyzeImageInteractor;
 
+
     public ViewManager(ViewFactory viewFactory, AnalyzeImageInteractor analyzeImageInteractor) {
         this.viewFactory = viewFactory;
         this.analyzeImageInteractor = analyzeImageInteractor;
@@ -42,8 +43,8 @@ public class ViewManager implements NavigationCall {
     }
 
     @Override
-    public void navigateToIngredientListView() {
-        showIngredientListView();
+    public void navigateToIngredientListView(IngredientRepository ingredientRepository) {
+        showIngredientListView(ingredientRepository);
     }
 
 

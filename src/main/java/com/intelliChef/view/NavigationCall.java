@@ -1,6 +1,7 @@
 package com.intelliChef.view;
 
 import com.intelliChef.entities.Ingredient;
+import com.intelliChef.use_case.IngredientRepository;
 
 import java.util.List;
 
@@ -19,5 +20,5 @@ public interface NavigationCall {
      */
     void navigateToIngredientsDetectedView(List<Ingredient> ingredientList);
 
-    void navigateToIngredientListView();
+    void navigateToIngredientListView(IngredientRepository ingredientRepository);
 }
