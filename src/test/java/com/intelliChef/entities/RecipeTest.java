@@ -1,38 +1,39 @@
 package com.intelliChef.entities;
 
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class RecipeTest {
 
     @Test
-    void testRecipeConstructorAndGetters() {
-        Recipe recipe = new Recipe(
-                "Spaghetti Bolognese",
-                "https://example.com/image.jpg",
-                500.5,
-                30,
-                "https://example.com/recipe"
-        );
+    void testRecipeInitializationWithValidData() {
+        // Arrange
+        Recipe recipe = new Recipe("Burger", "image_url", 500.0, 20, "recipe_url");
 
-        assertEquals("Spaghetti Bolognese", recipe.getName());
-        assertEquals("https://example.com/image.jpg", recipe.getImageUrl());
-        assertEquals(500.5, recipe.getCalories());
-        assertEquals(30, recipe.getCookingTime());
-        assertEquals("https://example.com/recipe", recipe.getUrl());
+        // Assert
+        assertEquals("Burger", recipe.getName());
+        assertEquals("image_url", recipe.getImageUrl());
+        assertEquals(500.0, recipe.getCalories());
+        assertEquals(20, recipe.getCookingTime());
+        assertEquals("recipe_url", recipe.getUrl());
     }
 
     @Test
-    void testRecipeWithNoCookingTime() {
-        Recipe recipe = new Recipe(
-                "Fruit Salad",
-                "https://example.com/salad.jpg",
-                150.0,
-                0, // No cooking time
-                "https://example.com/salad"
-        );
+    void testRecipeInitializationWithZeroCalories() {
+        // Arrange
+        Recipe recipe = new Recipe("Salad", "image_url", 0.0, 15, "recipe_url");
 
-        assertEquals(0, recipe.getCookingTime());
-        assertEquals("Fruit Salad", recipe.getName());
+        // Assert
+        assertEquals(0.0, recipe.getCalories());
+    }
+
+    @Test
+    void testRecipeInitializationWithNegativeCookingTime() {
+        // Arrange
+        Recipe recipe = new Recipe("Ice Cream", "image_url", 300.0, -1, "recipe_url");
+
+        // Assert
+        assertEquals(-1, recipe.getCookingTime());
     }
 }
