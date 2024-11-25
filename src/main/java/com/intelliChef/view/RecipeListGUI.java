@@ -16,11 +16,19 @@ import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.util.List;
 
+/**
+ * A graphical user interface (GUI) for displaying a list of recipes.
+ * Allows users to select a recipe to view its details or return to the list view.
+ */
 public class RecipeListGUI extends JFrame implements RecipeListView, RecipeView {
 
     private final RecipeGateway recipeGateway = new JSONRecipeGateway();
     private final RecipeSelectionInteractor interactor;
 
+    /**
+     * Constructs a new RecipeListGUI, initializes the recipe list view,
+     * and loads recipes from a data source.
+     */
     public RecipeListGUI() {
         RecipePresenter presenter = new RecipePresenter(this);
         this.interactor = new RecipeSelectionInteractor(presenter);
@@ -47,6 +55,13 @@ public class RecipeListGUI extends JFrame implements RecipeListView, RecipeView 
         setVisible(true);
     }
 
+    /**
+     * Creates a panel displaying the details of a single recipe.
+     * Includes the recipe's image, name, calorie count, cooking time, and a clickable link.
+     *
+     * @param recipe the {@link Recipe} to display
+     * @return a {@link JPanel} containing the recipe's information
+     */
     private JPanel createRecipePanel(Recipe recipe) {
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
@@ -119,6 +134,11 @@ public class RecipeListGUI extends JFrame implements RecipeListView, RecipeView 
         return panel;
     }
 
+    /**
+     * Displays the details of a selected recipe in a new window.
+     *
+     * @param recipe the {@link Recipe} to display
+     */
     @Override
     public void displayRecipe(Recipe recipe) {
         SwingUtilities.invokeLater(() -> {
@@ -127,11 +147,19 @@ public class RecipeListGUI extends JFrame implements RecipeListView, RecipeView 
         });
     }
 
+    /**
+     * Displays the recipe list view, making the current window visible.
+     */
     @Override
     public void showRecipeList() {
         this.setVisible(true); // Show RecipeListGUI when back button is pressed
     }
 
+    /**
+     * Main method to launch the RecipeListGUI application.
+     *
+     * @param args command-line arguments (not used)
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(RecipeListGUI::new);
     }
