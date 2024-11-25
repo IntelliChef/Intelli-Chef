@@ -1,13 +1,11 @@
 package com.intelliChef;
 
 import com.intelliChef.data_access.GeminiAIClient;
-import com.intelliChef.entities.Ingredient;
 import com.intelliChef.use_case.InteractorFactory;
 import com.intelliChef.use_case.analyzeImage.AnalyzeImageInteractor;
-import com.intelliChef.view.IngredientListView;
-import com.intelliChef.view.IngredientsDetectedView;
-import com.intelliChef.view.RecipeUploadView;
-import com.intelliChef.view.ViewFactory;
+import com.intelliChef.view.*;
+
+import com.intelliChef.entities.Ingredient; // only for testing purposes
 
 import javax.swing.*;
 import java.util.List;
@@ -18,13 +16,15 @@ public class Main {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
+            // ViewFactory viewFactory = new ViewFactory();
+            // AnalyzeImageInteractor analyzeImageInteractor =
             analyzeImageInteractor = new InteractorFactory()
                     .createAnalyzeImageInteractor(new GeminiAIClient(
-                            "",
-                            "us-central1",
-                            "gemini-1.5-flash-001"));
-            showRecipeUploadView();
-//            ViewManager viewManager = new ViewManager(new InteractorFactory, new ViewFactory, geminiAIClient);
+                        "",
+                        "us-central1",
+                        "gemini-1.5-flash-001"));
+            ViewManager viewManager = new ViewManager(viewFactory, analyzeImageInteractor);
+            viewManager.showRecipeUploadView();
         });
     }
 
