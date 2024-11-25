@@ -1,6 +1,5 @@
 package com.intelliChef.view;
 
-import com.intelliChef.adapters.PresenterFactory;
 import com.intelliChef.adapters.recipeUpload.RecipeUploadController;
 import com.intelliChef.adapters.recipeUpload.RecipeUploadPresenter;
 
@@ -10,14 +9,19 @@ import java.io.File;
 
 public class RecipeUploadView extends JFrame {
     private final JLabel scanningLabel;
-    private final RecipeUploadController recipeUploadController;
-    private final RecipeUploadPresenter recipeUploadPresenter;
+    private RecipeUploadController recipeUploadController;
+    private RecipeUploadPresenter recipeUploadPresenter;
 
-
-    public RecipeUploadView(RecipeUploadController recipeUploadController) {
-        super("IntelliChef");
+    public void setRecipeUploadController(RecipeUploadController recipeUploadController) {
         this.recipeUploadController = recipeUploadController;
-        this.recipeUploadPresenter = new PresenterFactory().getRecipeUploadPresenter(this);
+    }
+
+    public void setRecipeUploadPresenter(RecipeUploadPresenter recipeUploadPresenter) {
+        this.recipeUploadPresenter = recipeUploadPresenter;
+    }
+
+    public RecipeUploadView() {
+        super("IntelliChef");
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(500, 300);
