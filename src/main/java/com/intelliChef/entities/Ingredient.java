@@ -20,12 +20,12 @@ public class Ingredient {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public double getQuantity() {
         return quantity;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setQuantity(double quantity) {
