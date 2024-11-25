@@ -1,4 +1,4 @@
-package com.intellichef.use_case.confirm_ingredient_list;
+package com.intelliChef.use_case.confirm_ingredient_list;
 
 import com.intelliChef.use_case.IngredientRepository;
 import com.intelliChef.use_case.confirm_ingredient_list.ConfirmIngredientListInputBoundary;
