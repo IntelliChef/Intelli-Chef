@@ -1,7 +1,7 @@
 package com.intelliChef.view;
 
-import com.intelliChef.adapters.RecipeUploadController;
-import com.intelliChef.adapters.RecipeUploadPresenter;
+import com.intelliChef.adapters.recipeUpload.RecipeUploadController;
+import com.intelliChef.adapters.recipeUpload.RecipeUploadPresenter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,13 +9,20 @@ import java.io.File;
 
 public class RecipeUploadView extends JFrame {
     private final JLabel scanningLabel;
-    private final RecipeUploadController recipeUploadController;
-    private final RecipeUploadPresenter recipeUploadPresenter = new RecipeUploadPresenter(this);
+    private RecipeUploadController recipeUploadController;
+    private RecipeUploadPresenter recipeUploadPresenter;
 
-
-    public RecipeUploadView(RecipeUploadController recipeUploadController) {
-        super("IntelliChef");
+    public void setRecipeUploadController(RecipeUploadController recipeUploadController) {
         this.recipeUploadController = recipeUploadController;
+    }
+
+    public void setRecipeUploadPresenter(RecipeUploadPresenter recipeUploadPresenter) {
+        this.recipeUploadPresenter = recipeUploadPresenter;
+    }
+
+    public RecipeUploadView() {
+        super("IntelliChef");
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(500, 300);
         setLocationRelativeTo(null);
@@ -40,7 +47,7 @@ public class RecipeUploadView extends JFrame {
 
         JButton uploadButton = new JButton("Upload Image");
         styleButton(uploadButton);
-        uploadButton.addActionListener(e -> {handleUploadImageButton();});
+        uploadButton.addActionListener(e -> handleUploadImageButton());
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
@@ -59,9 +66,7 @@ public class RecipeUploadView extends JFrame {
         int result = fileChooser.showOpenDialog(RecipeUploadView.this);
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
-            String imagePath = selectedFile.getAbsolutePath();
-
-            recipeUploadController.uploadImageClick(imagePath, recipeUploadPresenter);
+            recipeUploadController.uploadImageClick(selectedFile.getAbsolutePath(), recipeUploadPresenter);
         }
     }
 
@@ -75,5 +80,21 @@ public class RecipeUploadView extends JFrame {
 
     public void updateScanningLabel(boolean isVisible) {
         scanningLabel.setVisible(isVisible);
+    }
+
+    public void showWarningMessage(String warningMessage) {
+        JOptionPane.showMessageDialog(
+                this,
+                warningMessage,
+                "No Ingredients Found",
+                JOptionPane.WARNING_MESSAGE);
+    }
+
+    public void showErrorMessage(String errorMessage) {
+        JOptionPane.showMessageDialog(
+                this,
+                errorMessage,
+                "Internal Error",
+                JOptionPane.ERROR_MESSAGE);
     }
 }
