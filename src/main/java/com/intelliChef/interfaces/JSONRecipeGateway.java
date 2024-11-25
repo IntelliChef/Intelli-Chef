@@ -9,8 +9,18 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A JSON-based implementation of the {@link RecipeGateway} interface.
+ * This class loads recipe data from a JSON file and converts it into a list of {@link Recipe} objects.
+ */
 public class JSONRecipeGateway implements RecipeGateway {
 
+    /**
+     * Loads recipes from a JSON file located in the classpath.
+     *
+     * @return a list of {@link Recipe} objects parsed from the JSON file
+     * @throws RuntimeException if the JSON file cannot be found or fails to load
+     */
     @Override
     public List<Recipe> loadRecipes() {
         List<Recipe> recipes = new ArrayList<>();
