@@ -2,11 +2,12 @@ package com.intelliChef.view;
 
 import com.intelliChef.adapters.recipeUpload.RecipeUploadController;
 import com.intelliChef.adapters.recipeUpload.RecipeUploadPresenter;
-import static com.intelliChef.utils.UseCustomFont.loadCustomFont;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+
+import static com.intelliChef.utils.UseCustomFont.*;
 
 public class RecipeUploadView extends JFrame {
     private final JLabel scanningLabel;
@@ -32,7 +33,7 @@ public class RecipeUploadView extends JFrame {
         setLayout(new BorderLayout());
 
         JLabel titleLabel = new JLabel("IntelliChef", SwingConstants.CENTER);
-        titleLabel.setFont(loadCustomFont("fonts/DynaPuff-Medium.ttf", 48f));
+        titleLabel.setFont(loadCustomFont(mediumDynaPuff, 48f));
         titleLabel.setBorder(BorderFactory.createEmptyBorder(30, 0, 10, 0));
         add(titleLabel, BorderLayout.NORTH);
 
@@ -69,7 +70,7 @@ public class RecipeUploadView extends JFrame {
         add(buttonPanel, BorderLayout.CENTER);
 
         JLabel poweredByLabel = new JLabel("Powered by Gemini", SwingConstants.CENTER);
-        poweredByLabel.setFont(loadCustomFont("fonts/DynaPuff-Regular.ttf", 16f));
+        poweredByLabel.setFont(loadCustomFont(regularDynaPuff, 16f));
         poweredByLabel.setForeground(new Color(33, 168, 120));
         poweredByLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
         add(poweredByLabel, BorderLayout.SOUTH);
@@ -92,7 +93,7 @@ public class RecipeUploadView extends JFrame {
 
     private void styleButton(JButton button) {
         button.setFont(new Font("SansSerif", Font.BOLD, 16));
-        button.setBackground(new Color(40, 118, 167));
+        button.setBackground(new Color(38, 129, 189));
         button.setForeground(Color.WHITE);
         button.setPreferredSize(new Dimension(180, 40));
         button.setFocusPainted(false);
