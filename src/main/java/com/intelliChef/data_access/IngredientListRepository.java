@@ -9,6 +9,13 @@ import java.util.List;
 public class IngredientListRepository implements IngredientRepository {
     private static final List<Ingredient> myIngredients = new ArrayList<Ingredient>();
 
+    public IngredientListRepository makeRepository(List<Ingredient> ingredientList) {
+        for (Ingredient ingredient : ingredientList) {
+            addIngredient(ingredient);
+        }
+        return this;
+    }
+
     @Override
     public List<Ingredient> getAllIngredients() {
         return myIngredients;
@@ -35,13 +42,7 @@ public class IngredientListRepository implements IngredientRepository {
         return myIngredients.size() + 1; // Might have to change this
     }
 
-    public IngredientListRepository makeRepository(List<Ingredient> ingredientList) {
-        for (Ingredient ingredient : ingredientList) {
-            addIngredient(ingredient);
-        }
-        return this;
-    }
-
+    @Override
     public int numberOfIngredients() {
         return myIngredients.size();
     }

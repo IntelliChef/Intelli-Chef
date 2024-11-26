@@ -24,8 +24,13 @@ public class GeminiAIClient {
         this.modelName = modelName;
     }
 
+    /**
+     * Api call takes place with input of imageBytes.
+     * @param imageBytes converted using the utility function
+     * @return a basic text response that needs to be parsed to create ingredient
+     * @throws RuntimeException when the API call fails
+     */
     public String analyzeImage(byte[] imageBytes) throws RuntimeException {
-
         try (VertexAI vertexAI = new VertexAI(projectId, location)) {
             GenerativeModel model = new GenerativeModel(modelName, vertexAI);
             GenerateContentResponse response = model.generateContent(

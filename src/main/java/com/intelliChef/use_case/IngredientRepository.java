@@ -20,7 +20,13 @@ public interface IngredientRepository {
 
     /**
      * Return the next possible id
-     * @return
+     * @return the next id
      */
     int getNextId();
+
+    /**
+     * To count number of ingredients.
+     * @return the number of ingredients in repository
+     */
+    int numberOfIngredients();
 }

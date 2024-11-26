@@ -1,6 +1,6 @@
 package com.intelliChef.adapters.ingredientsDetected;
 
-import com.intelliChef.data_access.IngredientListRepository;
+import com.intelliChef.use_case.IngredientRepository;
 import com.intelliChef.view.NavigationCall;
 
 public class IngredientsDetectedController {
@@ -10,7 +10,7 @@ public class IngredientsDetectedController {
         this.navigationCall = navigationCall;
     }
 
-    public void continueButtonClick(IngredientListRepository ingredientRepo,
+    public void continueButtonClick(IngredientRepository ingredientRepo,
                                     IngredientsDetectedPresenter ingredientsDetectedPresenter) {
         ingredientsDetectedPresenter.continueButtonClick();
         // TODO: add call to ingredient list view using ingredientRepo using navigationCall

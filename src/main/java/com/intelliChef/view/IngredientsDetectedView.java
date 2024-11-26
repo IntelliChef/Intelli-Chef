@@ -2,7 +2,7 @@ package com.intelliChef.view;
 
 import com.intelliChef.adapters.ingredientsDetected.IngredientsDetectedController;
 import com.intelliChef.adapters.ingredientsDetected.IngredientsDetectedPresenter;
-import com.intelliChef.data_access.IngredientListRepository;
+import com.intelliChef.use_case.IngredientRepository;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,7 +11,7 @@ public class IngredientsDetectedView extends JFrame {
     private IngredientsDetectedController ingredientsDetectedController;
     private IngredientsDetectedPresenter ingredientsDetectedPresenter;
 
-    public IngredientsDetectedView(IngredientListRepository ingredientRepository) {
+    public IngredientsDetectedView(IngredientRepository ingredientRepository) {
      super("Ingredient(s) Detected");
      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
      setSize(400, 200);
