@@ -13,8 +13,8 @@ import java.awt.event.ActionListener;
 
 public class IngredientListView extends JFrame implements ActionListener {
     private IngredientListViewModel viewModel;
-    private AddIngredientController addIngredientController;
-    private ConfirmIngredientListController confirmController;
+    private final AddIngredientController addIngredientController;
+    private final ConfirmIngredientListController confirmController;
 
     private JTable ingredientTable;
 
@@ -100,8 +100,7 @@ public class IngredientListView extends JFrame implements ActionListener {
                 Object value = ingredientTable.getValueAt(i, column);
                 selected[i] = (value != null && value instanceof Boolean) ? (Boolean) value : false;
             }
-            confirmController.execute(selected);
-            // Transition to the next view
+            confirmController.execute(selected); // Saves data, transit to the next view
 
         });    // Attach ActionListener
         // Add the button to the panel

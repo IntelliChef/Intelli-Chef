@@ -10,6 +10,9 @@ import java.util.stream.Collectors;
 public class GetIngredientListPresenter implements GetIngredientListOutputBoundary {
     private IngredientListViewModel viewModel;
 
+    public GetIngredientListPresenter() {
+    }
+
     @Override
     public void present(GetIngredientListOutputData outputData) {
         // Transform domain entities into a UI-friendly format
