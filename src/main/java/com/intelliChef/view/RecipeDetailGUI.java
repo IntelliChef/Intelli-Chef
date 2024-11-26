@@ -13,7 +13,7 @@ import java.awt.image.BufferedImage;
 import java.net.URL;
 
 public class RecipeDetailGUI extends JFrame {
-    private final BackButtonInteractor backButtonInteractor;
+    private BackButtonInteractor backButtonInteractor;
 
     public RecipeDetailGUI(Recipe recipe, RecipeListView recipeListView) {
         setTitle(recipe.getName());
@@ -110,5 +110,9 @@ public class RecipeDetailGUI extends JFrame {
 
         add(mainPanel);
         setVisible(true);
+    }
+
+    public void setBackButtonInteractor(BackButtonInteractor backButtonInteractor) {
+        this.backButtonInteractor = backButtonInteractor;
     }
 }
