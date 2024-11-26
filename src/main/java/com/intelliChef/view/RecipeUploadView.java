@@ -2,13 +2,11 @@ package com.intelliChef.view;
 
 import com.intelliChef.adapters.recipeUpload.RecipeUploadController;
 import com.intelliChef.adapters.recipeUpload.RecipeUploadPresenter;
+import static com.intelliChef.utils.UIStyles.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
-
-import static com.intelliChef.utils.UIStyles.styleButton;
-import static com.intelliChef.utils.UseCustomFont.*;
 
 public class RecipeUploadView extends JFrame {
     private final JLabel scanningLabel;
