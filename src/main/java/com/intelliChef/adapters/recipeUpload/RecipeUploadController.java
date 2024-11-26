@@ -27,7 +27,7 @@ public class RecipeUploadController {
      */
     public void ingredientButtonClick(RecipeUploadPresenter recipeUploadPresenter) {
         recipeUploadPresenter.ingredientButtonClick();
-        // TODO: add call to ingredient list view with an empty list using navigationCall
+        navigationCall.navigateToIngredientListView(new IngredientListRepository());
     }
 
     /**
