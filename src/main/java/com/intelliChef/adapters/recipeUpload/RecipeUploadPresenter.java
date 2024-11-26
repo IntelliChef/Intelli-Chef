@@ -5,6 +5,9 @@ import com.intelliChef.view.RecipeUploadView;
 
 import javax.swing.*;
 
+/**
+ * Presenter to display updates to the user through UI changes.
+ */
 public class RecipeUploadPresenter {
     private final RecipeUploadView recipeUploadView;
 
@@ -12,6 +15,10 @@ public class RecipeUploadPresenter {
         this.recipeUploadView = recipeUploadView;
     }
 
+    /**
+     * Controls the visibility of the scanning label at the bottom of recipe upload view.
+     * @param isVisible whether label is visible or not
+     */
     public void updateScanningLabel(boolean isVisible) {
         recipeUploadView.updateScanningLabel(isVisible);
         if (isVisible) {
@@ -24,10 +31,17 @@ public class RecipeUploadPresenter {
         }
     }
 
+    /**
+     * Removes current page from panel so next view can be displayed.
+     */
     public void ingredientButtonClick() {
         recipeUploadView.dispose();
     }
 
+    /**
+     * What to display based on whether output is empty or not.
+     * @param result output given from the API call
+     */
     public void uploadButtonResult(AnalyzeImageOutputData result) {
         recipeUploadView.updateScanningLabel(false);
         if (result.isEmpty()) {
@@ -37,6 +51,10 @@ public class RecipeUploadPresenter {
         }
     }
 
+    /**
+     * What to display if error occurred while image was being scanned.
+     * @param error message
+     */
     public void uploadImageClickError(String error) {
         recipeUploadView.updateScanningLabel(false);
         recipeUploadView.showErrorMessage(error);
