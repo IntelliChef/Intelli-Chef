@@ -11,6 +11,8 @@ public class RecipeUploadView extends JFrame {
     private final JLabel scanningLabel;
     private RecipeUploadController recipeUploadController;
     private RecipeUploadPresenter recipeUploadPresenter;
+    private final JProgressBar progressBar;
+
 
     public void setRecipeUploadController(RecipeUploadController recipeUploadController) {
         this.recipeUploadController = recipeUploadController;
@@ -33,11 +35,20 @@ public class RecipeUploadView extends JFrame {
         titleLabel.setBorder(BorderFactory.createEmptyBorder(20, 0, 10, 0));
         add(titleLabel, BorderLayout.NORTH);
 
+        JPanel southPanel = new JPanel();
+        southPanel.setLayout(new BorderLayout());
+
         scanningLabel = new JLabel("Image is being scanned. Please wait...", SwingConstants.CENTER);
-        scanningLabel.setFont(new Font("SansSerif", Font.ITALIC, 16));
-        scanningLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 20, 10));
+        scanningLabel.setFont(new Font("SansSerif", Font.PLAIN, 18));
+        scanningLabel.setForeground(Color.BLACK);
+        scanningLabel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
         scanningLabel.setVisible(false);
-        add(scanningLabel, BorderLayout.SOUTH);
+        southPanel.add(scanningLabel, BorderLayout.NORTH);
+
+        progressBar = new JProgressBar();
+        progressBar.setIndeterminate(true);
+        progressBar.setVisible(false);
+        southPanel.add(progressBar, BorderLayout.CENTER);
 
         JButton ingredientsButton = new JButton("Enter Ingredients");
         styleButton(ingredientsButton);
@@ -54,8 +65,16 @@ public class RecipeUploadView extends JFrame {
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(20, 30, 20, 30));
         buttonPanel.add(uploadButton);
         buttonPanel.add(ingredientsButton);
-
         add(buttonPanel, BorderLayout.CENTER);
+
+        JLabel poweredByLabel = new JLabel("Powered by Gemini", SwingConstants.CENTER);
+        poweredByLabel.setFont(new Font("Serif", Font.ITALIC, 16));
+        poweredByLabel.setForeground(new Color(33, 168, 120));
+        poweredByLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
+        add(poweredByLabel, BorderLayout.SOUTH);
+        southPanel.add(poweredByLabel, BorderLayout.SOUTH);
+        add(southPanel, BorderLayout.SOUTH);
+
         setVisible(true);
     }
 
@@ -80,6 +99,7 @@ public class RecipeUploadView extends JFrame {
 
     public void updateScanningLabel(boolean isVisible) {
         scanningLabel.setVisible(isVisible);
+        progressBar.setVisible(isVisible); // Show progress bar with the label
     }
 
     public void showWarningMessage(String warningMessage) {
