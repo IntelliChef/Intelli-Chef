@@ -15,15 +15,24 @@ public class IngredientsDetectedView extends JFrame {
     public IngredientsDetectedView(IngredientRepository ingredientRepository) {
      super("Ingredient(s) Detected");
      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-     setSize(400, 200);
+     setSize(500, 250);
      setLocationRelativeTo(null);
      setLayout(new BorderLayout());
 
-     JLabel ingredientLabel = new JLabel(
-             "Type(s) of ingredient(s) detected: " + ingredientRepository.numberOfIngredients(),
-             SwingConstants.CENTER);
-     ingredientLabel.setFont(new Font("SansSerif", Font.PLAIN, 16));
-     add(ingredientLabel, BorderLayout.CENTER);
+        JLabel ingredientLabel = new JLabel(
+                "<html><div style='text-align: center;'>Type(s) of ingredient(s) detected:<br>"
+                        + ingredientRepository.numberOfIngredients() + "</div></html>",
+                SwingConstants.CENTER
+        );
+        ingredientLabel.setFont(new Font("SansSerif", Font.BOLD, 18));
+        ingredientLabel.setForeground(Color.BLACK);
+        ingredientLabel.setOpaque(true);
+        ingredientLabel.setBackground(new Color(240, 240, 240));
+        ingredientLabel.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(Color.BLACK, 1),
+                BorderFactory.createEmptyBorder(10, 20, 10, 20)
+        ));
+        add(ingredientLabel, BorderLayout.CENTER);
 
      JButton continueButton = new JButton("Continue");
      styleButton(continueButton);
