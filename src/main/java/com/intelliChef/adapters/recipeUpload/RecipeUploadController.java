@@ -10,7 +10,7 @@ import com.intelliChef.view.NavigationCall;
 import java.io.IOException;
 
 /**
- * Controller that takes path of image and turns the image into bytes so it can be passed into the interactor.
+ * Controller that functions the button clicks in recipe upload view.
  */
 public class RecipeUploadController {
     private final AnalyzeImageInteractor analyzeImageInteractor;
@@ -21,11 +21,20 @@ public class RecipeUploadController {
         this.navigationCall = navigationCall;
     }
 
+    /**
+     * What happens when ingredient button is clicked.
+     * @param recipeUploadPresenter to delegate UI related tasks to presenter
+     */
     public void ingredientButtonClick(RecipeUploadPresenter recipeUploadPresenter) {
         recipeUploadPresenter.ingredientButtonClick();
         // TODO: add call to ingredient list view with an empty list using navigationCall
     }
 
+    /**
+     * What happens when upload image button is clicked.
+     * @param imagePath that is selected from files
+     * @param recipeUploadPresenter to delegate UI related tasks to presenter
+     */
     public void uploadImageClick(String imagePath, RecipeUploadPresenter recipeUploadPresenter) {
         recipeUploadPresenter.updateScanningLabel(true);
         try {
