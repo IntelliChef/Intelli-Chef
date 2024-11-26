@@ -7,8 +7,6 @@ import com.google.cloud.vertexai.generativeai.GenerativeModel;
 import com.google.cloud.vertexai.generativeai.PartMaker;
 import com.google.cloud.vertexai.generativeai.ResponseHandler;
 
-import java.io.IOException;
-
 /**
  * Vertex API call class that will take an image of fridge and return the ingredients in the fridge along with their
  * quantities.
@@ -42,9 +40,8 @@ public class GeminiAIClient {
                                     " If there are no ingredients in this picture, return an empty list only: []"
                     ));
             return ResponseHandler.getText(response);
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException();
         }
-        return null;
     }
 }

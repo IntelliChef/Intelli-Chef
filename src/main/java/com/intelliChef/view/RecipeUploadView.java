@@ -2,6 +2,7 @@ package com.intelliChef.view;
 
 import com.intelliChef.adapters.recipeUpload.RecipeUploadController;
 import com.intelliChef.adapters.recipeUpload.RecipeUploadPresenter;
+import static com.intelliChef.utils.UseCustomFont.loadCustomFont;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,19 +27,19 @@ public class RecipeUploadView extends JFrame {
         super("IntelliChef");
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(500, 300);
+        setSize(600, 350);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
         JLabel titleLabel = new JLabel("IntelliChef", SwingConstants.CENTER);
-        titleLabel.setFont(new Font("SansSerif", Font.BOLD, 30));
-        titleLabel.setBorder(BorderFactory.createEmptyBorder(20, 0, 10, 0));
+        titleLabel.setFont(loadCustomFont("fonts/DynaPuff-Medium.ttf", 48f));
+        titleLabel.setBorder(BorderFactory.createEmptyBorder(30, 0, 10, 0));
         add(titleLabel, BorderLayout.NORTH);
 
         JPanel southPanel = new JPanel();
         southPanel.setLayout(new BorderLayout());
 
-        scanningLabel = new JLabel("Image is being scanned. Please wait...", SwingConstants.CENTER);
+        scanningLabel = new JLabel("Scanning image...", SwingConstants.CENTER);
         scanningLabel.setFont(new Font("SansSerif", Font.PLAIN, 18));
         scanningLabel.setForeground(Color.BLACK);
         scanningLabel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
@@ -68,7 +69,7 @@ public class RecipeUploadView extends JFrame {
         add(buttonPanel, BorderLayout.CENTER);
 
         JLabel poweredByLabel = new JLabel("Powered by Gemini", SwingConstants.CENTER);
-        poweredByLabel.setFont(new Font("Serif", Font.ITALIC, 16));
+        poweredByLabel.setFont(loadCustomFont("fonts/DynaPuff-Regular.ttf", 16f));
         poweredByLabel.setForeground(new Color(33, 168, 120));
         poweredByLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
         add(poweredByLabel, BorderLayout.SOUTH);
@@ -99,7 +100,7 @@ public class RecipeUploadView extends JFrame {
 
     public void updateScanningLabel(boolean isVisible) {
         scanningLabel.setVisible(isVisible);
-        progressBar.setVisible(isVisible); // Show progress bar with the label
+        progressBar.setVisible(isVisible);
     }
 
     public void showWarningMessage(String warningMessage) {

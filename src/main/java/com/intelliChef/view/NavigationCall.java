@@ -15,7 +15,7 @@ public interface NavigationCall {
 
     /**
      * Loads the ingredients detection view.
-     * @param ingredientRepository repository interface which contains the new ingredients detected after scanning image
+     * @param ingredientRepository repository implementation that contains the ingredients detected after scanning image.
      */
     void navigateToIngredientsDetectedView(IngredientRepository ingredientRepository);
 

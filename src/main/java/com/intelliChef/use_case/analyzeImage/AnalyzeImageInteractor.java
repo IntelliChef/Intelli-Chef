@@ -16,6 +16,12 @@ public class AnalyzeImageInteractor {
         this.geminiAIClient = geminiAIClient;
     }
 
+    /**
+     * Interactor will make call to API from input data and convert it to output data.
+     * @param analyzeImageInputData passed from controller
+     * @return analyzeImageOutputData back to the controller
+     * @throws RuntimeException if API call wasn't successful
+     */
     public AnalyzeImageOutputData execute(AnalyzeImageInputData analyzeImageInputData) throws RuntimeException {
         String response = geminiAIClient.analyzeImage(analyzeImageInputData.getImageBytes());
         if (response.equals("[]")) {
@@ -24,6 +30,11 @@ public class AnalyzeImageInteractor {
         return new AnalyzeImageOutputData(parseIngredientsToList(response));
     }
 
+    /**
+     * Converts the raw text output from the API to initialize a list of ingredients.
+     * @param response raw text output
+     * @return list of ingredients
+     */
     private List<Ingredient> parseIngredientsToList(String response) {
         List<Ingredient> ingredients = new ArrayList<>();
         String[] pairs = response.split(", ");
