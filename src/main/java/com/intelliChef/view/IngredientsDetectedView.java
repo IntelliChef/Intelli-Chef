@@ -3,6 +3,7 @@ package com.intelliChef.view;
 import com.intelliChef.adapters.ingredientsDetected.IngredientsDetectedController;
 import com.intelliChef.adapters.ingredientsDetected.IngredientsDetectedPresenter;
 import com.intelliChef.use_case.IngredientRepository;
+import static com.intelliChef.utils.UIStyles.styleButton;
 
 import javax.swing.*;
 import java.awt.*;
@@ -42,11 +43,6 @@ public class IngredientsDetectedView extends JFrame {
      buttonPanel.add(cancelButton);
      add(buttonPanel, BorderLayout.SOUTH);
      setVisible(true);
-    }
-
-    private void styleButton(JButton button) {
-        button.setFont(new Font("SansSerif", Font.BOLD, 16));
-        button.setPreferredSize(new Dimension(120, 40));
     }
 
     public void setIngredientsDetectedController(IngredientsDetectedController ingredientsDetectedController) {

@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 
+import static com.intelliChef.utils.UIStyles.styleButton;
 import static com.intelliChef.utils.UseCustomFont.*;
 
 public class RecipeUploadView extends JFrame {
@@ -14,15 +15,6 @@ public class RecipeUploadView extends JFrame {
     private RecipeUploadController recipeUploadController;
     private RecipeUploadPresenter recipeUploadPresenter;
     private final JProgressBar progressBar;
-
-
-    public void setRecipeUploadController(RecipeUploadController recipeUploadController) {
-        this.recipeUploadController = recipeUploadController;
-    }
-
-    public void setRecipeUploadPresenter(RecipeUploadPresenter recipeUploadPresenter) {
-        this.recipeUploadPresenter = recipeUploadPresenter;
-    }
 
     public RecipeUploadView() {
         super("IntelliChef");
@@ -80,6 +72,14 @@ public class RecipeUploadView extends JFrame {
         setVisible(true);
     }
 
+    public void setRecipeUploadController(RecipeUploadController recipeUploadController) {
+        this.recipeUploadController = recipeUploadController;
+    }
+
+    public void setRecipeUploadPresenter(RecipeUploadPresenter recipeUploadPresenter) {
+        this.recipeUploadPresenter = recipeUploadPresenter;
+    }
+
     private void handleUploadImageButton() {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -89,14 +89,6 @@ public class RecipeUploadView extends JFrame {
             File selectedFile = fileChooser.getSelectedFile();
             recipeUploadController.uploadImageClick(selectedFile.getAbsolutePath(), recipeUploadPresenter);
         }
-    }
-
-    private void styleButton(JButton button) {
-        button.setFont(new Font("SansSerif", Font.BOLD, 16));
-        button.setBackground(new Color(38, 129, 189));
-        button.setForeground(Color.WHITE);
-        button.setPreferredSize(new Dimension(180, 40));
-        button.setFocusPainted(false);
     }
 
     public void updateScanningLabel(boolean isVisible) {
