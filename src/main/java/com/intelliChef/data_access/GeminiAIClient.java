@@ -7,8 +7,6 @@ import com.google.cloud.vertexai.generativeai.GenerativeModel;
 import com.google.cloud.vertexai.generativeai.PartMaker;
 import com.google.cloud.vertexai.generativeai.ResponseHandler;
 
-import java.io.IOException;
-
 /**
  * Vertex API call class that will take an image of fridge and return the ingredients in the fridge along with their
  * quantities.
@@ -24,8 +22,13 @@ public class GeminiAIClient {
         this.modelName = modelName;
     }
 
+    /**
+     * Api call takes place with input of imageBytes.
+     * @param imageBytes converted using the utility function
+     * @return a basic text response that needs to be parsed to create ingredient
+     * @throws RuntimeException when the API call fails
+     */
     public String analyzeImage(byte[] imageBytes) throws RuntimeException {
-
         try (VertexAI vertexAI = new VertexAI(projectId, location)) {
             GenerativeModel model = new GenerativeModel(modelName, vertexAI);
             GenerateContentResponse response = model.generateContent(
@@ -37,9 +40,8 @@ public class GeminiAIClient {
                                     " If there are no ingredients in this picture, return an empty list only: []"
                     ));
             return ResponseHandler.getText(response);
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException();
         }
-        return null;
     }
 }

@@ -2,31 +2,42 @@ package com.intelliChef.view;
 
 import com.intelliChef.adapters.ingredientsDetected.IngredientsDetectedController;
 import com.intelliChef.adapters.ingredientsDetected.IngredientsDetectedPresenter;
-import com.intelliChef.entities.Ingredient;
+import com.intelliChef.use_case.IngredientRepository;
+import static com.intelliChef.utils.UIStyles.styleButton;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
 
 public class IngredientsDetectedView extends JFrame {
     private IngredientsDetectedController ingredientsDetectedController;
     private IngredientsDetectedPresenter ingredientsDetectedPresenter;
 
-    public IngredientsDetectedView(int ingredientCount, List<Ingredient> ingredientList) {
+    public IngredientsDetectedView(IngredientRepository ingredientRepository) {
      super("Ingredient(s) Detected");
      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-     setSize(400, 200);
+     setSize(500, 250);
      setLocationRelativeTo(null);
      setLayout(new BorderLayout());
 
-     JLabel ingredientLabel = new JLabel("Type(s) of ingredient(s) detected: " + ingredientCount, SwingConstants.CENTER);
-     ingredientLabel.setFont(new Font("SansSerif", Font.PLAIN, 16));
-     add(ingredientLabel, BorderLayout.CENTER);
+        JLabel ingredientLabel = new JLabel(
+                "<html><div style='text-align: center;'>Type(s) of ingredient(s) detected:<br>"
+                        + ingredientRepository.numberOfIngredients() + "</div></html>",
+                SwingConstants.CENTER
+        );
+        ingredientLabel.setFont(new Font("SansSerif", Font.BOLD, 18));
+        ingredientLabel.setForeground(Color.BLACK);
+        ingredientLabel.setOpaque(true);
+        ingredientLabel.setBackground(new Color(240, 240, 240));
+        ingredientLabel.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(Color.BLACK, 1),
+                BorderFactory.createEmptyBorder(10, 20, 10, 20)
+        ));
+        add(ingredientLabel, BorderLayout.CENTER);
 
      JButton continueButton = new JButton("Continue");
      styleButton(continueButton);
      continueButton.addActionListener(e -> {
-         ingredientsDetectedController.continueButtonClick(ingredientList, ingredientsDetectedPresenter);
+         ingredientsDetectedController.continueButtonClick(ingredientRepository, ingredientsDetectedPresenter);
      });
 
      JButton cancelButton = new JButton("Cancel");
@@ -41,11 +52,6 @@ public class IngredientsDetectedView extends JFrame {
      buttonPanel.add(cancelButton);
      add(buttonPanel, BorderLayout.SOUTH);
      setVisible(true);
-    }
-
-    private void styleButton(JButton button) {
-        button.setFont(new Font("SansSerif", Font.BOLD, 16));
-        button.setPreferredSize(new Dimension(120, 40));
     }
 
     public void setIngredientsDetectedController(IngredientsDetectedController ingredientsDetectedController) {

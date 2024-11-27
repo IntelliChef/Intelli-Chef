@@ -15,4 +15,8 @@ public class AnalyzeImageOutputData {
     public List<Ingredient> getIngredientList() {
         return ingredientList;
     }
+
+    public boolean isEmpty() {
+        return ingredientList.isEmpty();
+    }
 }

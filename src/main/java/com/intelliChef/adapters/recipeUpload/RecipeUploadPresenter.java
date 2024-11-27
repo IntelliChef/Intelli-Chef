@@ -1,12 +1,13 @@
 package com.intelliChef.adapters.recipeUpload;
 
-import com.intelliChef.Main;
-import com.intelliChef.entities.Ingredient;
+import com.intelliChef.use_case.analyzeImage.AnalyzeImageOutputData;
 import com.intelliChef.view.RecipeUploadView;
 
 import javax.swing.*;
-import java.util.List;
 
+/**
+ * Presenter to display updates to the user through UI changes.
+ */
 public class RecipeUploadPresenter {
     private final RecipeUploadView recipeUploadView;
 
@@ -14,6 +15,10 @@ public class RecipeUploadPresenter {
         this.recipeUploadView = recipeUploadView;
     }
 
+    /**
+     * Controls the visibility of the scanning label at the bottom of recipe upload view.
+     * @param isVisible whether label is visible or not
+     */
     public void updateScanningLabel(boolean isVisible) {
         recipeUploadView.updateScanningLabel(isVisible);
         if (isVisible) {
@@ -26,19 +31,30 @@ public class RecipeUploadPresenter {
         }
     }
 
+    /**
+     * Removes current page from panel so next view can be displayed.
+     */
     public void ingredientButtonClick() {
         recipeUploadView.dispose();
     }
 
-    public void uploadButtonResult(List<Ingredient> ingredientList) {
+    /**
+     * What to display based on whether output is empty or not.
+     * @param result output given from the API call
+     */
+    public void uploadButtonResult(AnalyzeImageOutputData result) {
         recipeUploadView.updateScanningLabel(false);
-        if (ingredientList.isEmpty()) {
+        if (result.isEmpty()) {
             recipeUploadView.showWarningMessage("No ingredients found. Please upload a valid image.");
         } else {
             recipeUploadView.dispose();
         }
     }
 
+    /**
+     * What to display if error occurred while image was being scanned.
+     * @param error message
+     */
     public void uploadImageClickError(String error) {
         recipeUploadView.updateScanningLabel(false);
         recipeUploadView.showErrorMessage(error);

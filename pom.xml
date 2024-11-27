@@ -39,5 +39,10 @@
             <artifactId>google-cloud-vertexai</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.formdev</groupId>
+            <artifactId>flatlaf</artifactId>
+            <version>3.0</version>
+        </dependency>
     </dependencies>
 </project>
