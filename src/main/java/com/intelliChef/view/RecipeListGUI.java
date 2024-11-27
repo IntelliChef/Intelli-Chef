@@ -23,7 +23,7 @@ import java.util.List;
 public class RecipeListGUI extends JFrame implements RecipeListView, RecipeView {
 
     private final RecipeGateway recipeGateway = new JSONRecipeGateway();
-    private final RecipeSelectionInteractor interactor;
+    private RecipeSelectionInteractor interactor;
 
     /**
      * Constructs a new RecipeListGUI, initializes the recipe list view,
@@ -53,6 +53,10 @@ public class RecipeListGUI extends JFrame implements RecipeListView, RecipeView 
         }
 
         setVisible(true);
+    }
+
+    public void setInteractor(RecipeSelectionInteractor interactor) {
+        this.interactor = interactor;
     }
 
     /**
