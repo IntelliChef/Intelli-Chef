@@ -2,13 +2,11 @@ package com.intelliChef.data_access;
 
 import com.google.cloud.vertexai.VertexAI;
 import com.google.cloud.vertexai.api.GenerateContentResponse;
-import com.google.cloud.vertexai.generativeai.ContentMaker;
 import com.google.cloud.vertexai.generativeai.GenerativeModel;
-import com.google.cloud.vertexai.generativeai.PartMaker;
 import com.google.cloud.vertexai.generativeai.ResponseHandler;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Vertex API call class that will take an image of fridge and return the ingredients in the fridge along with their
@@ -25,7 +23,7 @@ public class GeminiAIforRecipe {
         this.modelName = modelName;
     }
 
-    public String getRecipe(ArrayList<String> dietPreference) throws RuntimeException {
+    public String getRecipe(List<String> dietPreference, List<String> ingredients) throws RuntimeException {
 
         try (VertexAI vertexAI = new VertexAI(projectId, location)) {
             GenerativeModel model = new GenerativeModel(modelName, vertexAI);

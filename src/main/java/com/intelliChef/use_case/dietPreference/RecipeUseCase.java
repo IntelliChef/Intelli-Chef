@@ -1,18 +1,16 @@
-package com.intelliChef.use_case;
+package com.intelliChef.use_case.dietPreference;
 
 import com.intelliChef.data_access.GeminiAIforRecipe;
-import com.intelliChef.entities.Recipe;
 import com.intelliChef.entities.DietPreference;
-import infrastructure.FileStorage;
+import com.intelliChef.use_case.dietPreference.FileStorage;
 
-import org.json.JSONObject;
-import org.json.JSONArray;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class RecipeUseCase {
-    private GeminiAIforRecipe geminiService;
+    private GeminiAIforRecipe geminiService = new GeminiAIforRecipe(
+            "",
+            "us-central1",
+            "gemini-1.5-flash-001");
     private FileStorage fileStorage;
 
     public RecipeUseCase(GeminiAIforRecipe geminiService, FileStorage fileStorage) {

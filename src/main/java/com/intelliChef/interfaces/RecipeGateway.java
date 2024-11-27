@@ -6,3 +6,4 @@ import java.util.List;
 public interface RecipeGateway {
     List<Recipe> loadRecipes();
 }
+
