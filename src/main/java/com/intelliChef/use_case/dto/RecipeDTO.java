@@ -1,11 +1,11 @@
-package com.intelliChef.entities;
+package com.intelliChef.use_case.dto;
 
 /**
- * Represents a recipe with details such as name, image, calories, cooking time, and URL.
- * As an entity in the innermost layer of Clean Architecture, it has no dependencies
- * on other layers or external frameworks.
+ * Data Transfer Object (DTO) for Recipe data.
+ * Used to transfer recipe data across Clean Architecture boundaries without exposing entity details.
+ * Contains only the data needed for use case interactions.
  */
-public class Recipe {
+public class RecipeDTO {
     private final String name;
     private final String imageUrl;
     private final double calories;
@@ -13,7 +13,7 @@ public class Recipe {
     private final String url;
 
     /**
-     * Constructs a new Recipe instance.
+     * Constructs a new RecipeDTO instance.
      *
      * @param name        the name of the recipe
      * @param imageUrl    the URL of the recipe's image
@@ -21,7 +21,7 @@ public class Recipe {
      * @param cookingTime the cooking time in minutes
      * @param url         the URL of the recipe details
      */
-    public Recipe(String name, String imageUrl, double calories, int cookingTime, String url) {
+    public RecipeDTO(String name, String imageUrl, double calories, int cookingTime, String url) {
         this.name = name;
         this.imageUrl = imageUrl;
         this.calories = calories;
