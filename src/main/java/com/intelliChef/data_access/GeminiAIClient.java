@@ -11,7 +11,7 @@ import com.google.cloud.vertexai.generativeai.ResponseHandler;
  * Vertex API call class that will take an image of fridge and return the ingredients in the fridge along with their
  * quantities.
  */
-public class GeminiAIClient {
+public class GeminiAIClient implements AIClient {
     private final String projectId;
     private final String location;
     private final String modelName;

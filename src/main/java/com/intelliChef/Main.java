@@ -2,6 +2,7 @@ package com.intelliChef;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.intelliChef.data_access.GeminiAIClient;
+import com.intelliChef.frameworks.factories.RecipeViewFactory;
 import com.intelliChef.use_case.InteractorFactory;
 import com.intelliChef.use_case.analyzeImage.AnalyzeImageInteractor;
 import com.intelliChef.view.*;
@@ -18,12 +19,13 @@ public class Main {
 
         SwingUtilities.invokeLater(() -> {
             ViewFactory viewFactory = new ViewFactory(null);
+            RecipeViewFactory recipeViewFactory = new RecipeViewFactory();
             AnalyzeImageInteractor analyzeImageInteractor = new InteractorFactory().createAnalyzeImageInteractor(
                     new GeminiAIClient(
                         "",
                         "us-central1",
                         "gemini-1.5-flash-001"));
-            ViewManager viewManager = new ViewManager(viewFactory, analyzeImageInteractor);
+            ViewManager viewManager = new ViewManager(viewFactory, analyzeImageInteractor, recipeViewFactory);
             viewFactory.setNavigator(viewManager);
             viewManager.navigateToRecipeUploadView();
         });

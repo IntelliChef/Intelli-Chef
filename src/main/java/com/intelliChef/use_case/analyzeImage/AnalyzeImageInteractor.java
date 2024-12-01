@@ -3,17 +3,17 @@ package com.intelliChef.use_case.analyzeImage;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.intelliChef.data_access.GeminiAIClient;
+import com.intelliChef.data_access.AIClient;
 import com.intelliChef.entities.Ingredient;
 
 /**
  * Interactor that calls the API and converts the resulting string output into list of ingredients.
  */
 public class AnalyzeImageInteractor {
-    private final GeminiAIClient geminiAIClient;
+    private final AIClient AIClient;
 
-    public AnalyzeImageInteractor(GeminiAIClient geminiAIClient) {
-        this.geminiAIClient = geminiAIClient;
+    public AnalyzeImageInteractor(AIClient AIClient) {
+        this.AIClient = AIClient;
     }
 
     /**
@@ -23,7 +23,7 @@ public class AnalyzeImageInteractor {
      * @throws RuntimeException if API call wasn't successful
      */
     public AnalyzeImageOutputData execute(AnalyzeImageInputData analyzeImageInputData) throws RuntimeException {
-        String response = geminiAIClient.analyzeImage(analyzeImageInputData.getImageBytes());
+        String response = AIClient.analyzeImage(analyzeImageInputData.getImageBytes());
         if (response.equals("[]")) {
             return new AnalyzeImageOutputData(new ArrayList<>());
         }
