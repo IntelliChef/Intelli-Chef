@@ -118,9 +118,9 @@ import com.intelliChef.adapters.presentation.*;
 import com.intelliChef.adapters.persistence.JSONRecipeRepository;
 import com.intelliChef.frameworks.gui.RecipeListGUI;
 import com.intelliChef.frameworks.gui.RecipeDetailGUI;
-import com.intelliChef.use_case.LoadRecipesInteractor;
-import com.intelliChef.use_case.SelectRecipeInteractor;
-import com.intelliChef.use_case.NavigationInteractor;
+import com.intelliChef.use_case.view_interactors.LoadRecipesInteractor;
+import com.intelliChef.use_case.view_interactors.SelectRecipeInteractor;
+import com.intelliChef.use_case.view_interactors.NavigationInteractor;
 import com.intelliChef.use_case.ports.output.RecipeRepository;
 import com.intelliChef.use_case.dto.RecipeDTO;
 

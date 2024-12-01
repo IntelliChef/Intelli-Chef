@@ -3,7 +3,7 @@
     {
       "recipe": {
         "label": "Spaghetti Carbonara",
-        "image": "https://example.com/images/spaghetti-carbonara.jpg",
+        "image": "https://static01.nyt.com/images/2021/02/14/dining/carbonara-horizontal/carbonara-horizontal-videoSmall-v2.jpg",
         "calories": 700.5,
         "totalTime": 30,
         "url": "https://example.com/recipes/spaghetti-carbonara"
@@ -12,7 +12,7 @@
     {
       "recipe": {
         "label": "Chicken Caesar Salad",
-        "image": "https://example.com/images/chicken-caesar-salad.jpg",
+        "image": "https://i0.wp.com/smittenkitchen.com/wp-content/uploads/2008/01/chicken-caesar-salad-1-scaled.jpg?fit=1200%2C800&ssl=1",
         "calories": 350.0,
         "totalTime": 20,
         "url": "https://example.com/recipes/chicken-caesar-salad"
@@ -21,7 +21,7 @@
     {
       "recipe": {
         "label": "Vegetable Stir Fry",
-        "image": "https://example.com/images/vegetable-stir-fry.jpg",
+        "image": "https://images.themodernproper.com/billowy-turkey/production/posts/VegetableStirFry_10.jpg?w=1200&q=82&auto=format&fit=crop&dm=1703377361&s=dcc5b387ddf86e293603e6c4adeba792",
         "calories": 250.5,
         "totalTime": 15,
         "url": "https://example.com/recipes/vegetable-stir-fry"
@@ -30,16 +30,16 @@
     {
       "recipe": {
         "label": "Beef Tacos",
-        "image": "https://example.com/images/beef-tacos.jpg",
+        "image": "https://www.onceuponachef.com/images/2023/08/Beef-Tacos.jpg",
         "calories": 500.8,
         "totalTime": 25,
-        "url": "https://example.com/recipes/beef-tacos"
+        "url": "https://www.onceuponachef.com/recipes/beef-tacos.html"
       }
     },
     {
       "recipe": {
         "label": "Pancakes",
-        "image": "https://example.com/images/pancakes.jpg",
+        "image": "https://cdn.apartmenttherapy.info/image/upload/f_auto,q_auto:eco,c_fill,g_auto,w_1500,ar_3:2/k%2FPhoto%2FRecipes%2F2024-06-seo-pancakes%2Fseo-pancakes-232",
         "calories": 320.2,
         "totalTime": 10,
         "url": "https://example.com/recipes/pancakes"

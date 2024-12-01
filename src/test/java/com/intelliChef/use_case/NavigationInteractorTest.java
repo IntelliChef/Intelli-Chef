@@ -1,28 +1,31 @@
 package com.intelliChef.use_case;
 
+import com.intelliChef.use_case.view_interactors.NavigationInteractor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 import static org.mockito.Mockito.*;
 
 import com.intelliChef.use_case.ports.output.NavigationOutputPort;
 
+@ExtendWith(MockitoExtension.class)
 class NavigationInteractorTest {
     @Mock private NavigationOutputPort outputPort;
     private NavigationInteractor interactor;
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this);
         interactor = new NavigationInteractor(outputPort);
     }
 
     @Test
-    void testNavigation() {
-        // Execute
+    void testSuccessfulNavigation() {
+        // Act
         interactor.navigateBack();
 
+        // Assert
         verify(outputPort).navigateToPreviousView();
         verifyNoMoreInteractions(outputPort);
     }
