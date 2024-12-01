@@ -29,4 +29,11 @@ public interface IngredientRepository {
      * @return the number of ingredients in repository
      */
     int numberOfIngredients();
+
+    /**
+     * Update the quantity of the ingredient with the given id
+     * @param id id of the ingredient to be updated
+     * @param quantity updated quantity
+     */
+    void updateQuantity(int id, double quantity);
 }
