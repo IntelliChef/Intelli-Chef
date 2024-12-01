@@ -21,13 +21,6 @@ public class DietPreferenceForm extends JFrame {
     private JCheckBox veganBox = new JCheckBox("Vegan");
     private JButton confirmButton = new JButton("Confirm");
 
-    ketoBox.setFont(new Font("Arial", Font.PLAIN, 18));
-    glutenFreeBox.setFont(new Font("Arial", Font.PLAIN, 18));
-    proteinRichBox.setFont(new Font("Arial", Font.PLAIN, 18));
-    fiberRichBox.setFont(new Font("Arial", Font.PLAIN, 18));
-    alcoholFreeBox.setFont(new Font("Arial", Font.PLAIN, 18));
-    veganBox.setFont(new Font("Arial", Font.PLAIN, 18));
-
 
     public DietPreferenceForm() {
         setTitle("Diet Preferences");
