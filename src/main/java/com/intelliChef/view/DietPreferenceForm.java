@@ -1,11 +1,12 @@
-package ui;
+package com.intelliChef.view;
 
-import domain.DietPreference;
-import application.RecipeUseCase;
-import infrastructure.GeminiServiceImpl;
-import infrastructure.FileStorage;
+import com.intelliChef.entities.DietPreference;
+import com.intelliChef.use_case.dietPreference.RecipeUseCase;
+import com.intelliChef.data_access.GeminiAIforRecipe;
+import com.intelliChef.use_case.dietPreference.FileStorage;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -19,6 +20,14 @@ public class DietPreferenceForm extends JFrame {
     private JCheckBox alcoholFreeBox = new JCheckBox("Alcohol-free");
     private JCheckBox veganBox = new JCheckBox("Vegan");
     private JButton confirmButton = new JButton("Confirm");
+
+    ketoBox.setFont(new Font("Arial", Font.PLAIN, 18));
+    glutenFreeBox.setFont(new Font("Arial", Font.PLAIN, 18));
+    proteinRichBox.setFont(new Font("Arial", Font.PLAIN, 18));
+    fiberRichBox.setFont(new Font("Arial", Font.PLAIN, 18));
+    alcoholFreeBox.setFont(new Font("Arial", Font.PLAIN, 18));
+    veganBox.setFont(new Font("Arial", Font.PLAIN, 18));
+
 
     public DietPreferenceForm() {
         setTitle("Diet Preferences");
@@ -49,7 +58,10 @@ public class DietPreferenceForm extends JFrame {
                 // Dummy ingredient list
                 List<String> ingredients = List.of("chicken", "garlic", "pepper");
 
-                RecipeUseCase useCase = new RecipeUseCase(new GeminiServiceImpl(), new FileStorage());
+                RecipeUseCase useCase = new RecipeUseCase(new GeminiAIforRecipe(
+                        "",
+                        "us-central1",
+                        "gemini-1.5-flash-001"), new FileStorage());
                 useCase.processRecipes(dietPreference, ingredients);
                 JOptionPane.showMessageDialog(null, "Recipes fetched and saved to file.");
             }
