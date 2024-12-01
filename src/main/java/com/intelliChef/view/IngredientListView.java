@@ -104,7 +104,7 @@ public class IngredientListView extends JFrame implements ActionListener {
 
             for (int i = 0; i < rowCount; i++) {
                 Object value = ingredientTable.getValueAt(i, column);
-                selected[i] = (value != null && value instanceof Boolean) ? (Boolean) value : false;
+                selected[i] = (Boolean) value;
             }
             confirmController.execute(selected); // Saves data, transit to the next view
         });

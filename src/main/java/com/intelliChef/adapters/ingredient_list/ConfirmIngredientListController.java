@@ -24,7 +24,7 @@ public class ConfirmIngredientListController {
         List<Integer> toChange = new ArrayList<>();
         int j = 0;
         for (int i = 0; i < selected.length; i++) {
-            if (selected[i]) { toChange.set(j, i); j++;}
+            if (!selected[i]) { toChange.set(j, i); j++;}
         }
         final ConfirmIngredientListInputData inputData = new ConfirmIngredientListInputData(toChange);
         interactor.execute(inputData);
