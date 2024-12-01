@@ -18,13 +18,15 @@ public class Main {
 
         SwingUtilities.invokeLater(() -> {
             ViewFactory viewFactory = new ViewFactory(null);
+            RecipeViewFactory recipeViewFactory = new RecipeViewFactory(null);
             AnalyzeImageInteractor analyzeImageInteractor = new InteractorFactory().createAnalyzeImageInteractor(
                     new GeminiAIClient(
                         "",
                         "us-central1",
                         "gemini-1.5-flash-001"));
-            ViewManager viewManager = new ViewManager(viewFactory, analyzeImageInteractor);
+            ViewManager viewManager = new ViewManager(viewFactory, analyzeImageInteractor, recipeViewFactory);
             viewFactory.setNavigator(viewManager);
+            recipeViewFactory.setNavigator(viewManager);
             viewManager.navigateToRecipeUploadView();
         });
     }

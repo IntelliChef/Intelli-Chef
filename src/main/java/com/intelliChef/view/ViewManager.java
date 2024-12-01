@@ -15,7 +15,9 @@ public class ViewManager implements NavigationCall {
     private final RecipeViewFactory recipeviewFactory;
 
 
-    public ViewManager(ViewFactory viewFactory, AnalyzeImageInteractor analyzeImageInteractor, RecipeViewFactory recipeviewFactory) {
+    public ViewManager(ViewFactory viewFactory,
+                       AnalyzeImageInteractor analyzeImageInteractor,
+                       RecipeViewFactory recipeviewFactory) {
         this.viewFactory = viewFactory;
         this.analyzeImageInteractor = analyzeImageInteractor;
         this.recipeviewFactory = recipeviewFactory;

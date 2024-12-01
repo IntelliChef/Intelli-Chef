@@ -11,7 +11,7 @@ import com.google.cloud.vertexai.generativeai.ResponseHandler;
  * Vertex API call class that will take an image of fridge and return the ingredients in the fridge along with their
  * quantities.
  */
-public class GeminiAIClient {
+public class GeminiAIClient implements AIClient {
     private final String projectId;
     private final String location;
     private final String modelName;
@@ -22,12 +22,6 @@ public class GeminiAIClient {
         this.modelName = modelName;
     }
 
-    /**
-     * Api call takes place with input of imageBytes.
-     * @param imageBytes converted using the utility function
-     * @return a basic text response that needs to be parsed to create ingredient
-     * @throws RuntimeException when the API call fails
-     */
     public String analyzeImage(byte[] imageBytes) throws RuntimeException {
         try (VertexAI vertexAI = new VertexAI(projectId, location)) {
             GenerativeModel model = new GenerativeModel(modelName, vertexAI);

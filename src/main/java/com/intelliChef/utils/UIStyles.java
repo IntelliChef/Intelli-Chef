@@ -17,7 +17,7 @@ public class UIStyles {
         button.setFont(loadCustomFont(mediumDynaPuff, 16));
         button.setBackground(new Color(38, 129, 189));
         button.setForeground(Color.WHITE);
-        button.setPreferredSize(new Dimension(180, 40));
+        button.setPreferredSize(new Dimension(200, 40));
         button.setFocusPainted(false);
     }
 
