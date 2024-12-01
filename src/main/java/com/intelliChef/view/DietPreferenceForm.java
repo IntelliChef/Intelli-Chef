@@ -1,127 +1,63 @@
 package com.intelliChef.view;
 
+import com.intelliChef.entities.DietPreference;
+import com.intelliChef.use_case.dietPreference.RecipeUseCase;
+import com.intelliChef.data_access.GeminiAIforRecipe;
+import com.intelliChef.use_case.dietPreference.FileStorage;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.lang.String;
 
-public class DietPreferenceForm {
-    public static void main(String[] args) {
-        List<String> dietPreference = new ArrayList<>();
-
-        JFrame frame = new JFrame("Diet Preference");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 300);
-        frame.setLayout(new BorderLayout());
-
-
-        JLabel title = new JLabel("Diet Preference:", SwingConstants.CENTER);
-        title.setFont(new Font("Arial", Font.BOLD, 24));
-        frame.add(title, BorderLayout.NORTH);
+public class DietPreferenceForm extends JFrame {
+    private JCheckBox ketoBox = new JCheckBox("Keto");
+    private JCheckBox glutenFreeBox = new JCheckBox("Gluten-free");
+    private JCheckBox proteinRichBox = new JCheckBox("Protein-Rich");
+    private JCheckBox fiberRichBox = new JCheckBox("Fiber-Rich");
+    private JCheckBox alcoholFreeBox = new JCheckBox("Alcohol-free");
+    private JCheckBox veganBox = new JCheckBox("Vegan");
+    private JButton confirmButton = new JButton("Confirm");
 
 
-        JPanel checkBoxPanel = new JPanel();
-        checkBoxPanel.setLayout(new BoxLayout(checkBoxPanel, BoxLayout.Y_AXIS));
+    public DietPreferenceForm() {
+        setTitle("Diet Preferences");
+        setSize(300, 400);
+        setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 
-        JCheckBox option1CheckBox = new JCheckBox("Keto");
-        JCheckBox option2CheckBox = new JCheckBox("Gluten-free");
-        JCheckBox option3CheckBox = new JCheckBox("Protein-Rich");
-        JCheckBox option4CheckBox = new JCheckBox("Fiber-Rich");
-        JCheckBox option5CheckBox = new JCheckBox("Alcohol-free");
-        JCheckBox option6CheckBox = new JCheckBox("Vegan");
+        add(ketoBox);
+        add(glutenFreeBox);
+        add(proteinRichBox);
+        add(fiberRichBox);
+        add(alcoholFreeBox);
+        add(veganBox);
+        add(confirmButton);
 
-        option1CheckBox.setFont(new Font("Arial", Font.PLAIN, 18));
-        option2CheckBox.setFont(new Font("Arial", Font.PLAIN, 18));
-        option3CheckBox.setFont(new Font("Arial", Font.PLAIN, 18));
-        option4CheckBox.setFont(new Font("Arial", Font.PLAIN, 18));
-        option5CheckBox.setFont(new Font("Arial", Font.PLAIN, 18));
-        option6CheckBox.setFont(new Font("Arial", Font.PLAIN, 18));
+        confirmButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                List<String> preferences = new ArrayList<>();
+                if (ketoBox.isSelected()) preferences.add("Keto");
+                if (glutenFreeBox.isSelected()) preferences.add("Gluten-free");
+                if (proteinRichBox.isSelected()) preferences.add("Protein-Rich");
+                if (fiberRichBox.isSelected()) preferences.add("Fiber-Rich");
+                if (alcoholFreeBox.isSelected()) preferences.add("Alcohol-free");
+                if (veganBox.isSelected()) preferences.add("Vegan");
 
-        checkBoxPanel.add(option1CheckBox);
-        checkBoxPanel.add(option2CheckBox);
-        checkBoxPanel.add(option3CheckBox);
-        checkBoxPanel.add(option4CheckBox);
-        checkBoxPanel.add(option5CheckBox);
-        checkBoxPanel.add(option6CheckBox);
+                DietPreference dietPreference = new DietPreference(preferences);
 
-        frame.add(checkBoxPanel, BorderLayout.CENTER);
+                // Dummy ingredient list
+                List<String> ingredients = List.of("chicken", "garlic", "pepper");
 
-        JPanel buttonPanel = new JPanel(new FlowLayout());
-        JButton backButton = new JButton("Back");
-        JButton confirmButton = new JButton("Confirm");
-
-        buttonPanel.add(backButton);
-        buttonPanel.add(confirmButton);
-        frame.add(buttonPanel, BorderLayout.SOUTH);
-
-        option1CheckBox.addActionListener(e -> {
-            if (option1CheckBox.isSelected()) {
-                dietPreference.add("Keto");
-            } else {
-                if (dietPreference.contains("Keto")) {
-                    dietPreference.remove("Keto");
-                }
+                RecipeUseCase useCase = new RecipeUseCase(new GeminiAIforRecipe(
+                        "",
+                        "us-central1",
+                        "gemini-1.5-flash-001"), new FileStorage());
+                useCase.processRecipes(dietPreference, ingredients);
+                JOptionPane.showMessageDialog(null, "Recipes fetched and saved to file.");
             }
         });
-
-
-        option2CheckBox.addActionListener(e -> {
-            if (option2CheckBox.isSelected()) {
-                dietPreference.add("Gluten-free");
-            } else {
-                if (dietPreference.contains("Gluten-free")) {
-                    dietPreference.remove("Gluten-free");
-                }
-            }
-        });
-
-        option3CheckBox.addActionListener(e -> {
-            if (option3CheckBox.isSelected()) {
-                dietPreference.add("Protein-Rich");
-            } else {
-                if (dietPreference.contains("Protein-Rich")) {
-                    dietPreference.remove("Protein-Rich");
-                }
-            }
-        });
-
-        option4CheckBox.addActionListener(e -> {
-            if (option4CheckBox.isSelected()) {
-                dietPreference.add("Fiber-Rich");
-            } else {
-                if (dietPreference.contains("Fiber-Rich")) {
-                    dietPreference.remove("Fiber-Rich");
-                }
-            }
-        });
-
-        option5CheckBox.addActionListener(e -> {
-            if (option5CheckBox.isSelected()) {
-                dietPreference.add("Alcohol-free");
-            } else {
-                if (dietPreference.contains("Alcohol-free")) {
-                    dietPreference.remove("Alcohol-free");
-                }
-            }
-        });
-
-        option6CheckBox.addActionListener(e -> {
-            if (option6CheckBox.isSelected()) {
-                dietPreference.add("Vegan");
-            } else {
-                if (dietPreference.contains("Vegan")) {
-                    dietPreference.remove("Vegan");
-                }
-            }
-        });
-
-        confirmButton.addActionListener(e -> {
-            if (confirmButton.isSelected()) {
-
-            }
-        });
-
-        frame.setVisible(true);
     }
 }

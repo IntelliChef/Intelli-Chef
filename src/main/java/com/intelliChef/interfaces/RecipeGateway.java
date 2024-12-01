@@ -15,3 +15,4 @@ public interface RecipeGateway {
      */
     List<Recipe> loadRecipes();
 }
+
