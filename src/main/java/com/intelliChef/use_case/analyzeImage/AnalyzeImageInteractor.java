@@ -24,9 +24,7 @@ public class AnalyzeImageInteractor {
      */
     public AnalyzeImageOutputData execute(AnalyzeImageInputData analyzeImageInputData) throws RuntimeException {
         String response = AIClient.analyzeImage(analyzeImageInputData.getImageBytes());
-        if (response.equals("[]")) {
-            return new AnalyzeImageOutputData(new ArrayList<>());
-        }
+        if (response.equals("[]")) { return new AnalyzeImageOutputData(new ArrayList<>()); }
         return new AnalyzeImageOutputData(parseIngredientsToList(response));
     }
 
@@ -39,18 +37,14 @@ public class AnalyzeImageInteractor {
         List<Ingredient> ingredients = new ArrayList<>();
         String[] pairs = response.split(", ");
         int i = 0;
-
         for (String pair : pairs) {
             String[] parts = pair.split(":");
-
             String name = parts[0].trim();
             int quantity = Integer.parseInt(parts[1].trim());
-
             Ingredient ing = new Ingredient(name, quantity);
             ing.setId(i);
             ingredients.add(ing);
             i++;
-        }
-        return ingredients;
+        } return ingredients;
     }
 }
