@@ -4,6 +4,9 @@ import com.intelliChef.entities.Ingredient;
 
 import java.util.List;
 
+/**
+ * The output data for the Get Ingredient List Use Case
+ */
 public class GetIngredientListOutputData {
     private final List<Ingredient> ingredients;
 

@@ -2,7 +2,6 @@ package com.intelliChef.view;
 
 import com.intelliChef.adapters.ingredient_list.AddIngredientController;
 import com.intelliChef.adapters.ingredient_list.ConfirmIngredientListController;
-import com.intelliChef.adapters.ingredient_list.GetIngredientListPresenter;
 import com.intelliChef.adapters.ingredient_list.IngredientListViewModel;
 
 import javax.swing.*;
@@ -11,6 +10,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * The View for the Ingredient List.
+ */
 public class IngredientListView extends JFrame implements ActionListener {
     private IngredientListViewModel viewModel;
     private final AddIngredientController addIngredientController;

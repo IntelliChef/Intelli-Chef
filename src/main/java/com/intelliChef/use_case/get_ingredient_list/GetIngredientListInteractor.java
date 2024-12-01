@@ -5,6 +5,9 @@ import com.intelliChef.use_case.IngredientRepository;
 
 import java.util.List;
 
+/**
+ * The Get Ingredient List Use Case.
+ */
 public class GetIngredientListInteractor implements GetIngredientListInputBoundary {
     private final IngredientRepository ingredientRepository; // Data Access Interface
     private final GetIngredientListOutputBoundary outputBoundary; // Presenter Interface
@@ -15,6 +18,10 @@ public class GetIngredientListInteractor implements GetIngredientListInputBounda
         this.outputBoundary = outputBoundary;
     }
 
+    /**
+     * Executes the Get Ingredient List Use Case
+     * Fetches ingredient list data from the DAO and passes them to the presenter.
+     */
     public void getIngredients() {
         // Fetch data from the repository
         List<Ingredient> ingredients = ingredientRepository.getAllIngredients();

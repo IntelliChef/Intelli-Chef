@@ -35,6 +35,9 @@ public final class IngredientListFactory {
                 confirmIngredientListController);
     }
 
+    /**
+     * Factory function for the Ingredient List View Model.
+     */
     public static IngredientListViewModel createIngredientListViewModel(IngredientRepository ingredientRepository) {
         // Create a Use Case Get Ingredient List
         // Create a new presenter, interactor for the use case
@@ -46,6 +49,9 @@ public final class IngredientListFactory {
         return getIngredientListOutputBoundary.getViewModel();
     }
 
+    /**
+     * Factory function for creating the Add Ingredient Use Case.
+     */
     public static AddIngredientController createAddIngredientUseCase(IngredientRepository ingredientRepository) {
         // Create a Use Case Add Ingredient
         // Create a new interactor for the use case
@@ -55,6 +61,9 @@ public final class IngredientListFactory {
         return new AddIngredientController(addIngredientInteractor);
     }
 
+    /**
+     * Factory function for creating the Confirm Ingredient List Use Case.
+     */
     public static ConfirmIngredientListController createConfirmIngredientListUseCase(IngredientRepository
                                                                                              ingredientRepository,
                                                                                      NavigationCall navigationCall) {
