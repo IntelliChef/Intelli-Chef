@@ -112,7 +112,7 @@ public class RecipeListGUI extends JFrame implements RecipeListView, RecipeView 
             detailsPanel.add(timeLabel);
         }
 
-        JLabel urlLabel = new JLabel("<html><a href='" + recipe.getUrl() + "'>Recipe Link</a></html>");
+        /*JLabel urlLabel = new JLabel("<html><a href='" + recipe.getUrl() + "'>Recipe Link</a></html>");
         urlLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
         urlLabel.setForeground(Color.BLUE);
         urlLabel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -124,7 +124,7 @@ public class RecipeListGUI extends JFrame implements RecipeListView, RecipeView 
                 }
             }
         });
-        detailsPanel.add(urlLabel);
+        detailsPanel.add(urlLabel);*/
 
         panel.add(detailsPanel, BorderLayout.CENTER);
 

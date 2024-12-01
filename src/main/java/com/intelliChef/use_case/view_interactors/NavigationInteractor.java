@@ -1,4 +1,4 @@
-package com.intelliChef.use_case;
+package com.intelliChef.use_case.view_interactors;
 
 import com.intelliChef.use_case.ports.input.NavigationUseCase;
 import com.intelliChef.use_case.ports.output.NavigationOutputPort;
