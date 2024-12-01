@@ -49,4 +49,15 @@ public class IngredientListRepository implements IngredientRepository {
     public int numberOfIngredients() {
         return myIngredients.size();
     }
+
+    @Override
+    public void updateQuantity(int id, double quantity) {
+        for (Ingredient ingredient : myIngredients) {
+            if (ingredient.getId() == (id)) {
+                ingredient.setQuantity(quantity);
+                break;
+            }
+        }
+        System.out.println("Ingredient ID doesn't exist");
+    }
 }
