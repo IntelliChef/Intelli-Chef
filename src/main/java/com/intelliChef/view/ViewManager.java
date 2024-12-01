@@ -3,7 +3,8 @@ package com.intelliChef.view;
 import com.intelliChef.app.IngredientListFactory;
 import com.intelliChef.use_case.IngredientRepository;
 import com.intelliChef.use_case.analyzeImage.AnalyzeImageInteractor;
-import com.intelliChef.entities.Recipe;
+import com.intelliChef.frameworks.factories.RecipeViewFactory;
+import com.intelliChef.adapters.presentation.RecipeListView;
 
 /**
  * Builder that creates all the views and implements NavigationCall to allow controllers to access its methods.
@@ -12,13 +13,16 @@ public class ViewManager implements NavigationCall {
     private final ViewFactory viewFactory;
     private final AnalyzeImageInteractor analyzeImageInteractor;
     private IngredientRepository ingredientRepository;
-    private final RecipeViewFactory recipeviewFactory;
+    private final RecipeViewFactory recipeViewFactory;
+    private RecipeListView recipeListView;
 
-
-    public ViewManager(ViewFactory viewFactory, AnalyzeImageInteractor analyzeImageInteractor, RecipeViewFactory recipeviewFactory) {
+    public ViewManager(
+            ViewFactory viewFactory,
+            AnalyzeImageInteractor analyzeImageInteractor,
+            RecipeViewFactory recipeViewFactory) {
         this.viewFactory = viewFactory;
         this.analyzeImageInteractor = analyzeImageInteractor;
-        this.recipeviewFactory = recipeviewFactory;
+        this.recipeViewFactory = recipeViewFactory;
     }
 
     public void showRecipeUploadView() {
@@ -37,13 +41,8 @@ public class ViewManager implements NavigationCall {
     }
 
     public void showRecipeListView() {
-        RecipeListGUI recipeListView = recipeviewFactory.createRecipeListView();
-        recipeListView.setVisible(true);
-    }
-
-    public void showRecipeDetailView(Recipe recipe, RecipeListGUI recipeListGUI) {
-        RecipeDetailGUI recipeDetailView = recipeviewFactory.createRecipeDetailView(recipe, recipeListGUI);
-        recipeDetailView.setVisible(true);
+        recipeListView = recipeViewFactory.createRecipeListView();
+        ((javax.swing.JFrame) recipeListView).setVisible(true);
     }
 
     @Override
@@ -66,5 +65,4 @@ public class ViewManager implements NavigationCall {
     public void navigateToDietPreferenceView() {
         // To be implemented by Harpuneet by using ingredientRepository
     }
-
 }
