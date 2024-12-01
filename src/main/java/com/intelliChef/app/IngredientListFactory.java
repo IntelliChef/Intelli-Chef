@@ -48,10 +48,9 @@ public final class IngredientListFactory {
 
     public static AddIngredientController createAddIngredientUseCase(IngredientRepository ingredientRepository) {
         // Create a Use Case Add Ingredient
-        // Create a new presenter, interactor for the use case
-        GetIngredientListOutputBoundary getIngredientListOutputBoundary = new GetIngredientListPresenter();
+        // Create a new interactor for the use case
         AddIngredientInteractor addIngredientInteractor = new AddIngredientInteractor(
-                ingredientRepository, getIngredientListOutputBoundary);
+                ingredientRepository);
         // Create a new controller for the interactor
         return new AddIngredientController(addIngredientInteractor);
     }

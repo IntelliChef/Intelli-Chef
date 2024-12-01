@@ -9,11 +9,9 @@ import java.util.List;
 
 public class AddIngredientInteractor {
     private final IngredientRepository repository;
-    private final GetIngredientListOutputBoundary outputBoundary;// Presenter Interface
 
-    public AddIngredientInteractor(IngredientRepository repository, GetIngredientListOutputBoundary outputBoundary) {
+    public AddIngredientInteractor(IngredientRepository repository) {
         this.repository = repository;
-        this.outputBoundary = outputBoundary;
     }
 
     public void execute(AddIngredientInputData inputData) {
@@ -21,10 +19,5 @@ public class AddIngredientInteractor {
         Ingredient ingredient = inputData.getIngredient();
         ingredient.setId(repository.getNextId());
         repository.addIngredient(ingredient);
-
-        List<Ingredient> ingredients = repository.getAllIngredients();
-        // Create output data and pass it to the presenter
-        GetIngredientListOutputData outputData = new GetIngredientListOutputData(ingredients);
-        outputBoundary.present(outputData);
     }
 }
