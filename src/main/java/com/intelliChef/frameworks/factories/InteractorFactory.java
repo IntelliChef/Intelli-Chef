@@ -1,4 +1,4 @@
-package com.intelliChef.use_case;
+package com.intelliChef.frameworks.factories;
 
 import com.intelliChef.data_access.AIClient;
 import com.intelliChef.use_case.analyzeImage.AnalyzeImageInteractor;

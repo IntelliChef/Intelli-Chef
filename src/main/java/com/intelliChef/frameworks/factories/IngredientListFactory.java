@@ -1,11 +1,9 @@
-package com.intelliChef.app;
+package com.intelliChef.frameworks.factories;
 
-import com.intelliChef.adapters.ingredient_list.AddIngredientController;
-import com.intelliChef.adapters.ingredient_list.ConfirmIngredientListController;
-import com.intelliChef.adapters.ingredient_list.GetIngredientListPresenter;
-import com.intelliChef.adapters.ingredient_list.IngredientListViewModel;
+import com.intelliChef.adapters.ingredient_list.*;
 import com.intelliChef.use_case.IngredientRepository;
 import com.intelliChef.use_case.add_ingredient.AddIngredientInteractor;
+import com.intelliChef.use_case.edit_ingredient.EditIngredientInteractor;
 import com.intelliChef.use_case.get_ingredient_list.GetIngredientListInputBoundary;
 import com.intelliChef.use_case.get_ingredient_list.GetIngredientListInteractor;
 import com.intelliChef.use_case.get_ingredient_list.GetIngredientListOutputBoundary;
@@ -30,9 +28,10 @@ public final class IngredientListFactory {
         AddIngredientController addIngredientController = createAddIngredientUseCase(ingredientRepository);
         ConfirmIngredientListController confirmIngredientListController = createConfirmIngredientListUseCase(
                 ingredientRepository, navigationCall);
+        EditIngredientController editIngredientController = createEditIngredientUseCase(ingredientRepository);
 
         return new IngredientListView(ingredientListViewModel, addIngredientController,
-                confirmIngredientListController);
+                confirmIngredientListController, editIngredientController);
     }
 
     /**
@@ -59,6 +58,17 @@ public final class IngredientListFactory {
                 ingredientRepository);
         // Create a new controller for the interactor
         return new AddIngredientController(addIngredientInteractor);
+    }
+
+    /**
+     * Factory function for creating the Edit Ingredient Use Case.
+     */
+    public static EditIngredientController createEditIngredientUseCase(IngredientRepository ingredientRepository) {
+        // Create a Use Case Add Ingredient
+        // Create a new interactor for the use case
+        EditIngredientInteractor editIngredientInteractor = new EditIngredientInteractor(ingredientRepository);
+        // Create a new controller for the interactor
+        return new EditIngredientController(editIngredientInteractor);
     }
 
     /**
