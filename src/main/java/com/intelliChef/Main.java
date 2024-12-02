@@ -3,7 +3,7 @@ package com.intelliChef;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.intelliChef.data_access.GeminiAIClient;
 import com.intelliChef.frameworks.factories.RecipeViewFactory;
-import com.intelliChef.use_case.InteractorFactory;
+import com.intelliChef.frameworks.factories.InteractorFactory;
 import com.intelliChef.use_case.analyzeImage.AnalyzeImageInteractor;
 import com.intelliChef.view.*;
 
