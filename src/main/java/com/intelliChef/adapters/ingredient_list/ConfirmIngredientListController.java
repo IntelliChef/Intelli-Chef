@@ -1,6 +1,7 @@
 package com.intelliChef.adapters.ingredient_list;
 
 
+import com.intelliChef.use_case.IngredientRepository;
 import com.intelliChef.use_case.confirm_ingredient_list.ConfirmIngredientListInputBoundary;
 import com.intelliChef.use_case.confirm_ingredient_list.ConfirmIngredientListInputData;
 import com.intelliChef.view.NavigationCall;

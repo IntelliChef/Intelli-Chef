@@ -1,5 +1,7 @@
 package com.intelliChef.view;
 
+
+import com.intelliChef.adapters.dietPreference.DietPreferenceController;
 import com.intelliChef.frameworks.factories.ControllerFactory;
 import com.intelliChef.frameworks.factories.PresenterFactory;
 import com.intelliChef.adapters.ingredientsDetected.IngredientsDetectedController;
@@ -47,5 +49,15 @@ public class ViewFactory {
         ingredientsDetectedView.setIngredientsDetectedController(ingredientsDetectedController);
         ingredientsDetectedView.setIngredientsDetectedPresenter(ingredientsDetectedPresenter);
         return ingredientsDetectedView;
+    }
+
+    public DietPreferenceForm createDietPreferenceForm(IngredientRepository ingredientRepo) {
+        DietPreferenceForm dietPreferenceForm = new DietPreferenceForm(ingredientRepo);
+
+        DietPreferenceController dietPreferenceController = new ControllerFactory()
+                .getDietPreferenceController(navigationCall);
+
+        dietPreferenceForm.setController(dietPreferenceController);
+        return dietPreferenceForm;
     }
 }
