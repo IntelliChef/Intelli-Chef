@@ -50,7 +50,8 @@ public class ViewFactory {
     }
 
     public DietPreferenceForm createDietPreferenceForm(IngredientRepository ingredientRepo) {
-        DietPreferenceForm dietPreferenceForm = new DietPreferenceForm();
+        DietPreferenceForm dietPreferenceForm = new DietPreferenceForm(ingredientRepo);
+
 
     }
 }

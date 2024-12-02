@@ -1,11 +1,15 @@
 package com.intelliChef.view;
 
+import com.intelliChef.adapters.dietPreference.dietPreferenceController;
 import com.intelliChef.entities.DietPreference;
+import com.intelliChef.use_case.IngredientRepository;
 import com.intelliChef.use_case.dietPreference.RecipeUseCase;
 import com.intelliChef.data_access.GeminiAIforRecipe;
 import com.intelliChef.interfaces.FileStorage;
+import com.intelliChef.data_access.IngredientListRepository;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -19,9 +23,11 @@ public class DietPreferenceForm extends JFrame {
     private JCheckBox alcoholFreeBox = new JCheckBox("Alcohol-free");
     private JCheckBox veganBox = new JCheckBox("Vegan");
     private JButton confirmButton = new JButton("Confirm");
+    private IngredientRepository ingredientRepository;
+    private dietPreferenceController controller;
 
-
-    public DietPreferenceForm() {
+    public DietPreferenceForm(IngredientRepository repository) {
+        this.ingredientRepository = repository;
         setTitle("Diet Preferences");
         setSize(300, 400);
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
@@ -45,17 +51,18 @@ public class DietPreferenceForm extends JFrame {
                 if (alcoholFreeBox.isSelected()) preferences.add("Alcohol-free");
                 if (veganBox.isSelected()) preferences.add("Vegan");
 
+                ketoBox.setFont(new Font("Arial", Font.PLAIN, 18));
+                glutenFreeBox.setFont(new Font("Arial", Font.PLAIN, 18));
+                proteinRichBox.setFont(new Font("Arial", Font.PLAIN, 18));
+                fiberRichBox.setFont(new Font("Arial", Font.PLAIN, 18));
+                alcoholFreeBox.setFont(new Font("Arial", Font.PLAIN, 18));
+                veganBox.setFont(new Font("Arial", Font.PLAIN, 18));
+
                 DietPreference dietPreference = new DietPreference(preferences);
 
-                // Dummy ingredient list
-                List<String> ingredients = List.of("chicken", "garlic", "pepper");
+                controller.fetchRecipes(dietPreference, ingredientRepository);
 
-                RecipeUseCase useCase = new RecipeUseCase(new GeminiAIforRecipe(
-                        "",
-                        "us-central1",
-                        "gemini-1.5-flash-001"), new FileStorage());
-                useCase.processRecipes(dietPreference, ingredients);
-                JOptionPane.showMessageDialog(null, "Recipes fetched and saved to file.");
+
             }
         });
     }

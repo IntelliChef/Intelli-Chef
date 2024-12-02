@@ -68,7 +68,7 @@ public class ViewManager implements NavigationCall {
     }
 
     @Override
-    public void navigateToDietPreferenceView(IngredientRepository ingredientRepository) {
-        showDietPreferenceForm(ingredientRepository);
+    public void navigateToDietPreferenceView() {
+        showDietPreferenceForm(this.ingredientRepository);
     }
 }
