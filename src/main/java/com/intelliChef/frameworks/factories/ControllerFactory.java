@@ -1,4 +1,4 @@
-package com.intelliChef.adapters;
+package com.intelliChef.frameworks.factories;
 
 import com.intelliChef.adapters.dietPreference.DietPreferenceController;
 import com.intelliChef.adapters.ingredientsDetected.IngredientsDetectedController;
