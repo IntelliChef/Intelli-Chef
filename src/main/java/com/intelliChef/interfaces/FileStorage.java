@@ -1,4 +1,4 @@
-package com.intelliChef.use_case.dietPreference;
+package com.intelliChef.interfaces;
 
 
 import com.intelliChef.use_case.dietPreference.RecipieOutputBoundary;

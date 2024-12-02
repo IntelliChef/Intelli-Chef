@@ -29,4 +29,9 @@ public interface NavigationCall {
      * Loads the diet preference view.
      */
     void navigateToDietPreferenceView();
+
+    /**
+     * Loads the recipe list view
+     */
+    void navigateToRecipeView();
 }

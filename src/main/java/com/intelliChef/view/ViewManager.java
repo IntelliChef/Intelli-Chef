@@ -1,10 +1,11 @@
 package com.intelliChef.view;
 
-import com.intelliChef.app.IngredientListFactory;
+import com.intelliChef.frameworks.factories.IngredientListFactory;
 import com.intelliChef.use_case.IngredientRepository;
 import com.intelliChef.use_case.analyzeImage.AnalyzeImageInteractor;
 import com.intelliChef.frameworks.factories.RecipeViewFactory;
 import com.intelliChef.adapters.presentation.RecipeListView;
+import com.intelliChef.view.DietPreferenceForm;
 
 /**
  * Builder that creates all the views and implements NavigationCall to allow controllers to access its methods.
@@ -40,6 +41,11 @@ public class ViewManager implements NavigationCall {
         ingredientListView.setVisible(true);
     }
 
+    public void showDietPreferenceForm(IngredientRepository ingredientRepository) {
+        DietPreferenceForm dietPreferenceForm = viewFactory.createDietPreferenceForm(ingredientRepository);
+        dietPreferenceForm.setVisible(true);
+    }
+
     public void showRecipeListView() {
         recipeListView = recipeViewFactory.createRecipeListView();
         ((javax.swing.JFrame) recipeListView).setVisible(true);
@@ -63,6 +69,6 @@ public class ViewManager implements NavigationCall {
 
     @Override
     public void navigateToDietPreferenceView() {
-        // To be implemented by Harpuneet by using ingredientRepository
+        showDietPreferenceForm(this.ingredientRepository);
     }
 }

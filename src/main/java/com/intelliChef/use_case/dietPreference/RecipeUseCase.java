@@ -1,9 +1,13 @@
 package com.intelliChef.use_case.dietPreference;
 
 import com.intelliChef.data_access.GeminiAIforRecipe;
+import com.intelliChef.data_access.IngredientListRepository;
 import com.intelliChef.entities.DietPreference;
-import com.intelliChef.use_case.dietPreference.FileStorage;
+import com.intelliChef.entities.Ingredient;
+import com.intelliChef.interfaces.FileStorage;
+import com.intelliChef.use_case.IngredientRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecipeUseCase {
@@ -13,14 +17,19 @@ public class RecipeUseCase {
             "gemini-1.5-flash-001");
     private FileStorage fileStorage;
 
-    public RecipeUseCase(GeminiAIforRecipe geminiService, FileStorage fileStorage) {
-        this.geminiService = geminiService;
+    public RecipeUseCase(FileStorage fileStorage) {
         this.fileStorage = fileStorage;
     }
 
-    public void processRecipes(DietPreference preferences, List<String> ingredients) {
+    public void processRecipes(DietPreference preferences, IngredientRepository ingredients) {
+        List<Ingredient> listOfIngredients = ingredients.getAllIngredients();
+        List<String> stringifiedIngredients= new ArrayList<>();
+        for (Ingredient ingredient : listOfIngredients) {
+            stringifiedIngredients.add(ingredient.getName() + "  " + ingredient.getQuantity());
+        }
+
         try {
-            String jsonResponse = geminiService.getRecipe(preferences.getPreferences(), ingredients);
+            String jsonResponse = geminiService.getRecipe(preferences.getPreferences(), stringifiedIngredients);
             fileStorage.saveToFile(jsonResponse);
         } catch (Exception e) {
             System.err.println("Error processing recipes: " + e.getMessage());

@@ -2,9 +2,12 @@ package com.intelliChef.view;
 
 import com.intelliChef.adapters.ingredient_list.AddIngredientController;
 import com.intelliChef.adapters.ingredient_list.ConfirmIngredientListController;
+import com.intelliChef.adapters.ingredient_list.EditIngredientController;
 import com.intelliChef.adapters.ingredient_list.IngredientListViewModel;
 
 import javax.swing.*;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -17,15 +20,18 @@ public class IngredientListView extends JFrame implements ActionListener {
     private IngredientListViewModel viewModel;
     private final AddIngredientController addIngredientController;
     private final ConfirmIngredientListController confirmController;
+    private final EditIngredientController editIngredientController;
 
     private JTable ingredientTable;
 
     public IngredientListView(IngredientListViewModel viewModel,
                               AddIngredientController addIngredientController,
-                              ConfirmIngredientListController confirmController) {
+                              ConfirmIngredientListController confirmController,
+                              EditIngredientController editIngredientController) {
         this.viewModel = viewModel;
         this.addIngredientController = addIngredientController;
         this.confirmController = confirmController;
+        this.editIngredientController = editIngredientController;
 
         // Set up the frame
         setTitle("Ingredient List");
@@ -78,9 +84,39 @@ public class IngredientListView extends JFrame implements ActionListener {
             @Override
             public boolean isCellEditable(int row, int column) {
                 // Only allow editing the checkbox column
-                return column == 0;
+                return column == 0 || column ==2 ;
             }
         };
+
+        // Add a TableModelListener to detect changes
+        tableModel.addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                // Check if the change was in the Quantity column
+                if (e.getType() == TableModelEvent.UPDATE) {
+                    int row = e.getFirstRow();
+                    int column = e.getColumn();
+
+                    if (column == 2) { // Quantity column
+                        // Get the updated value
+                        String updatedQuantity = (String) tableModel.getValueAt(row, column);
+
+                        // Validate that the quantity is a double
+                        try {
+                            double quantity = Double.parseDouble(updatedQuantity); // Try to parse as a double
+
+                            // Update the database if valid
+                            editIngredientController.execute(row, quantity);
+
+                        } catch (NumberFormatException ex) {
+                            // If it's not a valid integer, show an error message
+                            JOptionPane.showMessageDialog(null, "Invalid quantity! Please enter a valid integer.",
+                                    "Input Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                }
+            }
+        });
 
         // Create a JTable
         JTable ingredientTable = new JTable(tableModel);
