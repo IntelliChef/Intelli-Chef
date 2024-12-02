@@ -10,10 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RecipeUseCase {
-    private GeminiAIforRecipe geminiService = new GeminiAIforRecipe(
-            "",
-            "us-central1",
-            "gemini-1.5-flash-001");
+    private GeminiAIforRecipe geminiService = new GeminiAIforRecipe();
     private FileStorage fileStorage;
 
     public RecipeUseCase(FileStorage fileStorage) {

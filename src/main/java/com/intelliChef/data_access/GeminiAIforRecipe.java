@@ -12,15 +12,14 @@ import java.util.List;
  * Vertex API call class that will take an image of fridge and return the ingredients in the fridge along with their
  * quantities.
  */
-public class GeminiAIforRecipe{
-    private final String projectId;
-    private final String location;
-    private final String modelName;
 
-    public GeminiAIforRecipe(String projectId, String location, String modelName) {
-        this.projectId = projectId;
-        this.location = location;
-        this.modelName = modelName;
+
+public class GeminiAIforRecipe{
+    private final String projectId = "";
+    private final String location = "us-central1";
+    private final String modelName = "gemini-1.5-flash-001";
+
+    public GeminiAIforRecipe() {
     }
 
     public String getRecipe(List<String> dietPreference, List<String> ingredients) throws RuntimeException {
