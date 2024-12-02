@@ -31,6 +31,7 @@ public class DietPreferenceForm extends JFrame {
         setTitle("Diet Preferences");
         setSize(300, 400);
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+        setLocationRelativeTo(null);
 
         add(ketoBox);
         add(glutenFreeBox);
