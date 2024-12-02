@@ -17,23 +17,23 @@ IntelliChef/
 │   │   │   └── com/intelliChef/
 │   │   │       ├── entities/           # Core entities (User, Ingredient, etc.)
 │   │   │       ├── services/           # Business logic (RecipeSuggestionEngine, etc.)
-│   │   │       ├── adapters/           # Adapters for API integrations
+│   │   │       ├── interface_adapters/           # Adapters for API integrations
 │   │   │       └── utils/              # Utility classes (e.g., NutritionalInfo calculations)
 │   └── test/                           # Test files
 │       └── java/
 │           └── com/intelliChef/
 │               ├── entities/           # Entity tests
 │               ├── services/           # Service tests
-│               └── adapters/           # Adapter integration tests
+│               └── interface_adapters/           # Adapter integration tests
 ├── .gitignore                          # Ignore unnecessary files
-└── README.md                           # Main README with project overview and instructions
+└── README.md                           # app.Main README with project overview and instructions
 ```
 
 ### Directory Descriptions
 
 - **`src/main/java/com/intelliChef/entities/`**: Defines core entities of the system, including `User`, `Ingredient`, `Recipe`, and `Fridge`.
 - **`src/main/java/com/intelliChef/services/`**: Contains the business logic of the application, such as the `RecipeSuggestionEngine` for filtering and generating recipe suggestions.
-- **`src/main/java/com/intelliChef/adapters/`**: Manages API integrations with Google Gemini and Edamam Recipe APIs.
+- **`src/main/java/com/intelliChef/interface_adapters/`**: Manages API integrations with Google Gemini and Edamam Recipe APIs.
 - **`src/main/java/com/intelliChef/utils/`**: Holds utility classes for calculations, formatting, and shared resources (e.g., `NutritionalInfo`).
 
 ### Testing Structure
@@ -41,7 +41,7 @@ IntelliChef/
 The `src/test/java/com/intelliChef/` folder mirrors the main source structure to provide testing coverage for each component. For example:
 - **`entities/`**: Unit tests for core entities like `User` and `Recipe`.
 - **`services/`**: Tests for verifying the logic in the `RecipeSuggestionEngine`.
-- **`adapters/`**: Tests for API integration and response handling.
+- **`interface_adapters/`**: Tests for API integration and response handling.
 
 ## Development Guidelines
 

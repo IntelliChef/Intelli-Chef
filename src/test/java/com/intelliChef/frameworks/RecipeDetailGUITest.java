@@ -1,10 +1,10 @@
 package com.intelliChef.frameworks;
 
-import com.intelliChef.frameworks.gui.RecipeDetailGUI;
+import frameworks.gui.RecipeDetailGUI;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
-import com.intelliChef.adapters.presentation.RecipeViewModel;
+import interface_adapters.presentation.RecipeViewModel;
 import javax.swing.*;
 
 class RecipeDetailGUITest {

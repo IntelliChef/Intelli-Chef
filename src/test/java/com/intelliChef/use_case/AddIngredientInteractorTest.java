@@ -1,8 +1,9 @@
 package com.intelliChef.use_case;
 
-import com.intelliChef.entities.Ingredient;
-import com.intelliChef.use_case.add_ingredient.AddIngredientInputData;
-import com.intelliChef.use_case.add_ingredient.AddIngredientInteractor;
+import entities.Ingredient;
+import use_case.IngredientRepository;
+import use_case.add_ingredient.AddIngredientInputData;
+import use_case.add_ingredient.AddIngredientInteractor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
