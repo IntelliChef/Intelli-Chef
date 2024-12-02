@@ -2,7 +2,7 @@ package com.intelliChef.use_case.dietPreference;
 
 import com.intelliChef.data_access.GeminiAIforRecipe;
 import com.intelliChef.entities.DietPreference;
-import com.intelliChef.use_case.dietPreference.FileStorage;
+import com.intelliChef.interfaces.FileStorage;
 
 import java.util.List;
 

@@ -48,4 +48,9 @@ public class ViewFactory {
         ingredientsDetectedView.setIngredientsDetectedPresenter(ingredientsDetectedPresenter);
         return ingredientsDetectedView;
     }
+
+    public DietPreferenceForm createDietPreferenceForm(IngredientRepository ingredientRepo) {
+        DietPreferenceForm dietPreferenceForm = new DietPreferenceForm();
+
+    }
 }

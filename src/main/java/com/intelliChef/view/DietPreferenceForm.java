@@ -3,10 +3,9 @@ package com.intelliChef.view;
 import com.intelliChef.entities.DietPreference;
 import com.intelliChef.use_case.dietPreference.RecipeUseCase;
 import com.intelliChef.data_access.GeminiAIforRecipe;
-import com.intelliChef.use_case.dietPreference.FileStorage;
+import com.intelliChef.interfaces.FileStorage;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
