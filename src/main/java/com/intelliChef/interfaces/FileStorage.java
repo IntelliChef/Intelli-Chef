@@ -7,7 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class FileStorage extends RecipieOutputBoundary {
-    private static final String OUTPUT_FILE = "Recipes.json";
+    private static final String OUTPUT_FILE = "target/classes/recipes.json";
 
     @Override
     public void saveToFile(String jsonResponse) throws IOException {
