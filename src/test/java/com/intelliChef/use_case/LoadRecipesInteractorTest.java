@@ -1,6 +1,6 @@
 package com.intelliChef.use_case;
 
-import com.intelliChef.use_case.view_interactors.LoadRecipesInteractor;
+import use_case.view_interactors.LoadRecipesInteractor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -8,9 +8,9 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import static org.mockito.Mockito.*;
 
-import com.intelliChef.entities.Recipe;
-import com.intelliChef.use_case.ports.output.LoadRecipesOutputPort;
-import com.intelliChef.use_case.ports.output.RecipeRepository;
+import entities.Recipe;
+import use_case.ports.output.LoadRecipesOutputPort;
+import use_case.ports.output.RecipeRepository;
 
 import java.util.Arrays;
 import java.util.Collections;

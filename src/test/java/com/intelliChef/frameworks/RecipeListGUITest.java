@@ -1,12 +1,12 @@
 package com.intelliChef.frameworks;
 
-import com.intelliChef.frameworks.gui.RecipeListGUI;
+import frameworks.gui.RecipeListGUI;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.intelliChef.adapters.presentation.RecipeViewModel;
+import interface_adapters.presentation.RecipeViewModel;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.*;

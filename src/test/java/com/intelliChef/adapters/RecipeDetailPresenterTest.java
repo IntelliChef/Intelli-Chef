@@ -6,10 +6,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import static org.mockito.Mockito.*;
 
-import com.intelliChef.use_case.dto.RecipeDTO;
-import com.intelliChef.adapters.presentation.RecipeDetailPresenter;
-import com.intelliChef.adapters.presentation.RecipeDetailView;
-import com.intelliChef.adapters.presentation.RecipeViewModel;
+import use_case.dto.RecipeDTO;
+import interface_adapters.presentation.RecipeDetailPresenter;
+import interface_adapters.presentation.RecipeDetailView;
+import interface_adapters.presentation.RecipeViewModel;
 
 class RecipeDetailPresenterTest {
     @Mock private RecipeDetailView view;
