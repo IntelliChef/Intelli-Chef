@@ -8,7 +8,7 @@ import java.util.List;
 public class AnalyzeImageOutputData {
     private final List<Ingredient> ingredientList = new ArrayList<>();
 
-    AnalyzeImageOutputData(List<Ingredient> ingredientList) {
+    public AnalyzeImageOutputData(List<Ingredient> ingredientList) {
         this.ingredientList.addAll(ingredientList);
     }
 
