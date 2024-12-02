@@ -1,5 +1,6 @@
 package com.intelliChef.entities;
 
+import entities.Recipe;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -1,6 +1,6 @@
 package com.intelliChef.use_case;
 
-import com.intelliChef.use_case.view_interactors.NavigationInteractor;
+import use_case.view_interactors.NavigationInteractor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -8,7 +8,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import static org.mockito.Mockito.*;
 
-import com.intelliChef.use_case.ports.output.NavigationOutputPort;
+import use_case.ports.output.NavigationOutputPort;
 
 @ExtendWith(MockitoExtension.class)
 class NavigationInteractorTest {

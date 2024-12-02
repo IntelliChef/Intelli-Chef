@@ -3,8 +3,8 @@ package com.intelliChef.use_case;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.intelliChef.entities.Ingredient;
-import com.intelliChef.use_case.analyzeImage.AnalyzeImageOutputData;
+import entities.Ingredient;
+import use_case.analyze_image.AnalyzeImageOutputData;
 import java.util.ArrayList;
 import java.util.List;
 
