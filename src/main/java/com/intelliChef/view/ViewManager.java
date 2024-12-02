@@ -1,6 +1,6 @@
 package com.intelliChef.view;
 
-import com.intelliChef.app.IngredientListFactory;
+import com.intelliChef.frameworks.factories.IngredientListFactory;
 import com.intelliChef.use_case.IngredientRepository;
 import com.intelliChef.use_case.analyzeImage.AnalyzeImageInteractor;
 import com.intelliChef.frameworks.factories.RecipeViewFactory;

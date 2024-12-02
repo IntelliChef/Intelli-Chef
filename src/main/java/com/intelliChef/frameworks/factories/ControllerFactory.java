@@ -1,5 +1,6 @@
 package com.intelliChef.frameworks.factories;
 
+
 import com.intelliChef.adapters.dietPreference.DietPreferenceController;
 import com.intelliChef.adapters.ingredientsDetected.IngredientsDetectedController;
 import com.intelliChef.adapters.recipeUpload.RecipeUploadController;
@@ -14,8 +15,8 @@ public class ControllerFactory {
     public IngredientsDetectedController getIngredientsDetectedController(NavigationCall navigationCall) {
         return new IngredientsDetectedController(navigationCall);
     }
-
     public DietPreferenceController getDietPreferenceController(NavigationCall navigationCall) {
         return new DietPreferenceController(navigationCall);
     }
+
 }
