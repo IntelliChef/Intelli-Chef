@@ -64,7 +64,26 @@ IntelliChef is a desktop application designed to help young adults discover reci
     ```
 
 ## Usage
-[Usage instructions and screenshots to be added]
+Uploading the Image:
+
+https://github.com/user-attachments/assets/913f5e9f-dfe7-4a51-9a15-93b6600bafc3
+
+Scan is taking place: 
+
+![Screenshot 2024-12-01 012108](https://github.com/user-attachments/assets/8fdc4c45-8fb7-4f74-9df5-c315de9cfcd4)
+
+No ingredients found in given picture: 
+
+![Screenshot 2024-12-01 013036](https://github.com/user-attachments/assets/27f7d6f4-0586-4aee-80fc-9b46b85f9f3c)
+
+Error Screen:
+
+![Screenshot 2024-12-01 012750](https://github.com/user-attachments/assets/bfdcc400-2716-4b21-a173-2d1bd73981eb)
+
+Ingredients Detected:
+
+![Screenshot 2024-12-01 013455](https://github.com/user-attachments/assets/4dfa67e3-3d6a-44a1-bb6b-d3a4d2778f03)
+
 
 ## Contributing
 We welcome contributions to IntelliChef. Please follow these guidelines:
