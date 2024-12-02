@@ -1,12 +1,8 @@
 package com.intelliChef.view;
 
-import com.intelliChef.adapters.dietPreference.dietPreferenceController;
+import com.intelliChef.adapters.dietPreference.DietPreferenceController;
 import com.intelliChef.entities.DietPreference;
 import com.intelliChef.use_case.IngredientRepository;
-import com.intelliChef.use_case.dietPreference.RecipeUseCase;
-import com.intelliChef.data_access.GeminiAIforRecipe;
-import com.intelliChef.interfaces.FileStorage;
-import com.intelliChef.data_access.IngredientListRepository;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,7 +20,11 @@ public class DietPreferenceForm extends JFrame {
     private JCheckBox veganBox = new JCheckBox("Vegan");
     private JButton confirmButton = new JButton("Confirm");
     private IngredientRepository ingredientRepository;
-    private dietPreferenceController controller;
+    private DietPreferenceController controller;
+
+    public void setController(DietPreferenceController controller) {
+        this.controller = controller;
+    }
 
     public DietPreferenceForm(IngredientRepository repository) {
         this.ingredientRepository = repository;
@@ -60,10 +60,13 @@ public class DietPreferenceForm extends JFrame {
 
                 DietPreference dietPreference = new DietPreference(preferences);
 
-                controller.fetchRecipes(dietPreference, ingredientRepository);
 
+                controller.fetchRecipes(dietPreference, ingredientRepository);
+                controller.confirmClick();
 
             }
         });
     }
+
+
 }
