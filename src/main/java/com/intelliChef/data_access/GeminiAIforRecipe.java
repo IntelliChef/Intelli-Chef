@@ -32,7 +32,8 @@ public class GeminiAIforRecipe{
                     "when my diet preference are as follows"+
                     dietPreference.toString()+
                     "give your response back in a JSON file, do not write any extra words or symbols. Format your json " +
-                    "file according to this example. {" +
+                    "file according to this example. " + "Make sure to follow the JSON file structure accurately and completely" +
+                    "{" +
                     "  \"hits\": [" +
                     "    {" +
                     "      \"recipe\": {" +
