@@ -12,6 +12,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The View for the Ingredient List.
@@ -139,13 +141,13 @@ public class IngredientListView extends JFrame implements ActionListener {
             // Confirms the ingredient list
             int column = 0;
             int rowCount = ingredientTable.getRowCount();
-            boolean[] selected = new boolean[rowCount];
+            List<Integer> toDelete = new ArrayList<>();
 
             for (int i = 0; i < rowCount; i++) {
-                Object value = ingredientTable.getValueAt(i, column);
-                selected[i] = (Boolean) value;
+                Boolean value = (Boolean) ingredientTable.getValueAt(i, column);
+                if (Boolean.FALSE.equals(value)) {toDelete.add(i);}
             }
-            confirmController.execute(selected); // Saves data, transit to the next view
+            confirmController.execute(toDelete); // Saves data, transit to the next view
             dispose();
         });
 

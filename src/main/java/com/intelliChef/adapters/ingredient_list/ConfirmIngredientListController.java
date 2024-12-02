@@ -24,15 +24,10 @@ public class ConfirmIngredientListController {
 
     /**
      * Executes the Confirm Ingredient Use Case
-     * @param selected a list of booleans that expresses whether an ingredient should be kept
+     * @param toDelete a list of ids of ingredients to be deleted
      */
-    public void execute(boolean[] selected) {
-        List<Integer> toChange = new ArrayList<>();
-        int j = 0;
-        for (int i = 0; i < selected.length; i++) {
-            if (!selected[i]) { toChange.set(j, i); j++;}
-        }
-        final ConfirmIngredientListInputData inputData = new ConfirmIngredientListInputData(toChange);
+    public void execute(List<Integer> toDelete) {
+        final ConfirmIngredientListInputData inputData = new ConfirmIngredientListInputData(toDelete);
         interactor.execute(inputData);
         // Navigate to the next view
         navigationCall.navigateToDietPreferenceView();
