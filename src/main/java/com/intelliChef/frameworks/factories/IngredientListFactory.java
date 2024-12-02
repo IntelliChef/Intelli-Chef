@@ -1,4 +1,4 @@
-package com.intelliChef.app;
+package com.intelliChef.frameworks.factories;
 
 import com.intelliChef.adapters.ingredient_list.*;
 import com.intelliChef.use_case.IngredientRepository;
