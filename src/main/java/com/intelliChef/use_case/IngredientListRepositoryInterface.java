@@ -4,7 +4,7 @@ import com.intelliChef.entities.Ingredient;
 
 import java.util.List;
 
-public interface IngredientRepository {
+public interface IngredientListRepositoryInterface {
     /**
      * Returns all ingredients that are checked.
      * @return list of ingredients.

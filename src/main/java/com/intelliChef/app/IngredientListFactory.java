@@ -1,7 +1,7 @@
 package com.intelliChef.app;
 
 import com.intelliChef.adapters.ingredient_list.*;
-import com.intelliChef.use_case.IngredientRepository;
+import com.intelliChef.use_case.IngredientListRepositoryInterface;
 import com.intelliChef.use_case.add_ingredient.AddIngredientInteractor;
 import com.intelliChef.use_case.edit_ingredient.EditIngredientInteractor;
 import com.intelliChef.use_case.get_ingredient_list.GetIngredientListInputBoundary;
@@ -23,7 +23,7 @@ public final class IngredientListFactory {
     /**
      * Factory function for creating the IngredientListView.
      */
-    public static IngredientListView create(IngredientRepository ingredientRepository, NavigationCall navigationCall) {
+    public static IngredientListView create(IngredientListRepositoryInterface ingredientRepository, NavigationCall navigationCall) {
         IngredientListViewModel ingredientListViewModel = createIngredientListViewModel(ingredientRepository);
         AddIngredientController addIngredientController = createAddIngredientUseCase(ingredientRepository);
         ConfirmIngredientListController confirmIngredientListController = createConfirmIngredientListUseCase(
@@ -37,7 +37,7 @@ public final class IngredientListFactory {
     /**
      * Factory function for the Ingredient List View Model.
      */
-    public static IngredientListViewModel createIngredientListViewModel(IngredientRepository ingredientRepository) {
+    public static IngredientListViewModel createIngredientListViewModel(IngredientListRepositoryInterface ingredientRepository) {
         // Create a Use Case Get Ingredient List
         // Create a new presenter, interactor for the use case
         GetIngredientListOutputBoundary getIngredientListOutputBoundary = new GetIngredientListPresenter();
@@ -51,7 +51,7 @@ public final class IngredientListFactory {
     /**
      * Factory function for creating the Add Ingredient Use Case.
      */
-    public static AddIngredientController createAddIngredientUseCase(IngredientRepository ingredientRepository) {
+    public static AddIngredientController createAddIngredientUseCase(IngredientListRepositoryInterface ingredientRepository) {
         // Create a Use Case Add Ingredient
         // Create a new interactor for the use case
         AddIngredientInteractor addIngredientInteractor = new AddIngredientInteractor(
@@ -63,7 +63,7 @@ public final class IngredientListFactory {
     /**
      * Factory function for creating the Edit Ingredient Use Case.
      */
-    public static EditIngredientController createEditIngredientUseCase(IngredientRepository ingredientRepository) {
+    public static EditIngredientController createEditIngredientUseCase(IngredientListRepositoryInterface ingredientRepository) {
         // Create a Use Case Add Ingredient
         // Create a new interactor for the use case
         EditIngredientInteractor editIngredientInteractor = new EditIngredientInteractor(ingredientRepository);
@@ -74,7 +74,7 @@ public final class IngredientListFactory {
     /**
      * Factory function for creating the Confirm Ingredient List Use Case.
      */
-    public static ConfirmIngredientListController createConfirmIngredientListUseCase(IngredientRepository
+    public static ConfirmIngredientListController createConfirmIngredientListUseCase(IngredientListRepositoryInterface
                                                                                              ingredientRepository,
                                                                                      NavigationCall navigationCall) {
         ConfirmIngredientListInteractor confirmIngredientListInteractor = new ConfirmIngredientListInteractor(

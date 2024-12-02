@@ -1,14 +1,14 @@
 package com.intelliChef.use_case.edit_ingredient;
 
-import com.intelliChef.use_case.IngredientRepository;
+import com.intelliChef.use_case.IngredientListRepositoryInterface;
 
 /**
  * The Edit Ingredient Interactor
  */
 public class EditIngredientInteractor implements EditIngredientInputBoundary {
-    IngredientRepository myRepository;
+    IngredientListRepositoryInterface myRepository;
 
-    public EditIngredientInteractor(IngredientRepository repository) {
+    public EditIngredientInteractor(IngredientListRepositoryInterface repository) {
         myRepository = repository;
     }
 

@@ -1,15 +1,15 @@
 package com.intelliChef.use_case.add_ingredient;
 
 import com.intelliChef.entities.Ingredient;
-import com.intelliChef.use_case.IngredientRepository;
+import com.intelliChef.use_case.IngredientListRepositoryInterface;
 
 /**
  * The Add Ingredient Interactor
  */
 public class AddIngredientInteractor {
-    private final IngredientRepository repository;
+    private final IngredientListRepositoryInterface repository;
 
-    public AddIngredientInteractor(IngredientRepository repository) {
+    public AddIngredientInteractor(IngredientListRepositoryInterface repository) {
         this.repository = repository;
     }
 

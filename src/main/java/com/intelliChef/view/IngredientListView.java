@@ -57,6 +57,8 @@ public class IngredientListView extends JFrame implements ActionListener {
 
         // Add the combined panel to the bottom of the frame
         add(bottomPanel, BorderLayout.SOUTH);
+
+        dispose();
     }
 
     public JTable displayIngredientsAsTable() {

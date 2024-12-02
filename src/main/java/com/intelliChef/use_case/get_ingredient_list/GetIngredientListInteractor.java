@@ -1,7 +1,7 @@
 package com.intelliChef.use_case.get_ingredient_list;
 
 import com.intelliChef.entities.Ingredient;
-import com.intelliChef.use_case.IngredientRepository;
+import com.intelliChef.use_case.IngredientListRepositoryInterface;
 
 import java.util.List;
 
@@ -9,10 +9,10 @@ import java.util.List;
  * The Get Ingredient List Use Case.
  */
 public class GetIngredientListInteractor implements GetIngredientListInputBoundary {
-    private final IngredientRepository ingredientRepository; // Data Access Interface
+    private final IngredientListRepositoryInterface ingredientRepository; // Data Access Interface
     private final GetIngredientListOutputBoundary outputBoundary; // Presenter Interface
 
-    public GetIngredientListInteractor(IngredientRepository ingredientRepository,
+    public GetIngredientListInteractor(IngredientListRepositoryInterface ingredientRepository,
                                        GetIngredientListOutputBoundary outputBoundary) {
         this.ingredientRepository = ingredientRepository;
         this.outputBoundary = outputBoundary;

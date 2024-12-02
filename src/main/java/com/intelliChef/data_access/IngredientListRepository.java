@@ -1,7 +1,7 @@
 package com.intelliChef.data_access;
 
 import com.intelliChef.entities.Ingredient;
-import com.intelliChef.use_case.IngredientRepository;
+import com.intelliChef.use_case.IngredientListRepositoryInterface;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Data storage object that will store all the ingredients entered by the user.
  */
-public class IngredientListRepository implements IngredientRepository {
+public class IngredientListRepository implements IngredientListRepositoryInterface {
     private static final List<Ingredient> myIngredients = new ArrayList<Ingredient>();
 
     public IngredientListRepository makeRepository(List<Ingredient> ingredientList) {

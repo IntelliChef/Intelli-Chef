@@ -6,7 +6,7 @@ import com.intelliChef.adapters.ingredientsDetected.IngredientsDetectedControlle
 import com.intelliChef.adapters.ingredientsDetected.IngredientsDetectedPresenter;
 import com.intelliChef.adapters.recipeUpload.RecipeUploadController;
 import com.intelliChef.adapters.recipeUpload.RecipeUploadPresenter;
-import com.intelliChef.use_case.IngredientRepository;
+import com.intelliChef.use_case.IngredientListRepositoryInterface;
 import com.intelliChef.use_case.analyzeImage.AnalyzeImageInteractor;
 
 /**
@@ -36,7 +36,7 @@ public class ViewFactory {
         return recipeUploadView;
     }
 
-    public IngredientsDetectedView createIngredientsDetectedView(IngredientRepository ingredientRepo) {
+    public IngredientsDetectedView createIngredientsDetectedView(IngredientListRepositoryInterface ingredientRepo) {
         IngredientsDetectedView ingredientsDetectedView = new IngredientsDetectedView(ingredientRepo);
 
         IngredientsDetectedController ingredientsDetectedController = new ControllerFactory()

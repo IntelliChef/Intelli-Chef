@@ -11,14 +11,14 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class AddIngredientInteractorTest {
-    private IngredientRepository repository;
+    private IngredientListRepositoryInterface repository;
     private AddIngredientInteractor interactor;
     private AddIngredientInputData inputData;
 
     @BeforeEach
     void setUp() {
         // Mocking the IngredientRepository
-        repository = Mockito.mock(IngredientRepository.class);
+        repository = Mockito.mock(IngredientListRepositoryInterface.class);
         interactor = new AddIngredientInteractor(repository);
 
         // Create a sample input data

@@ -1,7 +1,7 @@
 package com.intelliChef.view;
 
 import com.intelliChef.app.IngredientListFactory;
-import com.intelliChef.use_case.IngredientRepository;
+import com.intelliChef.use_case.IngredientListRepositoryInterface;
 import com.intelliChef.use_case.analyzeImage.AnalyzeImageInteractor;
 import com.intelliChef.frameworks.factories.RecipeViewFactory;
 import com.intelliChef.adapters.presentation.RecipeListView;
@@ -12,7 +12,7 @@ import com.intelliChef.adapters.presentation.RecipeListView;
 public class ViewManager implements NavigationCall {
     private final ViewFactory viewFactory;
     private final AnalyzeImageInteractor analyzeImageInteractor;
-    private IngredientRepository ingredientRepository;
+    private IngredientListRepositoryInterface ingredientRepository;
     private final RecipeViewFactory recipeViewFactory;
     private RecipeListView recipeListView;
 
@@ -30,12 +30,12 @@ public class ViewManager implements NavigationCall {
         recipeUploadView.setVisible(true);
     }
 
-    public void showIngredientsDetectedView(IngredientRepository ingredientRepo) {
+    public void showIngredientsDetectedView(IngredientListRepositoryInterface ingredientRepo) {
         IngredientsDetectedView ingredientsDetectedView = viewFactory.createIngredientsDetectedView(ingredientRepo);
         ingredientsDetectedView.setVisible(true);
     }
 
-    public void showIngredientListView(IngredientRepository ingredientRepository) {
+    public void showIngredientListView(IngredientListRepositoryInterface ingredientRepository) {
         IngredientListView ingredientListView = IngredientListFactory.create(ingredientRepository, this);
         ingredientListView.setVisible(true);
     }
@@ -51,12 +51,12 @@ public class ViewManager implements NavigationCall {
     }
 
     @Override
-    public void navigateToIngredientsDetectedView(IngredientRepository ingredientRepo) {
+    public void navigateToIngredientsDetectedView(IngredientListRepositoryInterface ingredientRepo) {
         showIngredientsDetectedView(ingredientRepo);
     }
 
     @Override
-    public void navigateToIngredientListView(IngredientRepository ingredientRepository) {
+    public void navigateToIngredientListView(IngredientListRepositoryInterface ingredientRepository) {
         this.ingredientRepository = ingredientRepository;
         showIngredientListView(ingredientRepository);
     }
