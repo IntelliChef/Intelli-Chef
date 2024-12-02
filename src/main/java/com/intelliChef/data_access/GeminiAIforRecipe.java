@@ -12,7 +12,7 @@ import java.util.List;
  * Vertex API call class that will take an image of fridge and return the ingredients in the fridge along with their
  * quantities.
  */
-public class GeminiAIforRecipe {
+public class GeminiAIforRecipe{
     private final String projectId;
     private final String location;
     private final String modelName;
@@ -28,7 +28,10 @@ public class GeminiAIforRecipe {
         try (VertexAI vertexAI = new VertexAI(projectId, location)) {
             GenerativeModel model = new GenerativeModel(modelName, vertexAI);
             GenerateContentResponse response = model.generateContent("Give me a list of 10 recipies that i can make" +
-                    "using only these ingredients"+ingredients+"when my diet preference are as follows"+dietPreference+
+                    "using only these ingredients"
+                    +ingredients.toString()+
+                    "when my diet preference are as follows"+
+                    dietPreference.toString()+
                     "give your response back in a JSON file, do not write any extra words or symbols. Format your json " +
                     "file according to this example. {" +
                     "  \"hits\": [" +

@@ -1,7 +1,6 @@
 package com.intelliChef.use_case.dietPreference;
 
 import com.intelliChef.data_access.GeminiAIforRecipe;
-import com.intelliChef.data_access.IngredientListRepository;
 import com.intelliChef.entities.DietPreference;
 import com.intelliChef.entities.Ingredient;
 import com.intelliChef.interfaces.FileStorage;
