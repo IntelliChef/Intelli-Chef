@@ -62,8 +62,10 @@ public class DietPreferenceForm extends JFrame {
 
 
                 controller.fetchRecipes(dietPreference, ingredientRepository);
+
                 controller.confirmClick();
 
+                dispose();
             }
         });
     }
