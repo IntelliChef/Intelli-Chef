@@ -1,7 +1,7 @@
 package com.intelliChef.view;
 
-import com.intelliChef.adapters.ControllerFactory;
-import com.intelliChef.adapters.PresenterFactory;
+import com.intelliChef.frameworks.factories.ControllerFactory;
+import com.intelliChef.frameworks.factories.PresenterFactory;
 import com.intelliChef.adapters.ingredientsDetected.IngredientsDetectedController;
 import com.intelliChef.adapters.ingredientsDetected.IngredientsDetectedPresenter;
 import com.intelliChef.adapters.recipeUpload.RecipeUploadController;
