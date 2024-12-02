@@ -6,9 +6,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import static org.mockito.Mockito.*;
 
-import com.intelliChef.use_case.dto.RecipeDTO;
-import com.intelliChef.adapters.presentation.RecipeListPresenter;
-import com.intelliChef.adapters.presentation.RecipeListView;
+import use_case.dto.RecipeDTO;
+import interface_adapters.presentation.RecipeListPresenter;
+import interface_adapters.presentation.RecipeListView;
 import java.util.Arrays;
 import java.util.List;
 

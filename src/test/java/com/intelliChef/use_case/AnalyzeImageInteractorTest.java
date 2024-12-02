@@ -4,10 +4,10 @@ import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.intelliChef.data_access.AIClient;
-import com.intelliChef.use_case.analyzeImage.AnalyzeImageInputData;
-import com.intelliChef.use_case.analyzeImage.AnalyzeImageInteractor;
-import com.intelliChef.use_case.analyzeImage.AnalyzeImageOutputData;
+import data_access.AIClient;
+import use_case.analyze_image.AnalyzeImageInputData;
+import use_case.analyze_image.AnalyzeImageInteractor;
+import use_case.analyze_image.AnalyzeImageOutputData;
 
 public class AnalyzeImageInteractorTest {
     @Test
