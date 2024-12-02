@@ -57,6 +57,7 @@ public class IngredientListView extends JFrame implements ActionListener {
 
         // Add the combined panel to the bottom of the frame
         add(bottomPanel, BorderLayout.SOUTH);
+
     }
 
     public JTable displayIngredientsAsTable() {
@@ -145,6 +146,7 @@ public class IngredientListView extends JFrame implements ActionListener {
                 selected[i] = (Boolean) value;
             }
             confirmController.execute(selected); // Saves data, transit to the next view
+            dispose();
         });
 
         buttonPanel.add(confirmButton);
