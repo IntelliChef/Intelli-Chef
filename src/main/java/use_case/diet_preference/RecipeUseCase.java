@@ -25,10 +25,18 @@ public class RecipeUseCase {
         }
 
         try {
-            String jsonResponse = geminiService.getRecipe(preferences.getPreferences(), stringifiedIngredients);
+            String jsonResponse = getGeminiService().getRecipe(preferences.getPreferences(), stringifiedIngredients);
             fileStorage.saveToFile(jsonResponse);
         } catch (Exception e) {
             System.err.println("Error processing recipes: " + e.getMessage());
         }
+    }
+
+    public GeminiAIforRecipe getGeminiService() {
+        return geminiService;
+    }
+
+    public void setGeminiService(GeminiAIforRecipe geminiService) {
+        this.geminiService = geminiService;
     }
 }
