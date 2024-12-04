@@ -1,4 +1,4 @@
-package com.intelliChef.entities;
+package entities;
 
 import entities.DietPreference;
 import org.junit.jupiter.api.Test;

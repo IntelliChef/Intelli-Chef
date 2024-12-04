@@ -1,4 +1,4 @@
-package com.intelliChef.entities;
+package entities;
 
 import entities.Recipe;
 import org.junit.jupiter.api.Test;

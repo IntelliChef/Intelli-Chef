@@ -1,4 +1,4 @@
-package com.intelliChef.frameworks;
+package frameworks;
 
 import frameworks.gui.RecipeDetailGUI;
 import org.junit.jupiter.api.Test;

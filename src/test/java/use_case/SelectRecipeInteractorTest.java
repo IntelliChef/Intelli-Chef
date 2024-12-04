@@ -1,4 +1,4 @@
-package com.intelliChef.use_case;
+package use_case;
 
 import use_case.view_interactors.SelectRecipeInteractor;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,4 +1,4 @@
-package com.intelliChef.use_case;
+package use_case;
 
 import data_access.GeminiAIforRecipe;
 import entities.DietPreference;

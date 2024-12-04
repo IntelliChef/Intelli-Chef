@@ -1,4 +1,4 @@
-package com.intelliChef.use_case;
+package use_case;
 
 import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.*;
